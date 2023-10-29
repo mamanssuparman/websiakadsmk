@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Prodi;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mapelproduktif extends Model
 {
@@ -13,4 +14,10 @@ class Mapelproduktif extends Model
         'deskripsi'
     ];
     protected $table = 'mapelproduktif';
+
+    // Relasi nilai balik ke prodi
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class, 'prodiid', 'id');
+    }
 }

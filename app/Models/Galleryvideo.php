@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use sluggable;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,14 +18,12 @@ class Galleryvideo extends Model
         'isactivegallery'
     ];
     protected $table = 'galleryvideos';
-    // Sluggable
-    public function sluggable(): array
+
+    // Relasi nilai balik ke users
+    public function user()
     {
-        return [
-            'slug' => [
-                'source' => 'judul'
-            ]
-        ];
+        return $this->belongsTo(User::class, 'usersid', 'id');
     }
+
 
 }

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Prodi;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Prestasiprodi extends Model
 {
@@ -13,4 +14,10 @@ class Prestasiprodi extends Model
         'deskripsi'
     ];
     protected $table = 'prestasiprodi';
+
+    // Relasi nilai balik ke prodi
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class, 'prodiid', 'id');
+    }
 }

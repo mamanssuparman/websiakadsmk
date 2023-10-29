@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Mapelajarguru;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mapel extends Model
 {
@@ -14,4 +15,10 @@ class Mapel extends Model
         'isactivemapel'
     ];
     protected $table = 'mapel';
+
+    // Model Relation to mapelajarguru
+    public function mapelajargurus()
+    {
+        return $this->hasMany(Mapelajarguru::class,'mapelid', id);
+    }
 }
