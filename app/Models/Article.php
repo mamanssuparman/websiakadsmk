@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
-use sluggable;
+
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Visitor;
 use App\Models\Categori;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Article extends Model
 {
     use HasFactory;
+    use sluggable;
     protected $fillable = [
         'judul',
         'slug',

@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use sluggable;
+
+use Cviebrock\EloquentSluggable\Sluggable;
 use App\Models\User;
 use App\Models\Prestasiprodi;
 use App\Models\Mapelproduktif;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Prodi extends Model
 {
     use HasFactory;
+    use sluggable;
     protected $fillable = [
         'kajurid',
         'sinomin',

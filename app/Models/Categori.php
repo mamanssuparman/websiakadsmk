@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use sluggable;
+
+use Cviebrock\EloquentSluggable\Sluggable;
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Categori extends Model
 {
     use HasFactory;
+    use sluggable;
     protected $fillable = [
         'categoryname',
         'slug',
