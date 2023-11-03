@@ -46,9 +46,11 @@ Route::get('/gallery', [GalleryController::class, 'foto']);
 Route::get('/video', [GalleryController::class, 'video']);
 
 // Admin Panel
-Route::get('/auth', [AuthController::class, 'index']);
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/auth', [AuthController::class, 'index'])->name('login');
+Route::get('/signout',[AuthController::class, 'logout']);
+Route::post('/auth', [AuthController::class, 'check']);
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);
     Route::get('/profile/add', [ProfileSekolahController::class, 'add']);
     Route::get('/profile/edit', [ProfileSekolahController::class, 'edit']);
@@ -75,4 +77,7 @@ Route::prefix('admin')->group(function () {
 // LFM
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+Route::middleware(['auth', 'second'])->group(function () {
+
 });

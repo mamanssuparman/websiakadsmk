@@ -33,15 +33,15 @@
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 " role="none">
-                                Nama Users
+                                {{ auth()->user()->nama }}
                             </p>
                             <p class="text-sm font-medium text-gray-900 truncate " role="none">
-                                Username / Email
+                                {{ auth()->user()->email }}
                             </p>
                         </div>
                         <ul class="py-1" role="none">
                             <li>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                                <a href="{{ url('signout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
                                     role="menuitem">Sign
                                     out</a>
                             </li>
