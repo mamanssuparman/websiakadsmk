@@ -14,7 +14,7 @@ return new class extends Migration
         // Relasi tabel Mata Pelajaran
         Schema::table('mapelajarguru', function(Blueprint $table){
             $table->foreign('guruid')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('mapelid')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('mapelid')->references('id')->on('mapel')->onDelete('cascade')->onUpdate('cascade');
         });
 
         // Relasi Tabel Ekstrakurikuler
