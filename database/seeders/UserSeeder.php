@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         $insert = [
             'nuptk'             => '-',
             'nip'               => '-',
-            'nama'              => 'Maman Suparman',
+            'nama'              => 'Mimin',
             'alamat'            => 'Cikawung Cintaratu',
             'jeniskelamin'      => 'Laki-laki',
             'pendidikanterakhir'=> 'S1',
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'role'              => 'Super Admin',
             'photos'            => 'defaultuser.jpg',
             'statususers'       => 'Active',
-            'email'             => 'omenartcorp@gmail.com',
+            'email'             => 'omenartcorp2@gmail.com',
             'password'          => Hash::make('1234567')
         ];
         User::create($insert);

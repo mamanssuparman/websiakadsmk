@@ -49,6 +49,7 @@ Route::get('/video', [GalleryController::class, 'video']);
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
 Route::get('/signout',[AuthController::class, 'logout']);
 Route::post('/auth', [AuthController::class, 'check']);
+Route::get('/gtk/getDataGtk', [GtkDataController::class, 'getDataGtk']);
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);
@@ -56,7 +57,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileSekolahController::class, 'edit']);
     Route::get('/gtk', [GtkDataController::class, 'index']);
     Route::get('/gtk/add', [GtkDataController::class, 'add']);
-    Route::get('/gtk/detail', [GtkDataController::class, 'detail']);
+    Route::post('/gtk/add',[GtkDataController::class, 'stored']);
+    Route::get('/gtk/detail/{id}', [GtkDataController::class, 'detail']);
+    Route::get('/gtk/getData/{id}', [GtkDataController::class, 'getData']);
+    Route::get('/gtk/getDataMapel', [GtkDataController::class, 'getDataMapel']);
+    Route::post('/gtk/activenon',[GtkDataController::class, 'activenon']);
+    Route::post('/gtk/removemapelajar',[GtkDataController::class, 'removemapelajar']);
+    Route::post('/gtk/addmapelajar', [GtkDataController::class, 'addMapelAjar']);
+    Route::post('/gtk/updateprofile',[GtkDataController::class, 'updateprofile']);
     Route::get('/mapel',[MapelController::class, 'index']);
     Route::get('/prodi', [ProdiController::class, 'index']);
     Route::get('/prodi/add', [ProdiController::class, 'add']);
