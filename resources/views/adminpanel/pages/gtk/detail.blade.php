@@ -9,6 +9,27 @@
 
 @endpush
 @section('content')
+{{-- start Toast or alert --}}
+    <div id="alert-1" class="@if (session('success'))
+        {{ 'flex' }}
+    @else
+        {{ 'hidden' }}
+    @endif  items-center p-4 mx-8 mt-4 text-white bg-green-800 rounded-lg " role="alert">
+        <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Info</span>
+        <div class="ml-3 text-sm font-medium">
+            {{ session('success') }}
+        </div>
+            <button type="button" class="ml-auto -mx-1.5 -my-1.5  text-white rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8  dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+{{-- End Toast or alert--}}
     <div class="h-16 p-4 mx-8 mt-8 bg-blue-800 rounded-tl-lg rounded-tr-lg">
         <div class="flex flex-row justify-between">
             <div class="flex font-semibold text-white">
@@ -27,86 +48,93 @@
         </div>
         <hr class="mb-4 border border-slate-300">
         <div id="profile" class="">
-            <form action="" method="post">
+            <form action="{{ url('admin') }}/gtk/updateprofile" method="post" id="form-profile" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="guruid" id="guruid" value="">
                 <div class="flex flex-wrap gap-3 mb-4">
                     <div class="w-full sm:w-1/2">
                         <div class="mb-4">
                             <label for="nuptk" class="block">NUPTK</label>
-                            <input id="nuptk" name="nuptk" type="number"
+                            <input id="textnuptk" name="nuptk" type="text"
                                 class="w-full border rounded-md border-slate-300 ">
                         </div>
                         <div class="mb-4">
                             <label for="nip" class="block">NIP</label>
-                            <input id="nip" name="nip" type="number"
+                            <input id="textnip" name="nip" type="text"
                                 class="w-full border rounded-md border-slate-300 ">
                         </div>
                         <div class="mb-4">
                             <label for="nama" class="block">Nama</label>
-                            <input id="nama" type="text" class="w-full border rounded-md border-slate-300">
+                            <input id="textnama" type="text" class="w-full border rounded-md border-slate-300" name="textnama">
                         </div>
                         <div class="mb-4">
-                            <label for="jenisKelamin" class="block ">Jenis Kelamin</label>
-                            <select id="jenisKelamin" name="jenisKelamin"
+                            <label for="selectjenisKelamin" class="block ">Jenis Kelamin</label>
+                            <select id="selectjenisKelamin" name="selectJenisKelamin"
                                 class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
-                                <option selected>--Pilih Jenis Kelamin--</option>
-                                <option value="L">Laki Laki</option>
-                                <option value="P">Perempuan</option>
+                                <option value="">--Pilih Jenis Kelamin--</option>
+                                <option value="Laki-laki">Laki Laki</option>
+                                <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
                         <div class="mb-4">
                             <label for="alamat" class="block ">Alamat</label>
-                            <textarea id="alamat" name="alamat" class="w-full p-3 rounded-md border-slate-300" rows="8"></textarea>
+                            <textarea id="textalamat" name="textalamat" class="w-full p-3 rounded-md border-slate-300" rows="8"></textarea>
                         </div>
                     </div>
                     <div class="w-full sm:flex-1">
                         <div class="mb-4">
-                            <label for="pendidikanTerakhir" class="block ">Pendidikan Terakhir</label>
-                            <select id="pendidikanTerakhir" name="pendidikanTerakhir"
+                            <label for="selectpendidikanTerakhir" class="block ">Pendidikan Terakhir</label>
+                            <select id="selectpendidikanTerakhir" name="selectpendidikanTerakhir"
                                 class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
-                                <option selected>--Pilih Pendidikan Terakhir--</option>
-                                <option value="s1">S1</option>
-                                <option value="s2">S2</option>
-                                <option value="s3">S3</option>
-                                <option value="d1">D1</option>
-                                <option value="d2">D2</option>
-                                <option value="d3">D3</option>
+                                <option value="">--Pilih Pendidikan Terakhir--</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
+                                <option value="D1">D1</option>
+                                <option value="D2">D2</option>
+                                <option value="D3">D3</option>
+                                <option value="SMA">SMA</option>
+                                <option value="SMP">SMP</option>
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="jabatan" class="block ">Jabatan</label>
-                            <select id="jabatan" name="jabatan"
+                            <label for="selectjabatan" class="block ">Jabatan</label>
+                            <select id="selectjabatan" name="selectjabatan"
                                 class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
-                                <option selected>--Pilih Jabatan--</option>
-                                <option value="guru">Guru</option>
-                                <option value="kepalaSekolah">Kepala Sekolah</option>
-                                <option value="tenagaKependidikan">Tenaga Kependidikan</option>
+                                <option value="">--Pilih Jabatan--</option>
+                                <option value="Tenaga Pendidik">Tenaga Pendidik</option>
+                                <option value="Kepala Sekolah">Kepala Sekolah</option>
+                                <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="tugasTambahan" class="block ">Tugas Tambahan</label>
-                            <select id="tugasTambahan" name="tugasTambahan"
+                            <label for="selecttugasTambahan" class="block ">Tugas Tambahan</label>
+                            <select id="selecttugasTambahan" name="selecttugasTambahan"
                                 class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
-                                <option selected>--Pilih Tugas Tambahan--</option>
-                                <option value="">--</option>
-                                <option value="">--</option>
+                                <option value="">--Pilih Tugas Tambahan--</option>
+                                <option value="Wakasek Kurikulum">Wakasek Kurikulum</option>
+                                <option value="Wakasek Humas">Wakasek Humas</option>
+                                <option value="Wakasek Kesiswaan">Wakasek Kesiswaan</option>
+                                <option value="Wakasek Sarpras">Wakasek Sarpras</option>
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="role" class="block ">Role</label>
-                            <select id="role" name="role"
+                            <label for="selectrole" class="block ">Role</label>
+                            <select id="selectrole" name="selectrole"
                                 class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
-                                <option selected>--Pilih Role--</option>
-                                <option value="guru">Guru</option>
-                                <option value="admin">Admin</option>
+                                <option value="">--Pilih Role--</option>
+                                <option value="Super Admin">Super Admin</option>
+                                <option value="Admin">Admin</option>
+                                <option value="User">User</option>
                             </select>
                         </div>
                         <div class="mb-4">
                             <label for="fotoProfile" class="block ">Foto Profile</label>
                             <input id="fotoProfile" name="fotoProfile" type="file"
-                                class="w-full border rounded-md selec border-slate-300">
+                                class="w-full border rounded-md selec border-slate-300" accept="image/png,image/jpg">
                         </div>
                         <div class="mb5">
-                            <img src="/dist/image/kepala-sekolah.jpg" class="rounded-md" width="120" alt="">
+                            <img id="images" src="" class="rounded-md" width="120" alt="">
                         </div>
                     </div>
                 </div>
@@ -125,50 +153,16 @@
                                     <th scope="col" class="px-6 py-3">
                                         #
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Mapel
+                                    <th scope="col" class="py-3 text-left">
+                                        Mapelsta
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 text-center">
                                         Action
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="text-black bg-transparent border-0 border-t border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap ">
-                                        1
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        Produktif RPL
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="" class="px-1 text-white bg-red-500 rounded-md "><i class="bi bi-x"></i></a>
-                                    </td>
-                                </tr>
-                                <tr class="text-black bg-transparent border-0 border-t border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap ">
-                                        2
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        Pendidikan Agama
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="" class="px-1 text-white bg-red-500 rounded-md"><i
-                                                class="bi bi-x"></i></a>
-                                    </td>
-                                </tr>
-                                <tr class="text-black bg-transparent border-0 border-t border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap ">
-                                        3
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        PPKN
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <a href="" class="px-1 text-white bg-red-500 rounded-md"><i
-                                                class="bi bi-x"></i></a>
-                                    </td>
-                                </tr>
+                            <tbody id="tbmapel">
+
                             </tbody>
                         </table>
                     </div>
@@ -222,7 +216,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
-                    <table id="example" class="w-full bg-white border rounded-md display border-slate-300">
+                    <table id="tblchoosepelajaran" class="w-full bg-white border rounded-md display border-slate-300">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -231,45 +225,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    PPkn
-                                </td>
-                                <td>
-                                    <a href="/src/page/gtkdetail.html">
-                                        <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-check"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    B. Indonesia
-                                </td>
-                                <td>
-                                    <a href="/src/page/gtkdetail.html">
-                                        <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-check"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>
-                                    B. Inggris
-                                </td>
-                                <td>
-                                    <a href="/src/page/gtkdetail.html">
-                                        <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-check"></i>
-                                    </a>
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b ">
-
+                    <div class="flex items-center justify-between">
+                        {{-- <h3 class="font-semibold text-slate-900 ">Mapel Ajar</h3> --}}
+                        <button type="button" class="px-4 py-1 text-white bg-green-700 rounded-md" data-modal-target="default-modal" data-modal-toggle="default-modal"><i class="bi bi-check"></i> Selesai</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -277,7 +242,18 @@
     {{-- End Modal Data Mata Pelajaran --}}
 @endsection
 @push('jsexternal')
-    <script>
+    <script type="text/javascript">
+
+        let btn_modal = document.getElementById('btn_modal');
+        let baseurl = window.location.origin;
+        let urlfull = window.location.href
+        let id = urlfull.split("/").pop();
+        let csrfHash = $('input[name="_token"]').val(); // CSRF hash
+        let arrdatamapel = [];
+        $(document).ready(function(){
+            $('#guruid').val(id)
+
+        })
         // mengambul semua elemet
         const btn_profile = document.getElementById('btn_profile');
         const btn_ubahpassword = document.getElementById('btn_ubahpassword');
@@ -299,5 +275,106 @@
             btn_profile.classList.remove('text-blue-800');
             content_ubah_password.style.display = "block";
         });
+        $.getJSON(baseurl+'/admin/gtk/getData/'+atob(id), function(res){
+            var photo = document.getElementById('images')
+            if(res.datadetail.statuscode == 200){
+                $('#textnuptk').val(res.datadetail.data.nuptk)
+                $('#textnip').val(res.datadetail.data.nip)
+                $('#textnuptk').val(res.datadetail.data.nuptk)
+                $('#textnama').val(res.datadetail.data.nama)
+                $('#selectjenisKelamin').val(res.datadetail.data.jeniskelamin)
+                $('#textalamat').val(res.datadetail.data.alamat)
+                $('#selectpendidikanTerakhir').val(res.datadetail.data.pendidikanterakhir)
+                $('#selectjabatan').val(res.datadetail.data.jabatan)
+                $('#selecttugasTambahan').val(res.datadetail.data.tugastambahan)
+                $('#selectrole').val(res.datadetail.data.role)
+                photo.src=baseurl+'/images/'+ res.datadetail.data.photos
+            }
+            console.log(res.datamapelajar.data)
+            res.datamapelajar.data.map((x)=>{
+                let mapeldata = {
+                    idmapelajar: x.id,
+                    mapel:x.mapel.namamapel,
+                    status:"old"
+                }
+                arrdatamapel.push(mapeldata);
+                eachDataMapel()
+            })
+        })
+    const eachDataMapel = () =>{
+        $('#tbmapel').html('')
+        let nomapel = 1
+        arrdatamapel.map((x,i )=>{
+            $('#tbmapel').append(eachmapel(x, nomapel++, i))
+        })
+    }
+    const eachmapel = (x,no,i)=>{
+        return `
+            <tr class="text-black bg-transparent border-0 border-t border-b">
+                <th class="px-6 py-4 font-medium whitespace-nowrap">${no}</th>
+                <td >${x.mapel}</td>
+                <td class="text-center">
+                    <button type="button" onclick="removeMapelAjar(this,${x.idmapelajar},'${x.status}',${i})" class="px-1 text-white bg-red-500 rounded-md"><i class="bi bi-x"></i></button>
+                </td>
+            </tr>
+        `
+    }
+
+    $(() => {
+		tablechoosemapel = $('#tblchoosepelajaran').DataTable({
+			"processing": true,
+			"serverSide": true,
+			"order": [],
+			"searching": true,
+			"ajax": {
+				"url":  baseurl + '/admin/gtk/getDataMapel',
+				"type": "GET",
+				"data": function(data) {}
+			},
+			"columnDefs": [{
+				"targets": [0],
+				"orderable": false,
+			}]
+		})
+	})
+
+    function pilihmapel(txt, idmapel, mapel){
+        var imapel = idmapel;
+        let mapelchoose = {
+            idmapelajar: idmapel,
+            mapel:mapel
+        }
+        arrdatamapel.push(mapelchoose)
+        eachDataMapel()
+        $.ajax({
+            url: baseurl+ '/admin/gtk/addmapelajar',
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                _token: csrfHash,
+                guruid: atob(id),
+                mapelid: idmapel
+            },
+            success:function(res){},
+            error:function(jqXHR, textStatus, errorThrown){}
+        })
+    }
+
+    function removeMapelAjar(txt, id, status, i){
+        arrdatamapel.splice(i, 1)
+        eachDataMapel()
+        $.ajax({
+            url: baseurl + '/admin/gtk/removemapelajar',
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                imapelajar: id,
+                _token: csrfHash
+            },
+            success: function(res){},
+            error: function(jqXHR, textStatus, errorThrown){}
+        });
+    }
     </script>
+
 @endpush

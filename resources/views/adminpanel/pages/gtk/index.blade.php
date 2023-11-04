@@ -56,7 +56,8 @@
             </a>
           </div>
           <div class="overflow-y-auto">
-            <table id="example" class="w-full bg-white border rounded-md display border-slate-300">
+            @csrf
+            <table id="example2" class="w-full bg-white border rounded-md display border-slate-300">
               <thead>
                   <tr>
                       <th>#</th>
@@ -68,54 +69,48 @@
                       <th>Option</th>
                   </tr>
               </thead>
-              <tbody>
-                  <tr>
-                      <td>1</td>
-                      <td>123444555</td>
-                      <td>123444555</td>
-                      <td>Maman Sudirman, M.Pd</td>
-                      <td>Kepala Sekolah</td>
-                      <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                      </td>
-                      <td>
-                          <a href="{{ url('') }}/admin/gtk/detail">
-                              <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-list"></i>
-                          </a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>1</td>
-                      <td>123444555</td>
-                      <td>123444555</td>
-                      <td>Maman Sudirman</td>
-                      <td>Guru</td>
-                      <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                      </td>
-                      <td>
-                          <a href="{{ url('') }}/admin/gtk/detail">
-                              <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-list"></i>
-                          </a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>1</td>
-                      <td>123444555</td>
-                      <td>123444555</td>
-                      <td>Maman Faturohman</td>
-                      <td>Guru</td>
-                      <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" class="">
-                      </td>
-                      <td>
-                          <a href="{{ url('') }}/admin/gtk/detail">
-                              <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-list"></i>
-                          </a>
-                      </td>
-                  </tr>
-                </tbody>
+              <tbody id="">
+
+            </tbody>
             </table>
           </div>
     </div>
 @endsection
+@push('jsexternal')
+    <script type="text/javascript">
+        let baseurl = window.location.origin;
+        let csrfHash = $('input[name="_token"]').val(); // CSRF hash
+    $(() => {
+		tabelgtk = $('#example2').DataTable({
+			"processing": true,
+			"serverSide": true,
+			"order": [],
+			"searching": true,
+			"ajax": {
+				"url":  baseurl + '/gtk/getDataGtk',
+				"type": "GET",
+				"data": function(data) {
+				}
+			},
+			"columnDefs": [{
+				"targets": [0],
+				"orderable": false,
+			}]
+		})
+	})
+
+    function aktifnonuseres(txt,id){
+        $.ajax({
+            url: baseurl+'/admin/gtk/activenon',
+            type: "POST",
+            dataType: 'JSON',
+            data: {
+                iuser: id,
+                _token: csrfHash
+            },
+            success: function(res){},
+            error:function(jqXHR, textStatus, errorThrown){}
+        });
+    }
+    </script>
+@endpush
