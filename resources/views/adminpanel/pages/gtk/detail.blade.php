@@ -242,7 +242,7 @@
     {{-- End Modal Data Mata Pelajaran --}}
 @endsection
 @push('jsexternal')
-    <script src="/storage/jsadmin/gtk/detail.js">
+    <script src="/jsadmin/gtk/detail.js">
 
 
     </script>

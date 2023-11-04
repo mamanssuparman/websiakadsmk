@@ -77,7 +77,7 @@
     </div>
 @endsection
 @push('jsexternal')
-    <script src="/storage/jsadmin/gtk/index.js">
+    <script src="/jsadmin/gtk/index.js">
 
     </script>
 @endpush
