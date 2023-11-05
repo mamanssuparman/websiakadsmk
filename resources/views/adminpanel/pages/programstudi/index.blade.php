@@ -54,7 +54,7 @@
             <a href="{{ url('admin') }}/prodi/add" class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-lg"><i
                     class="bi bi-plus"></i>Add Prodi</a>
         </div>
-        <table id="example" class="display" style="width:100%">
+        <table id="example2" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>#</th>
@@ -64,67 +64,31 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Teknik Bisnis Sepeda Motor</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                    </td>
-                    <td>
-                    <a href="{{ url('admin') }}/prodi/detail">
-                        <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                    </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Pendidikan Agama</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" class="">
-                    </td>
-                    <td>
-                    <a href="{{ url('admin') }}/prodi/detail">
-                        <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                    </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Teknik Informatika</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                    </td>
-                    <td>
-                    <a href="{{ url('admin') }}/prodi/detail">
-                        <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                    </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Pertanian</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" class="">
-                    </td>
-                    <td>
-                    <a href="{{ url('admin') }}/prodi/detail">
-                        <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                    </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Perikanan</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" class="">
-                    </td>
-                    <td>
-                    <a href="{{ url('admin') }}/prodi/detail">
-                        <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                    </a>
-                    </td>
-                </tr>
+
             </tbody>
         </table>
     </div>
 @endsection
+@push('jsexternal')
+    <script type="text/javascript">
+        let baseurl = window.location.origin;
+        let csrfHash = $('input[name="_token"]').val(); // CSRF hash
+        $(() => {
+            tabelgtk = $('#example2').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "order": [],
+                "searching": true,
+                "ajax": {
+                    "url": baseurl + '/prodi/getDataProdi',
+                    "type": "GET",
+                    "data": function(data) {}
+                },
+                "columnDefs": [{
+                    "targets": [0],
+                    "orderable": false,
+                }]
+            })
+        })
+    </script>
+@endpush
