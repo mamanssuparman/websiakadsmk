@@ -43,6 +43,7 @@ $.getJSON(baseurl + "/admin/gtk/getData/" + atob(id), function (res) {
         $("#selectjabatan").val(res.datadetail.data.jabatan);
         $("#selecttugasTambahan").val(res.datadetail.data.tugastambahan);
         $("#selectrole").val(res.datadetail.data.role);
+        $("#textEmail").val(res.datadetail.data.email);
         photo.src = baseurl + "/images/" + res.datadetail.data.photos;
     }
     console.log(res.datamapelajar.data);
@@ -131,4 +132,34 @@ function removeMapelAjar(txt, id, status, i) {
         success: function (res) {},
         error: function (jqXHR, textStatus, errorThrown) {},
     });
+}
+
+function updatePassword(){
+    $.ajax({
+        url: baseurl+'/admin/gtk/updatepassword',
+        type: "POST",
+        dataType: "JSON",
+        data: {
+            id: atob(id),
+            newpassword: $('#password').val(),
+            confirmpassword: $('#cocokan_password').val(),
+            _token: csrfHash
+        },
+        success: function(res){
+            location.reload()
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            console.log(jqXHR)
+            if(jqXHR.status == 422){
+                if(jqXHR.responseJSON.errors.newpassword != ""){
+                    $('#information-passwordbaru').removeClass('hidden');
+                    $('#information-passwordbaru').html(jqXHR.responseJSON.errors.newpassword)
+                }
+                if(jqXHR.responseJSON.errors.confirmpassword != ""){
+                    $('#information-confirmpassword').removeClass('hidden');
+                    $('#information-confirmpassword').html(jqXHR.responseJSON.errors.confirmpassword)
+                }
+            }
+        }
+    })
 }

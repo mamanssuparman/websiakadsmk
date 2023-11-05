@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
 use App\Models\Mapelajarguru;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
@@ -230,6 +231,8 @@ class GtkDataController extends Controller
             'selectjabatan'             => 'required',
             'selecttugasTambahan'       => 'required',
             'selectrole'                => 'required',
+            // 'email'                     => 'required|unique:users,email,'.$request->email.',email',
+            'email'                     => 'required|unique:users,email,'.base64_decode($request->guruid).',id',
         ]);
         if($request->fotoProfile == ""){
             $dataStore = [
@@ -242,9 +245,10 @@ class GtkDataController extends Controller
                 'jabatan'               => $request->selectjabatan,
                 'tugastambahan'         => $request->selecttugasTambahan,
                 'role'                  => $request->selectrole,
+                'email'                 => $request->email
             ];
             User::where('id', base64_decode($request->guruid))->update($dataStore);
-            return redirect()->back()->with('success','Profil berhasil di perbaharui');
+            return redirect()->back()->with('message','Profil berhasil di perbaharui');
         } else {
             $imagesName     = time().'.'.$request->fotoProfile->extension();
             $request->fotoProfile->move(public_path('images'),$imagesName);
@@ -258,10 +262,11 @@ class GtkDataController extends Controller
                 'jabatan'               => $request->selectjabatan,
                 'tugastambahan'         => $request->selecttugasTambahan,
                 'role'                  => $request->selectrole,
-                'photos'                => $imagesName
+                'photos'                => $imagesName,
+                'email'                 => $request->email
             ];
             User::where('id', base64_decode($request->guruid))->update($dataStore);
-            return redirect()->back()->with('success','Profil berhasil di perbaharui');
+            return redirect()->back()->with('message','Profil berhasil di perbaharui');
         }
     }
     public function stored(Request $request)
@@ -312,6 +317,28 @@ class GtkDataController extends Controller
             ];
             User::create($dataStore);
             return redirect()->back()->with('success', 'Data GTK berhasil di simpan');
+        }
+    }
+    public function updatepassword(Request $request)
+    {
+        try {
+            $validasi = $request->validate([
+                'id'                => 'required',
+                'newpassword'       => 'required|same:confirmpassword',
+                'confirmpassword'   => 'required'
+            ]);
+            User::where('id', $request->id)->update(['password' => Hash::make($request->newpassword)]);
+            return response()->json([
+                'statuscode'        => 200,
+                'data'              => $validasi,
+                'message'           => $request->session()->flash('message', 'Password berhasil di perbaharui.!')
+            ]);
+
+        } catch (Exception $validasi) {
+            return response()->json([
+                'statuscode'        => 422,
+                'data'              => $validasi
+            ]);
         }
     }
 }
