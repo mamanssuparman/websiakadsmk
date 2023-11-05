@@ -10,7 +10,7 @@
 @endpush
 @section('content')
 {{-- start Toast or alert --}}
-    <div id="alert-1" class="@if (session('success'))
+    <div id="alert-1" class="@if (session('message'))
         {{ 'flex' }}
     @else
         {{ 'hidden' }}
@@ -20,7 +20,7 @@
         </svg>
         <span class="sr-only">Info</span>
         <div class="ml-3 text-sm font-medium">
-            {{ session('success') }}
+            {{ session('message') }}
         </div>
             <button type="button" class="ml-auto -mx-1.5 -my-1.5  text-white rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8  dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
             <span class="sr-only">Close</span>
@@ -56,29 +56,44 @@
                         <div class="mb-4">
                             <label for="nuptk" class="block">NUPTK</label>
                             <input id="textnuptk" name="nuptk" type="text"
-                                class="w-full border rounded-md border-slate-300 ">
+                                class="w-full border rounded-md border-slate-300 " value="{{ old('nuptk') }}">
+                            @error('nuptk')
+                                <small class="italic text-yellow-500">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="nip" class="block">NIP</label>
                             <input id="textnip" name="nip" type="text"
-                                class="w-full border rounded-md border-slate-300 ">
+                                class="w-full border rounded-md border-slate-300 " value="{{ old('nip') }}">
+                            @error('nip')
+                                <small class="italic text-yellow-500">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="nama" class="block">Nama</label>
-                            <input id="textnama" type="text" class="w-full border rounded-md border-slate-300" name="textnama">
+                            <input id="textnama" type="text" class="w-full border rounded-md border-slate-300" name="textnama" value="{{ old('textnama') }}">
+                            @error('textnama')
+                                <small class="italic text-yellow-500">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="selectjenisKelamin" class="block ">Jenis Kelamin</label>
                             <select id="selectjenisKelamin" name="selectJenisKelamin"
                                 class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">--Pilih Jenis Kelamin--</option>
-                                <option value="Laki-laki">Laki Laki</option>
-                                <option value="Perempuan">Perempuan</option>
+                                <option value="Laki-laki" {{ old('selectJenisKelamin')=="Laki-laki" ? 'selected' : '' }}>Laki Laki</option>
+                                <option value="Perempuan" {{ old('selectJenisKelamin')=="Perempuan" ? 'selected' : '' }}>Perempuan</option>
                             </select>
+                            @error('selectJenisKelamin')
+                                <small class="italic text-yellow-500">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="alamat" class="block ">Alamat</label>
-                            <textarea id="textalamat" name="textalamat" class="w-full p-3 rounded-md border-slate-300" rows="8"></textarea>
+                            <textarea id="textalamat" name="textalamat" class="w-full p-3 rounded-md border-slate-300" rows="8">{{ old('textalamat') }}</textarea>
+                            @error('textalamat')
+                                <small class="italic text-yellow-500">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="w-full sm:flex-1">
@@ -87,46 +102,65 @@
                             <select id="selectpendidikanTerakhir" name="selectpendidikanTerakhir"
                                 class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">--Pilih Pendidikan Terakhir--</option>
-                                <option value="S1">S1</option>
-                                <option value="S2">S2</option>
-                                <option value="S3">S3</option>
-                                <option value="D1">D1</option>
-                                <option value="D2">D2</option>
-                                <option value="D3">D3</option>
-                                <option value="SMA">SMA</option>
-                                <option value="SMP">SMP</option>
+                                <option value="S1" {{ old('selectpendidikanTerakhir') == "S1" ? 'selected' : '' }}>S1</option>
+                                <option value="S2" {{ old('selectpendidikanTerakhir') == "S2" ? 'selected' : '' }}>S2</option>
+                                <option value="S3" {{ old('selectpendidikanTerakhir') == "S3" ? 'selected' : '' }}>S3</option>
+                                <option value="D1" {{ old('selectpendidikanTerakhir') == "D1" ? 'selected' : '' }}>D1</option>
+                                <option value="D2" {{ old('selectpendidikanTerakhir') == "D2" ? 'selected' : '' }}>D2</option>
+                                <option value="D3" {{ old('selectpendidikanTerakhir') == "D3" ? 'selected' : '' }}>D3</option>
+                                <option value="SMA" {{ old('selectpendidikanTerakhir') == "SMA" ? 'selected' : '' }}>SMA</option>
+                                <option value="SMP" {{ old('selectpendidikanTerakhir') == "SMP" ? 'selected' : '' }}>SMP</option>
                             </select>
+                            @error('selectpendidikanTerakhir')
+                                <small class="italic text-yellow-500">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="selectjabatan" class="block ">Jabatan</label>
                             <select id="selectjabatan" name="selectjabatan"
                                 class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">--Pilih Jabatan--</option>
-                                <option value="Tenaga Pendidik">Tenaga Pendidik</option>
-                                <option value="Kepala Sekolah">Kepala Sekolah</option>
-                                <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
+                                <option value="Tenaga Pendidik" {{ old('selectjabatan') == "Tenaga Pendidik" ? 'selected' : '' }}>Tenaga Pendidik</option>
+                                <option value="Kepala Sekolah" {{ old('selectjabatan') == "Kepala Sekolah" ? 'selected' : '' }}>Kepala Sekolah</option>
+                                <option value="Tenaga Kependidikan" {{ old('selectjabatan') == "Tenaga Kependidikan" ? 'selected' : '' }}>Tenaga Kependidikan</option>
                             </select>
+                            @error('selectjabatan')
+                                <small class="italic text-yellow-500">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="selecttugasTambahan" class="block ">Tugas Tambahan</label>
                             <select id="selecttugasTambahan" name="selecttugasTambahan"
                                 class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">--Pilih Tugas Tambahan--</option>
-                                <option value="Wakasek Kurikulum">Wakasek Kurikulum</option>
-                                <option value="Wakasek Humas">Wakasek Humas</option>
-                                <option value="Wakasek Kesiswaan">Wakasek Kesiswaan</option>
-                                <option value="Wakasek Sarpras">Wakasek Sarpras</option>
+                                <option value="Wakasek Kurikulum" {{ old('selecttugasTambahan') == "Wakasek Kurikulum" ? 'selected' : '' }}>Wakasek Kurikulum</option>
+                                <option value="Wakasek Humas" {{ old('selecttugasTambahan') == "Wakasek Humas" ? 'selected' : '' }}>Wakasek Humas</option>
+                                <option value="Wakasek Kesiswaan" {{ old('selecttugasTambahan') == "Wakasek Kesiswaan" ? 'selected' : '' }}>Wakasek Kesiswaan</option>
+                                <option value="Wakasek Sarpras" {{ old('selecttugasTambahan') == "Wakasek Sarpras" ? 'selected' : '' }}>Wakasek Sarpras</option>
                             </select>
+                            @error('selecttugasTambahan')
+                                <small class="italic text-yellow-500">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="selectrole" class="block ">Role</label>
                             <select id="selectrole" name="selectrole"
                                 class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">--Pilih Role--</option>
-                                <option value="Super Admin">Super Admin</option>
-                                <option value="Admin">Admin</option>
-                                <option value="User">User</option>
+                                <option value="Super Admin" {{ old('selectrole') == "Super Admin" ? 'selected' : '' }}>Super Admin</option>
+                                <option value="Admin" {{ old('selectrole') == "Admin" ? 'selected' : '' }}>Admin</option>
+                                <option value="User" {{ old('selectrole') == "User" ? 'selected' : '' }}>User</option>
                             </select>
+                            @error('selectrole')
+                                <small class="italic text-yellow-500">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="textEmail" class="w-full border rounded-md border-slate-300" required value="{{ old('email') }}">
+                            @error('email')
+                                <small class="italic text-yellow-500">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label for="fotoProfile" class="block ">Foto Profile</label>
@@ -178,21 +212,21 @@
             </form>
         </div>
         <div id="ubah_password" class="hidden">
-            <form action="" method="post" class="sm:w-1/2">
+            <form action="#" method="post" class="sm:w-1/2">
+                @csrf
                 <div class="mb-5 ">
                     <label for="password" class="block">Password Baru</label>
                     <input id="password" name="password" type="password"
                         class="w-full border rounded-md border-slate-300 ">
+                        <small class="hidden italic text-yellow-500" id="information-passwordbaru"></small>
                 </div>
                 <div class="mb-5">
                     <label for="password" class="block">Cocokan Password</label>
-                    <input id="password" name="cocokan_password" type="password"
-                        class="w-full border rounded-md border-slate-300 ">
+                    <input id="cocokan_password" name="cocokan_password" type="password" class="w-full border rounded-md border-slate-300 ">
+                    <small class="hidden italic text-yellow-500" id="information-confirmpassword"></small>
                 </div>
                 <div class="flex justify-end">
-                    <button type="submit"
-                        class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800"><i
-                            class="bi bi-database-down"></i> Update Password</button>
+                    <button type="button" onclick="updatePassword()" class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800"><i class="bi bi-database-down" ></i> Update Password</button>
                 </div>
             </form>
         </div>
@@ -242,139 +276,9 @@
     {{-- End Modal Data Mata Pelajaran --}}
 @endsection
 @push('jsexternal')
-    <script type="text/javascript">
+    <script src="/jsadmin/gtk/detail.js">
 
-        let btn_modal = document.getElementById('btn_modal');
-        let baseurl = window.location.origin;
-        let urlfull = window.location.href
-        let id = urlfull.split("/").pop();
-        let csrfHash = $('input[name="_token"]').val(); // CSRF hash
-        let arrdatamapel = [];
-        $(document).ready(function(){
-            $('#guruid').val(id)
 
-        })
-        // mengambul semua elemet
-        const btn_profile = document.getElementById('btn_profile');
-        const btn_ubahpassword = document.getElementById('btn_ubahpassword');
-
-        const content_profile = document.getElementById('profile');
-        const content_ubah_password = document.getElementById('ubah_password');
-
-        btn_profile.addEventListener('click', function() {
-            content_profile.style.display = 'block';
-            // Tandai tombol "Profile" sebagai aktif
-            btn_profile.classList.add('text-blue-800');
-            btn_ubahpassword.classList.remove('text-blue-800');
-            content_ubah_password.style.display = 'none';
-        });
-
-        btn_ubahpassword.addEventListener('click', function() {
-            content_profile.style.display = 'none';
-            btn_ubahpassword.classList.add('text-blue-800');
-            btn_profile.classList.remove('text-blue-800');
-            content_ubah_password.style.display = "block";
-        });
-        $.getJSON(baseurl+'/admin/gtk/getData/'+atob(id), function(res){
-            var photo = document.getElementById('images')
-            if(res.datadetail.statuscode == 200){
-                $('#textnuptk').val(res.datadetail.data.nuptk)
-                $('#textnip').val(res.datadetail.data.nip)
-                $('#textnuptk').val(res.datadetail.data.nuptk)
-                $('#textnama').val(res.datadetail.data.nama)
-                $('#selectjenisKelamin').val(res.datadetail.data.jeniskelamin)
-                $('#textalamat').val(res.datadetail.data.alamat)
-                $('#selectpendidikanTerakhir').val(res.datadetail.data.pendidikanterakhir)
-                $('#selectjabatan').val(res.datadetail.data.jabatan)
-                $('#selecttugasTambahan').val(res.datadetail.data.tugastambahan)
-                $('#selectrole').val(res.datadetail.data.role)
-                photo.src=baseurl+'/images/'+ res.datadetail.data.photos
-            }
-            console.log(res.datamapelajar.data)
-            res.datamapelajar.data.map((x)=>{
-                let mapeldata = {
-                    idmapelajar: x.id,
-                    mapel:x.mapel.namamapel,
-                    status:"old"
-                }
-                arrdatamapel.push(mapeldata);
-                eachDataMapel()
-            })
-        })
-    const eachDataMapel = () =>{
-        $('#tbmapel').html('')
-        let nomapel = 1
-        arrdatamapel.map((x,i )=>{
-            $('#tbmapel').append(eachmapel(x, nomapel++, i))
-        })
-    }
-    const eachmapel = (x,no,i)=>{
-        return `
-            <tr class="text-black bg-transparent border-0 border-t border-b">
-                <th class="px-6 py-4 font-medium whitespace-nowrap">${no}</th>
-                <td >${x.mapel}</td>
-                <td class="text-center">
-                    <button type="button" onclick="removeMapelAjar(this,${x.idmapelajar},'${x.status}',${i})" class="px-1 text-white bg-red-500 rounded-md"><i class="bi bi-x"></i></button>
-                </td>
-            </tr>
-        `
-    }
-
-    $(() => {
-		tablechoosemapel = $('#tblchoosepelajaran').DataTable({
-			"processing": true,
-			"serverSide": true,
-			"order": [],
-			"searching": true,
-			"ajax": {
-				"url":  baseurl + '/admin/gtk/getDataMapel',
-				"type": "GET",
-				"data": function(data) {}
-			},
-			"columnDefs": [{
-				"targets": [0],
-				"orderable": false,
-			}]
-		})
-	})
-
-    function pilihmapel(txt, idmapel, mapel){
-        var imapel = idmapel;
-        let mapelchoose = {
-            idmapelajar: idmapel,
-            mapel:mapel
-        }
-        arrdatamapel.push(mapelchoose)
-        eachDataMapel()
-        $.ajax({
-            url: baseurl+ '/admin/gtk/addmapelajar',
-            type: "POST",
-            dataType: "JSON",
-            data: {
-                _token: csrfHash,
-                guruid: atob(id),
-                mapelid: idmapel
-            },
-            success:function(res){},
-            error:function(jqXHR, textStatus, errorThrown){}
-        })
-    }
-
-    function removeMapelAjar(txt, id, status, i){
-        arrdatamapel.splice(i, 1)
-        eachDataMapel()
-        $.ajax({
-            url: baseurl + '/admin/gtk/removemapelajar',
-            type: "POST",
-            dataType: "JSON",
-            data: {
-                imapelajar: id,
-                _token: csrfHash
-            },
-            success: function(res){},
-            error: function(jqXHR, textStatus, errorThrown){}
-        });
-    }
     </script>
 
 @endpush

@@ -65,6 +65,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/gtk/removemapelajar',[GtkDataController::class, 'removemapelajar']);
     Route::post('/gtk/addmapelajar', [GtkDataController::class, 'addMapelAjar']);
     Route::post('/gtk/updateprofile',[GtkDataController::class, 'updateprofile']);
+    Route::post('/gtk/updatepassword',[GtkDataController::class, 'updatepassword']);
     Route::get('/mapel',[MapelController::class, 'index']);
     Route::get('/prodi', [ProdiController::class, 'index']);
     Route::get('/prodi/add', [ProdiController::class, 'add']);
