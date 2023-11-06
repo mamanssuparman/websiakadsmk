@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
+use App\Models\Prestasiprodi;
+use App\Models\Mapelproduktif;
+use App\Models\Pekerjaanproduktif;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rules\File;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ProdiController extends Controller
 {
@@ -79,6 +85,68 @@ class ProdiController extends Controller
             'recordsTotal'  => $recordsTotal,
             'recordsFiltered'   => $recordsFiltered,
             'data'  => $data1,
+        ]);
+    }
+    public function saveprodi(Request $request)
+    {
+        try {
+            $validasi =  $request->validate([
+                'nama_prodi'            => 'required',
+                'singkatan'             => 'required',
+                'ketua_jurusan'         => 'required',
+                'deskripsi'             => 'required',
+                'logo'                  => ['required',File::image()->max('2mb')]
+            ]);
+            $imagesName = time().'.'.$request->logo->extension();
+            $request->logo->move(public_path('images'),$imagesName);
+            $dataStoreProdis = [
+                'kajurid'       => $request->ketua_jurusan,
+                'sinonim'       => $request->singkatan,
+                'judul'         => $request->nama_prodi,
+                'slug'          => $request->slug,
+                'logoprodi'     => $imagesName,
+                'description'   => $request->deskripsi
+            ];
+            $saveProdi = Prodi::create($dataStoreProdis);
+            $p = $request->input();
+            if($p['prestasi_name']){
+                foreach ($p['prestasi_name'] as $key => $x) {
+                    Prestasiprodi::create([
+                        'prodiid'       => $saveProdi->id,
+                        'deskripsi'     => $p['prestasi_name'][$key]
+                    ]);
+                }
+            }
+            if($p['pekerjaan_name']){
+                foreach ($p['pekerjaan_name'] as $key => $x) {
+                    Pekerjaanproduktif::create([
+                        'prodiid'       => $saveProdi->id,
+                        'deskripsi'     => $p['pekerjaan_name'][$key]
+                    ]);
+                }
+            }
+            if($p['mapel_ajar']){
+                foreach ($p['mapel_ajar'] as $key => $x) {
+                    Mapelproduktif::Create([
+                        'prodiid'       => $saveProdi->id,
+                        'deskripsi'     => $p['mapel_ajar'][$key]
+                    ]);
+                }
+            }
+            return redirect()->back()->with('message','Data Prodi berhasil di simpan.!');
+        } catch (Exception $e) {
+            return response()->json([
+                'statuscode'        =>500,
+                'message'           => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function checkslug(Request $request)
+    {
+        $slug = SlugService::createSlug(Prodi::class, 'slug', $request->title);
+        return response()->json([
+            'slug'      => $slug
         ]);
     }
 }

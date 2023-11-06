@@ -71,6 +71,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/prodi', [ProdiController::class, 'index']);
     Route::get('/prodi/add', [ProdiController::class, 'add']);
     Route::get('/prodi/detail', [ProdiController::class, 'detail']);
+    Route::post('/prodi/saveProdi',[ProdiController::class, 'saveprodi']);
+    Route::get('/prodi/checkSlug', [ProdiController::class, 'checkslug']);
     Route::get('/ekstrakurikuler', [EkstrakurikulersekolahController::class, 'index']);
     Route::get('/ekstrakurikuler/add', [EkstrakurikulersekolahController::class, 'add']);
     Route::get('/ekstrakurikuler/edit', [EkstrakurikulersekolahController::class, 'edit']);
