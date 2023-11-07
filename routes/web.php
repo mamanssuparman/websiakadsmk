@@ -50,6 +50,7 @@ Route::get('/auth', [AuthController::class, 'index'])->name('login');
 Route::get('/signout',[AuthController::class, 'logout']);
 Route::post('/auth', [AuthController::class, 'check']);
 Route::get('/gtk/getDataGtk', [GtkDataController::class, 'getDataGtk']);
+Route::get('/prodi/getDataProdi', [ProdiController::class, 'getDataProdi']);
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);
@@ -69,7 +70,18 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/mapel',[MapelController::class, 'index']);
     Route::get('/prodi', [ProdiController::class, 'index']);
     Route::get('/prodi/add', [ProdiController::class, 'add']);
-    Route::get('/prodi/detail', [ProdiController::class, 'detail']);
+    Route::get('/prodi/detail/{id}', [ProdiController::class, 'detail']);
+    Route::post('/prodi/detail/{id}', [ProdiController::class, 'updateProdi']);
+    Route::post('/prodi/saveProdi',[ProdiController::class, 'saveprodi']);
+    Route::get('/prodi/checkSlug', [ProdiController::class, 'checkslug']);
+    Route::post('/prodi/activenon', [ProdiController::class, 'activenon']);
+    Route::get('/prodi/getData/{id}', [ProdiController::class,'getData']);
+    Route::post('/prodi/addPrestasi',[ProdiController::class, 'addPrestasi']);
+    Route::post('/prodi/addPekerjaan',[ProdiController::class, 'addPekerjaan']);
+    Route::post('/prodi/removePekerjaan',[ProdiController::class, 'removePekerjaan']);
+    Route::post('/prodi/removePrestasi',[ProdiController::class, 'removePrestasi']);
+    Route::post('/prodi/addMapelAjar',[ProdiController::class, 'addMapelAjar']);
+    Route::post('/prodi/removeMapelAjar',[ProdiController::class, 'removeMapelAjar']);
     Route::get('/ekstrakurikuler', [EkstrakurikulersekolahController::class, 'index']);
     Route::get('/ekstrakurikuler/add', [EkstrakurikulersekolahController::class, 'add']);
     Route::get('/ekstrakurikuler/edit', [EkstrakurikulersekolahController::class, 'edit']);

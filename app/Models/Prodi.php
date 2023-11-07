@@ -17,7 +17,7 @@ class Prodi extends Model
     use sluggable;
     protected $fillable = [
         'kajurid',
-        'sinomin',
+        'sinonim',
         'judul',
         'slug',
         'logoprodi',
@@ -54,7 +54,7 @@ class Prodi extends Model
     {
         return [
             'slug' => [
-                'source' => 'judul'
+                'source' => 'title'
             ]
         ];
     }
