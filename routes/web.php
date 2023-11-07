@@ -65,6 +65,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/ekstrakurikuler/add', [EkstrakurikulersekolahController::class, 'add']);
     Route::get('/ekstrakurikuler/edit', [EkstrakurikulersekolahController::class, 'edit']);
     Route::get('/categoryarticle', [CategoryarticleController::class, 'index']);
+    Route::get('/getCategoryarticle', [CategoryarticleController::class, 'getCategoryarticle']);
+    Route::post('/categoryarticle/store', [CategoryarticleController::class, 'store']);
+    Route::post('/categoryarticle/activenon', [CategoryarticleController::class, 'activenon']);
+    Route::get('/categoryarticle/{category}/edit', [CategoryarticleController::class, 'edit']);
+    Route::put('/categoryarticle/{category}/update', [CategoryarticleController::class, 'update']);
     Route::get('/article', [ArticledataController::class, 'index']);
     Route::get('/article/add', [ArticledataController::class, 'add']);
     Route::get('/article/edit', [ArticledataController::class, 'edit']);
@@ -75,9 +80,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
 });
 // LFM
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 Route::middleware(['auth', 'second'])->group(function () {
 
 });
