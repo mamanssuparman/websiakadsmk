@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
+use App\Models\Mapelajarguru;
 use App\Models\Prestasiprodi;
 use App\Models\Mapelproduktif;
 use App\Models\Pekerjaanproduktif;
@@ -36,13 +37,15 @@ class ProdiController extends Controller
         ];
         return view('adminpanel.pages.programstudi.add', $data);
     }
-    public function detail(Request $request)
+    public function detail(Request $request, $id)
     {
         $data = [
             'title'         => 'S-Panel | Program Studi',
             'head'          => 'Program Studi',
             'breadcumb1'    => 'Program Studi',
-            'breadcumb2'    => 'Detail and Edit'
+            'breadcumb2'    => 'Detail and Edit',
+            'datakajur'     => User::where('statususers', 'Active')->where('jabatan', '!=','Kepala Sekolah')->where('jabatan', '!=', 'Tenaga Kependidikan')->get(),
+            'dataprodi'     => Prodi::where('id',base64_decode($id))->firstOrFail()
         ];
         return view('adminpanel.pages.programstudi.edit', $data);
     }
@@ -76,8 +79,8 @@ class ProdiController extends Controller
             $row = [];
             $row[] = $no;
             $row[] = $x->judul;
-            $row[] = $x->judul;
-            $row[] = $x->judul;
+            $row[] = $this->_toggle($x);
+            $row[] = $this->_btn_detail($x);
             $data1 [] = $row;
         }
         return response()->json([
@@ -86,6 +89,41 @@ class ProdiController extends Controller
             'recordsFiltered'   => $recordsFiltered,
             'data'  => $data1,
         ]);
+    }
+    private function _toggle($x)
+    {
+        // $active = 'Active';
+        // $non    ="Non-Active";
+        $statustoogle = $x->isactiveprodi;
+        if($statustoogle == 'Active'){
+            $togle= '<input type="checkbox" id="toggle" checked onclick="activenon(this,'.$x->id.')">';
+        } else {
+            $togle= '<input type="checkbox" id="toggle" onclick="activenon(this,'.$x->id.')">';
+        }
+        return $togle;
+    }
+    public function activenon(Request $request)
+    {
+        $cariStatus = Prodi::where('id', $request->iprodi)->first();
+        $ketemu = $cariStatus->isactiveprodi;
+        if($ketemu=="Active"){
+            Prodi::where('id',$request->iprodi)->update(['isactiveprodi'=>"Non Active"]);
+            return response()->json([
+                'data'      => 'Berhasil mengupdate data',
+                'statuscode'    => 200
+            ]);
+        } else {
+            Prodi::where('id',$request->iprodi)->update(['isactiveprodi'=>"Active"]);
+            return response()->json([
+                'data'      => 'Berhasil mengupdate data',
+                'statuscode'    => 200
+            ]);
+        }
+    }
+    private function _btn_detail($x)
+    {
+        $btn_detail = '<a href="'.url('admin/prodi/detail/'.base64_encode($x->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+        return $btn_detail;
     }
     public function saveprodi(Request $request)
     {
@@ -148,5 +186,216 @@ class ProdiController extends Controller
         return response()->json([
             'slug'      => $slug
         ]);
+    }
+
+    public function getData(Request $request, $id)
+    {
+        try {
+            $getdataprestasi = Prestasiprodi::where('prodiid', $id)->get();
+            if($getdataprestasi){
+                $jsonPrestasi = [
+                    'statuscode'        => 200,
+                    'message'           => 'Berhasil mengambil data',
+                    'data'              => $getdataprestasi
+                ];
+            } else {
+                $jsonPrestasi = [
+                    'statuscode'        => 500,
+                    'message'           => 'Gagal mengambil data'
+                ];
+            }
+            $getdatapekerjaan = Pekerjaanproduktif::where('prodiid', $id)->get();
+            if($getdatapekerjaan){
+                $jsonPekerjaan = [
+                    'statuscode'        => 200,
+                    'message'           => 'Berhasil mengambil data',
+                    'data'              => $getdatapekerjaan
+                ];
+            } else {
+                $jsonPekerjaan = [
+                    'statuscode'        => 500,
+                    'message'           => 'Gagal mengambil data'
+                ];
+            }
+            $getdatamapelajar = Mapelproduktif::where('prodiid', $id)->get();
+            if($getdatamapelajar){
+                $jsonMapelAjar = [
+                    'statuscode'        => 200,
+                    'message'           => 'Berhasil mengambim data',
+                    'data'              => $getdatamapelajar
+                ];
+            } else {
+                $jsonMapelAjar = [
+                    'statuscode'        => 500,
+                    'message'           => 'Gagal mengambil data'
+                ];
+            }
+            return response()->json([
+                'dataprestasi'          => $jsonPrestasi,
+                'datapekerjaan'         => $jsonPekerjaan,
+                'datamapelajar'         => $jsonMapelAjar
+            ]);
+        } catch (Exception $error) {
+            return response()->json([
+                'statuscode'            => 404,
+                'message'               => 'Something went wrong'
+            ]);
+        }
+    }
+    public function removePrestasi(Request $request)
+    {
+        try {
+            $request->validate([
+                'id'            => 'required'
+            ]);
+            Prestasiprodi::where('id', $request->id)->delete();
+            return response()->json([
+                'statuscode'            => 200,
+                'message'               => 'Data has been deleted'
+            ]);
+        } catch (Exception $error) {
+            return response()->json([
+                'error'     => $error
+            ]);
+        }
+    }
+    public function addPrestasi(Request $request)
+    {
+        try {
+            $request->validate([
+                'namaprestasi'      => 'required'
+            ]);
+            $savePrestasi = Prestasiprodi::create([
+                'deskripsi'         => $request->namaprestasi,
+                'prodiid'           => $request->idprodi
+            ]);
+            return response()->json([
+                'statuscode'        => 200,
+                'message'           => 'Data prestasi berhasil di tambahkan',
+                'idprestasi'        => $savePrestasi->id
+            ]);
+        } catch (Exception $error) {
+            return response()->json([
+                'statuscode'        => 500,
+                'message'           => 'Something went wrong'
+            ]);
+        }
+    }
+    public function addPekerjaan(Request $request)
+    {
+        try {
+            $request->validate([
+                'namapekerjaan'      => 'required'
+            ]);
+            $savePekerjaan = Pekerjaanproduktif::create([
+                'deskripsi'         => $request->namapekerjaan,
+                'prodiid'           => $request->idprodi
+            ]);
+            return response()->json([
+                'statuscode'        => 200,
+                'message'           => 'Data prestasi berhasil di tambahkan',
+                'idprestasi'        => $savePekerjaan->id
+            ]);
+        } catch (Exception $error) {
+            return response()->json([
+                'statuscode'        => 500,
+                'message'           => 'Something went wrong'
+            ]);
+        }
+    }
+    public function removePekerjaan(Request $request)
+    {
+        try {
+            $request->validate([
+                'id'            => 'required'
+            ]);
+            Pekerjaanproduktif::where('id', $request->id)->delete();
+            return response()->json([
+                'statuscode'            => 200,
+                'message'               => 'Data has been deleted'
+            ]);
+        } catch (Exception $error) {
+            return response()->json([
+                'error'     => $error
+            ]);
+        }
+    }
+    public function addMapelAjar(Request $request)
+    {
+        try {
+            $request->validate([
+                'namamapelajar'      => 'required'
+            ]);
+            $saveMapelProduktif = Mapelproduktif::create([
+                'deskripsi'         => $request->namamapelajar,
+                'prodiid'           => $request->idprodi
+            ]);
+            return response()->json([
+                'statuscode'        => 200,
+                'message'           => 'Data Mapel Produktif berhasil di tambahkan',
+                'idmapel'           => $saveMapelProduktif->id
+            ]);
+        } catch (Exception $error) {
+            return response()->json([
+                'statuscode'        => 500,
+                'message'           => 'Something went wrong'
+            ]);
+        }
+    }
+    public function removeMapelAjar(Request $request)
+    {
+        try {
+            $request->validate([
+                'id'            => 'required'
+            ]);
+            Mapelproduktif::where('id', $request->id)->delete();
+            return response()->json([
+                'statuscode'            => 200,
+                'message'               => 'Data has been deleted'
+            ]);
+        } catch (Exception $error) {
+            return response()->json([
+                'error'     => $error
+            ]);
+        }
+    }
+    public function updateProdi(Request $request, $id)
+    {
+        try {
+            $validasi =  $request->validate([
+                'nama_prodi'            => 'required',
+                'singkatan'             => 'required',
+                'ketua_jurusan'         => 'required',
+                'deskripsi'             => 'required',
+            ]);
+            if($request->logo){
+                $request->validate([
+                    'logo'      =>      'required|mimes:png,jpg|max:2048'
+                ]);
+                $imagesName = time().'.'.$request->logo->extension();
+                $request->logo->move(public_path('images'), $imagesName);
+                $dataUpdateProdi = [
+                    'kajurid'       => $request->ketua_jurusan,
+                    'sinonim'       => $request->singkatan,
+                    'judul'         => $request->nama_prodi,
+                    'logoprodi'     => $imagesName,
+                    'description'   => $request->deskripsi
+                ];
+                Prodi::where('id', base64_decode($id))->update($dataUpdateProdi);
+                return redirect()->back()->with('message', 'Data Prodi berhasi di perbaharui.!');
+            } else {
+                $dataUpdateProdi = [
+                    'kajurid'       => $request->ketua_jurusan,
+                    'sinonim'       => $request->singkatan,
+                    'judul'         => $request->nama_prodi,
+                    // 'logoprodi'     => $imagesName,
+                    'description'   => $request->deskripsi
+                ];
+                Prodi::where('id', base64_decode($id))->update($dataUpdateProdi);
+                return redirect()->back()->with('message', 'Data Prodi berhasi di perbaharui.!');
+            }
+        } catch (Exception $error) {
+            return redirect()->back()->with('message', $error);
+        }
     }
 }

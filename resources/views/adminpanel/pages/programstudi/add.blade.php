@@ -29,7 +29,9 @@
             <div class="flex font-semibold text-white">
                 {{ $head }}
             </div>
-
+            <div class="flex">
+                <a href="{{ url('admin') }}/prodi" class="px-4 py-2 font-semibold text-white bg-yellow-500 rounded-md"><i class="bi bi-arrow-counterclockwise"></i>Kembali</a>
+            </div>
         </div>
     </div>
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">

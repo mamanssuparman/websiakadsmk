@@ -19,3 +19,17 @@ $(() => {
         ],
     });
 });
+
+function activenon(txt,id){
+    $.ajax({
+        url: baseurl+'/admin/prodi/activenon',
+        type: "POST",
+        dataType: 'JSON',
+        data: {
+            iprodi: id,
+            _token: csrfHash
+        },
+        success: function(res){},
+        error:function(jqXHR, textStatus, errorThrown){}
+    });
+}
