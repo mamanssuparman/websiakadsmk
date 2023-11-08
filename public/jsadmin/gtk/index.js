@@ -1,5 +1,5 @@
 let baseurl = window.location.origin;
-        let csrfHash = $('input[name="_token"]').val(); // CSRF hash
+let csrfHash = $('input[name="_token"]').val(); // CSRF hash
     $(() => {
 		tabelgtk = $('#example2').DataTable({
 			"processing": true,

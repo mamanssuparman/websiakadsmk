@@ -52,7 +52,7 @@
         <div class="flex flex-wrap mt-5 gap-9">
             <div class="w-full sm:w-1/2">
                 <div class="overflow-y-auto">
-                    <table id="example" class="w-full bg-white border rounded-md display border-slate-300">
+                    <table id="example2" class="w-full bg-white border rounded-md display border-slate-300">
                       <thead>
                           <tr>
                               <th>#</th>
@@ -62,79 +62,41 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr>
-                              <td>1</td>
-                              <td>
-                                    <div class="w-40 h-24 overflow-hidden rounded-md">
-                                        <iframe class="object-cover w-full h-full transition ease-out rounded-md sm:h-42 hover:scale-105 hover:rounded-none" src="https://www.youtube.com/embed/5V4ZgeoUZ-c?si=SVnoSEZ6hVyNJnsT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                    </div>
-                              </td>
-                              <td>
-                                <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                              </td>
-                              <td>
-                                  <a href="">
-                                      <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                                  </a>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>2</td>
-                              <td>
-                                    <div class="w-40 h-24 overflow-hidden rounded-md">
-                                        <iframe class="object-cover w-full h-full transition ease-out rounded-md sm:h-42 hover:scale-105 hover:rounded-none" src="https://www.youtube.com/embed/5V4ZgeoUZ-c?si=SVnoSEZ6hVyNJnsT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                    </div>
-                              </td>
-                              <td>
-                                <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                              </td>
-                              <td>
-                                  <a href="">
-                                      <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                                  </a>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>3</td>
-                              <td>
-                                    <div class="w-40 h-24 overflow-hidden rounded-md">
-                                        <iframe class="object-cover w-full h-full transition ease-out rounded-md sm:h-42 hover:scale-105 hover:rounded-none" src="https://www.youtube.com/embed/5V4ZgeoUZ-c?si=SVnoSEZ6hVyNJnsT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                    </div>
-                              </td>
-                              <td>
-                                <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                              </td>
-                              <td>
-                                  <a href="">
-                                      <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                                  </a>
-                              </td>
-                          </tr>
-
-                        </tbody>
+                      </tbody>
                     </table>
                   </div>
             </div>
             <div class="w-full border rounded-md sm:flex-1 border-slate-300 p-9 ">
-                <form action="">
+                <form action="{{ route('save.data') }}" method="post" id="form-id">
+                    <input type="hidden" name="idVideo" id="idVideo">
                     <div class="mb-5">
-                        <label for="judulVido" class="block">Judul Video</label>
-                        <input id="judulVido" name="judulVideo" type="text" class="w-full border rounded-lg border-slate-300">
+                        <label for="judul" class="block">Judul Video</label>
+                        <input id="judul" name="judul" type="text" class="w-full border rounded-lg border-slate-300">
+                        <small id="judulError" class="error-messages italic text-yellow-500"></small>
                     </div>
                     <div class="mb-5">
-                        <label  for="deskripsi" class="block ">Deskripsi / Keterangan</label>
-                        <textarea id="deskripsi" name="deskripsi" class="w-full p-3 rounded-lg border-slate-300" rows="6"></textarea>
+                        <label for="jenis" class="block" >Jenis</label>
+                        <select name="jenis" id="jenis" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option selected value="">--Pilih Jenis Media--</option>
+                            <option value="Gallery">Gallery</option>
+                            <option value="Video">Video</option>
+                        </select>
+                        <small id="jenisError" class="error-messages italic text-yellow-500"></small>
                     </div>
                     <div class="mb-5">
-                        <label for="embededYoutube" class="block">Embeded Youtube</label>
-                        <input id="embededYoutube" name="embededYoutube" type="text" class="w-full border rounded-lg border-slate-300">
+                        <label for="urlvideo" class="block">Embeded Youtube</label>
+                        <input id="urlvideo" name="urlvideo" type="text" class="w-full border rounded-lg border-slate-300">
+                        <small id="urlvideoError" class="error-messages italic text-yellow-500"></small>
                     </div>
                     <div class="flex justify-end">
-                        <button class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-lg mt-9 hover:bg-blue-800"><i class="bi bi-plus"></i> Add Video</button>
+                        <button type="submit" id="btn-add-edit" class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-lg mt-9 hover:bg-blue-800"><i class="bi bi-plus"></i> Add Video</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 @endsection
+@push('jsexternal')
+    <script src="/jsadmin/video/index.js"></script>
+@endpush
 
