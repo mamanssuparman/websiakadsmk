@@ -56,7 +56,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);
     Route::get('/profile/add', [ProfileSekolahController::class, 'add']);
-    Route::get('/profile/edit', [ProfileSekolahController::class, 'edit']);
+    Route::post('/profile/add', [ProfileSekolahController::class, 'stored']);
+    Route::get('/profile/edit/{id}', [ProfileSekolahController::class, 'edit']);
+    Route::post('/profile/edit/{id}', [ProfileSekolahController::class, 'updated']);
+    Route::get('/profile/getDataProfile', [ProfileSekolahController::class, 'getDataProfile']);
+    Route::get('/profile/checkSlug',[ProfileSekolahController::class, 'checkslug']);
+    Route::post('/profile/activenon', [ProfileSekolahController::class, 'activenon']);
     Route::get('/gtk', [GtkDataController::class, 'index']);
     Route::get('/gtk/add', [GtkDataController::class, 'add']);
     Route::post('/gtk/add',[GtkDataController::class, 'stored']);
@@ -111,7 +116,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
 });
 // LFM
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 

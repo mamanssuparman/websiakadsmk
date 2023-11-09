@@ -53,7 +53,8 @@
             <div></div>
             <a href="{{ url('admin') }}/profile/add"> <div class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-lg"><i class="bi bi-plus"></i>Tambah Profile</div></a>
         </div>
-        <table id="example" class="display" style="width:100%">
+        <table id="example2" class="display" style="width:100%">
+        @csrf
             <thead>
                 <tr>
                     <th>#</th>
@@ -63,32 +64,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Sejarah</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                    </td>
-                    <td>
-                        <a href="{{ url('admin') }}/profile/edit">
-                            <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Visi dan Misi</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" class="">
-                    </td>
-                    <td>
-                        <a href="{{ url('admin') }}/profile/edit">
-                            <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                        </a>
-                    </td>
-                </tr>
+
             </tbody>
         </table>
 
     </div>
 @endsection
+@push('jsexternal')
+<script src="/jsadmin/profile/index.js"></script>
+
+@endpush
