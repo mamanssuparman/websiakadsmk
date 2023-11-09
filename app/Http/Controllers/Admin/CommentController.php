@@ -27,4 +27,5 @@ class CommentController extends Controller
         ];
         return view('adminpanel.pages.comment.detail', $data);
     }
+    
 }
