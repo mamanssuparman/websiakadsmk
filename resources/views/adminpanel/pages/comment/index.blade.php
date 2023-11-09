@@ -50,53 +50,24 @@
     </div>
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
         <div class="mt-5 overflow-y-auto">
-            <table id="example" class="w-full bg-white border rounded-lg display border-slate-300">
+            <table id="example2" class="w-full bg-white border rounded-lg display border-slate-300">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Nama Pengirim</th>
                         <th>Article</th>
                         <th>Status Comments</th>
-                        <th>Status Comments</th>
+                        <th>Status</th>
                         <th>Option</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Aonymous</td>
-                        <td>PPDB 2030</td>
-                        <td>
-                            <span class="block h-6 text-center text-white bg-blue-800 rounded-full w-28">New</span>
-                        </td>
-                        <td>
-                            <input type="checkbox" title="Dead Part" id="toggle" class="" />
-                        </td>
-                        <td>
-                            <a href="{{ url('admin') }}/comment/detail">
-                                <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-list"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Aonymous</td>
-                        <td>PPDB 2025</td>
-                        <td>
-                            <span class="block h-6 text-center text-white bg-green-600 rounded-full w-28">Approve</span>
-                        </td>
-                        <td>
-                            <input type="checkbox" title="Dead Part" id="toggle" checked class="" />
-                        </td>
-                        <td>
-                            <a href="{{ url('admin') }}/comment/detail">
-                                <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-list"></i>
-                            </a>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
 
     </div>
 @endsection
+@push('jsexternal')
+    <script src="/jsadmin/comments/index.js"></script>
+@endpush
