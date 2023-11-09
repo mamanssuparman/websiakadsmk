@@ -56,7 +56,7 @@
 
             </div>
         </div>
-        <table id="example" class="display" style="width:100%">
+        <table id="example2" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>No</th>
@@ -67,49 +67,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>OSIS</td>
-                    <td>OSIS</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                    </td>
-                    <td>
-                        <a href="{{ url('admin') }}/ekstrakurikuler/edit">
-                            <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td>Pramuka</td>
-                    <td>Pramuka</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                    </td>
-                    <td>
-                        <a href="{{ url('admin') }}/ekstrakurikuler/edit">
-                            <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>3</td>
-                    <td>Volley</td>
-                    <td>Volley</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle">
-                    </td>
-                    <td>
-                        <a href="{{ url('admin') }}/ekstrakurikuler/edit">
-                            <i class="px-2 py-1 text-white bg-blue-700 rounded-md bi bi-list"></i>
-                        </a>
-                    </td>
-                </tr>
 
             </tbody>
         </table>
     </div>
 @endsection
+@push('jsexternal')
+    <script src="/jsadmin/ekstrakurikuler/index.js"></script>
+@endpush

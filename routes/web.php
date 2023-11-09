@@ -82,9 +82,17 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/prodi/removePrestasi',[ProdiController::class, 'removePrestasi']);
     Route::post('/prodi/addMapelAjar',[ProdiController::class, 'addMapelAjar']);
     Route::post('/prodi/removeMapelAjar',[ProdiController::class, 'removeMapelAjar']);
+
+
     Route::get('/ekstrakurikuler', [EkstrakurikulersekolahController::class, 'index']);
+    Route::get('/ekstrakurikuler/checkSlug', [EkstrakurikulersekolahController::class, 'checkslug']);
     Route::get('/ekstrakurikuler/add', [EkstrakurikulersekolahController::class, 'add']);
-    Route::get('/ekstrakurikuler/edit', [EkstrakurikulersekolahController::class, 'edit']);
+    Route::post('/ekstrakurikuler/store', [EkstrakurikulersekolahController::class, 'store']);
+    Route::post('/ekstrakurikuler/update/{ekstra}', [EkstrakurikulersekolahController::class, 'update']);
+    Route::get('/ekstrakurikuler/edit/{ekstra}', [EkstrakurikulersekolahController::class, 'edit']);
+    Route::get('/getEkstrakulikuler', [EkstrakurikulersekolahController::class, 'getEkstrakulikuler']);
+    Route::post('/ekstrakurikuler/activenon', [EkstrakurikulersekolahController::class, 'activenon']);
+
     Route::get('/categoryarticle', [CategoryarticleController::class, 'index']);
     Route::get('/article', [ArticledataController::class, 'index']);
     Route::get('/article/add', [ArticledataController::class, 'add']);
@@ -96,9 +104,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
 });
 // LFM
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 Route::middleware(['auth', 'second'])->group(function () {
 
 });
