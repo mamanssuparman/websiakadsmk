@@ -103,12 +103,18 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/comment/detail', [CommentController::class, 'detail']);
     Route::get('/gallery', [GallerydataController::class, 'index']);
     Route::get('/video', [VideodataController::class, 'index']);
+    Route::get('/video/data-video', [VideodataController::class, 'getDataVideo']);
+    Route::post('/video/save-data', [VideodataController::class, 'stored'])->name('save.data');
+    Route::get('/video/{video}/edit', [VideodataController::class, 'edit']);
+    Route::put('/video/{video}/update', [VideodataController::class, 'update']);
+    Route::post('/video/activenon', [VideodataController::class, 'activenon'])->name('activenon.video');
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
 });
 // LFM
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
+
 Route::middleware(['auth', 'second'])->group(function () {
 
 });
