@@ -1202,29 +1202,16 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
-            "version": "v10.30.1",
+            "version": "v10.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "7a2da50258c4d0f693b738d3f3c69b2693aea6c1"
+                "reference": "09137f50f715c1efc649788a26092dcb1ec4ab6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/7a2da50258c4d0f693b738d3f3c69b2693aea6c1",
-                "reference": "7a2da50258c4d0f693b738d3f3c69b2693aea6c1",
-=======
-            "version": "v10.31.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "507ce9b28bce4b5e4140c28943092ca38e9a52e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/507ce9b28bce4b5e4140c28943092ca38e9a52e4",
-                "reference": "507ce9b28bce4b5e4140c28943092ca38e9a52e4",
->>>>>>> feature/mapel
+                "url": "https://api.github.com/repos/laravel/framework/zipball/09137f50f715c1efc649788a26092dcb1ec4ab6e",
+                "reference": "09137f50f715c1efc649788a26092dcb1ec4ab6e",
                 "shasum": ""
             },
             "require": {
@@ -1413,11 +1400,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-<<<<<<< HEAD
-            "time": "2023-11-01T13:52:17+00:00"
-=======
-            "time": "2023-11-07T13:48:30+00:00"
->>>>>>> feature/mapel
+            "time": "2023-10-10T13:01:37+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -1861,29 +1844,16 @@
         },
         {
             "name": "league/flysystem",
-<<<<<<< HEAD
-            "version": "3.18.0",
+            "version": "3.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "015633a05aee22490495159237a5944091d8281e"
+                "reference": "bd4c9b26849d82364119c68429541f1631fba94b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/015633a05aee22490495159237a5944091d8281e",
-                "reference": "015633a05aee22490495159237a5944091d8281e",
-=======
-            "version": "3.19.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "1b2aa10f2326e0351399b8ce68e287d8e9209a83"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/1b2aa10f2326e0351399b8ce68e287d8e9209a83",
-                "reference": "1b2aa10f2326e0351399b8ce68e287d8e9209a83",
->>>>>>> feature/mapel
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/bd4c9b26849d82364119c68429541f1631fba94b",
+                "reference": "bd4c9b26849d82364119c68429541f1631fba94b",
                 "shasum": ""
             },
             "require": {
@@ -1948,11 +1918,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/thephpleague/flysystem/tree/3.18.0"
-=======
-                "source": "https://github.com/thephpleague/flysystem/tree/3.19.0"
->>>>>>> feature/mapel
+                "source": "https://github.com/thephpleague/flysystem/tree/3.17.0"
             },
             "funding": [
                 {
@@ -1964,37 +1930,20 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2023-10-20T17:59:40+00:00"
+            "time": "2023-10-05T20:15:05+00:00"
         },
         {
             "name": "league/flysystem-local",
-            "version": "3.18.0",
+            "version": "3.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-local.git",
-                "reference": "e7381ef7643f658b87efb7dbe98fe538fb1bbf32"
+                "reference": "ec7383f25642e6fd4bb0c9554fc2311245391781"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/e7381ef7643f658b87efb7dbe98fe538fb1bbf32",
-                "reference": "e7381ef7643f658b87efb7dbe98fe538fb1bbf32",
-=======
-            "time": "2023-11-07T09:04:28+00:00"
-        },
-        {
-            "name": "league/flysystem-local",
-            "version": "3.19.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/flysystem-local.git",
-                "reference": "8d868217f9eeb4e9a7320db5ccad825e9a7a4076"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/8d868217f9eeb4e9a7320db5ccad825e9a7a4076",
-                "reference": "8d868217f9eeb4e9a7320db5ccad825e9a7a4076",
->>>>>>> feature/mapel
+                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/ec7383f25642e6fd4bb0c9554fc2311245391781",
+                "reference": "ec7383f25642e6fd4bb0c9554fc2311245391781",
                 "shasum": ""
             },
             "require": {
@@ -2029,11 +1978,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem-local/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/thephpleague/flysystem-local/tree/3.18.0"
-=======
-                "source": "https://github.com/thephpleague/flysystem-local/tree/3.19.0"
->>>>>>> feature/mapel
+                "source": "https://github.com/thephpleague/flysystem-local/tree/3.16.0"
             },
             "funding": [
                 {
@@ -2045,11 +1990,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2023-10-19T20:07:13+00:00"
-=======
-            "time": "2023-11-06T20:35:28+00:00"
->>>>>>> feature/mapel
+            "time": "2023-08-30T10:23:59+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -6189,29 +6130,16 @@
         },
         {
             "name": "laravel/pint",
-<<<<<<< HEAD
-            "version": "v1.13.5",
+            "version": "v1.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "df105cf8ce7a8f0b8a9425ff45cd281a5448e423"
+                "reference": "93b2d0d49719bc6e444ba21cd4dbbccec935413d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/df105cf8ce7a8f0b8a9425ff45cd281a5448e423",
-                "reference": "df105cf8ce7a8f0b8a9425ff45cd281a5448e423",
-=======
-            "version": "v1.13.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/pint.git",
-                "reference": "3e3d2ab01c7d8b484c18e6100ecf53639c744fa7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/3e3d2ab01c7d8b484c18e6100ecf53639c744fa7",
-                "reference": "3e3d2ab01c7d8b484c18e6100ecf53639c744fa7",
->>>>>>> feature/mapel
+                "url": "https://api.github.com/repos/laravel/pint/zipball/93b2d0d49719bc6e444ba21cd4dbbccec935413d",
+                "reference": "93b2d0d49719bc6e444ba21cd4dbbccec935413d",
                 "shasum": ""
             },
             "require": {
@@ -6222,23 +6150,13 @@
                 "php": "^8.1.0"
             },
             "require-dev": {
-<<<<<<< HEAD
                 "friendsofphp/php-cs-fixer": "^3.34.1",
-                "illuminate/view": "^10.26.2",
+                "illuminate/view": "^10.23.1",
                 "laravel-zero/framework": "^10.1.2",
                 "mockery/mockery": "^1.6.6",
                 "nunomaduro/larastan": "^2.6.4",
                 "nunomaduro/termwind": "^1.15.1",
-                "pestphp/pest": "^2.20.0"
-=======
-                "friendsofphp/php-cs-fixer": "^3.38.0",
-                "illuminate/view": "^10.30.1",
-                "laravel-zero/framework": "^10.3.0",
-                "mockery/mockery": "^1.6.6",
-                "nunomaduro/larastan": "^2.6.4",
-                "nunomaduro/termwind": "^1.15.1",
-                "pestphp/pest": "^2.24.2"
->>>>>>> feature/mapel
+                "pestphp/pest": "^2.18.2"
             },
             "bin": [
                 "builds/pint"
@@ -6274,11 +6192,7 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-<<<<<<< HEAD
-            "time": "2023-10-26T09:26:10+00:00"
-=======
-            "time": "2023-11-07T17:59:57+00:00"
->>>>>>> feature/mapel
+            "time": "2023-10-10T15:39:09+00:00"
         },
         {
             "name": "laravel/sail",
