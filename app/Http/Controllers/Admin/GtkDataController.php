@@ -250,8 +250,12 @@ class GtkDataController extends Controller
             User::where('id', base64_decode($request->guruid))->update($dataStore);
             return redirect()->back()->with('message','Profil berhasil di perbaharui');
         } else {
-            $imagesName     = time().'.'.$request->fotoProfile->extension();
-            $request->fotoProfile->move(public_path('images'),$imagesName);
+            $files = $request->file('fotoProfile');
+            $filenameWithExtension      = $request->file('fotoProfile')->getClientOriginalExtension();
+            $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            $extension                  = $files->getClientOriginalExtension();
+            $filenamesimpan             = 'gtk-' . time() . '.' . $extension;
+            $files->move('images', $filenamesimpan);
             $dataStore = [
                 'nuptk'                 => $request->nuptk,
                 'nip'                   => $request->nip,
@@ -262,7 +266,7 @@ class GtkDataController extends Controller
                 'jabatan'               => $request->selectjabatan,
                 'tugastambahan'         => $request->selecttugasTambahan,
                 'role'                  => $request->selectrole,
-                'photos'                => $imagesName,
+                'photos'                => $filenamesimpan,
                 'email'                 => $request->email
             ];
             User::where('id', base64_decode($request->guruid))->update($dataStore);
@@ -299,8 +303,12 @@ class GtkDataController extends Controller
             User::create($dataStore);
             return redirect()->back()->with('success', 'Data GTK berhasil di simpan');
         } else {
-            $imagesName     = time().'.'.$request->fotoProfile->extension();
-            $request->fotoProfile->move(public_path('images'),$imagesName);
+            $files = $request->file('fotoProfile');
+            $filenameWithExtension      = $request->file('fotoProfile')->getClientOriginalExtension();
+            $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+            $extension                  = $files->getClientOriginalExtension();
+            $filenamesimpan             = 'gtk-' . time() . '.' . $extension;
+            $files->move('images', $filenamesimpan);
             $dataStore = [
                 'nutpk'                 => $request->nuptk,
                 'nip'                   => $request->nip,
@@ -311,7 +319,7 @@ class GtkDataController extends Controller
                 'jabatan'               => $request->selectJabatan,
                 'tugastambahan'         => $request->selectTugasTambahan,
                 'role'                  => $request->selectRole,
-                'photos'                => $imagesName,
+                'photos'                => $filenamesimpan,
                 'email'                 => $request->textemail,
                 'password'              => Hash::make('1234567')
             ];
