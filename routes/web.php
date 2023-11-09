@@ -97,6 +97,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/categoryarticle/activenon', [CategoryarticleController::class, 'activenon']);
     Route::get('/categoryarticle/{category}/edit', [CategoryarticleController::class, 'edit']);
     Route::put('/categoryarticle/{category}/update', [CategoryarticleController::class, 'update']);
+    Route::get('/category/checkSlug', [CategoryarticleController::class, 'checkSlug']);
+
     Route::get('/article', [ArticledataController::class, 'index']);
     Route::get('/article/add', [ArticledataController::class, 'add']);
     Route::post('/article/add', [ArticledataController::class, 'stored']);
@@ -107,6 +109,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/comment', [CommentController::class, 'index']);
     Route::get('/comment/detail', [CommentController::class, 'detail']);
     Route::get('/gallery', [GallerydataController::class, 'index']);
+    Route::get('/getGallery', [GallerydataController::class, 'getGallery']);
+    Route::post('/gallery/store', [GallerydataController::class, 'store']);
+    Route::get('/gallery/{photo}/edit', [GallerydataController::class, 'edit']);
+    Route::post('/gallery/{photo}/update', [GallerydataController::class, 'update']);
+    Route::post('/gallery/activenon', [GallerydataController::class, 'activenon']);
     Route::get('/video', [VideodataController::class, 'index']);
     Route::get('/video/data-video', [VideodataController::class, 'getDataVideo']);
     Route::post('/video/save-data', [VideodataController::class, 'stored'])->name('save.data');
@@ -116,9 +123,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
 });
 // LFM
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 
 Route::middleware(['auth', 'second'])->group(function () {
 
