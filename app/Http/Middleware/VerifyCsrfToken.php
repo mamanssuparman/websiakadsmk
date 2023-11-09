@@ -13,5 +13,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        "admin/mapel/store",
+        "admin/mapel/activenon",
+        "admin/mapel/*/update"
     ];
 }

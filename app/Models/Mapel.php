@@ -19,6 +19,6 @@ class Mapel extends Model
     // Model Relation to mapelajarguru
     public function mapelajargurus()
     {
-        return $this->hasMany(Mapelajarguru::class,'mapelid', id);
+        return $this->hasMany(Mapelajarguru::class,'mapelid', 'id');
     }
 }

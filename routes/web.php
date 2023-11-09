@@ -67,7 +67,21 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/gtk/addmapelajar', [GtkDataController::class, 'addMapelAjar']);
     Route::post('/gtk/updateprofile',[GtkDataController::class, 'updateprofile']);
     Route::post('/gtk/updatepassword',[GtkDataController::class, 'updatepassword']);
+
+
+
+
     Route::get('/mapel',[MapelController::class, 'index']);
+    Route::get('/getMapel', [MapelController::class, 'getMapel']);
+    Route::post('/mapel/store', [MapelController::class, 'store']);
+    Route::post('/mapel/activenon', [MapelController::class, 'activenon']);
+    Route::get('/mapel/{id}/edit', [MapelController::class, 'edit']);
+    Route::put('/mapel/{id}/update', [MapelController::class, 'update']);
+
+
+
+
+
     Route::get('/prodi', [ProdiController::class, 'index']);
     Route::get('/prodi/add', [ProdiController::class, 'add']);
     Route::get('/prodi/detail/{id}', [ProdiController::class, 'detail']);
@@ -96,9 +110,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
 });
 // LFM
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 Route::middleware(['auth', 'second'])->group(function () {
 
 });
