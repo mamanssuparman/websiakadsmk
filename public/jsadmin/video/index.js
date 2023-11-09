@@ -25,12 +25,12 @@ $(document).ready(function () {
 		var id = $('#idVideo').val();
 		var method = "POST";
 		var url = baseurl + '/admin/video/save-data';
-		// var alert = '#alert-1';
+		var alert = '#alert-1';
 
 		if (id) {
 			url = baseurl + "/admin/video/" + id + "/update";
 			method = "PUT";
-			// alert = "#alert-2";
+			alert = "#alert-2";
 		}
 
 		$.ajax({
