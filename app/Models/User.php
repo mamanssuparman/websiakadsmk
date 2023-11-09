@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Models\Prodi;
 use App\Models\Ekstra;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\Galleryvideo;
 use App\Models\Mapelajarguru;
 use Laravel\Sanctum\HasApiTokens;
@@ -61,7 +62,7 @@ class User extends Authenticatable
     // Relation 1 : M to mapelajarguru
     public function mapelajargurus()
     {
-        return $this->hasMany(Mapelajarguru::class, 'guruid', id);
+        return $this->hasMany(Mapelajarguru::class, 'guruid', 'id');
     }
 
     // Relation 1 : M to ekstras
@@ -86,5 +87,11 @@ class User extends Authenticatable
     public function articles()
     {
         return $this->hasMany(Article::class, 'usersid', 'id');
+    }
+
+    // Relasi 1 : M to comment
+    public function comment()
+    {
+        return $this->hasMany(Comment::class, 'usersid', 'id');
     }
 }

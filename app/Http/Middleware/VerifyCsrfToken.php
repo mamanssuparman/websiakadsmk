@@ -18,6 +18,7 @@ class VerifyCsrfToken extends Middleware
         "admin/categoryarticle/*/update",
         "admin/video/save-data",
         "admin/video/activenon",
-        "admin/video/*/update"
+        "admin/video/*/update",
+        "admin/comment/activenon",
     ];
 }

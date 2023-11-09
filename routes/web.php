@@ -100,7 +100,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/article/activenon', [ArticledataController::class, 'activenon']);
     Route::get('/article/checkSlug', [ArticledataController::class, 'checkslug']);
     Route::get('/comment', [CommentController::class, 'index']);
-    Route::get('/comment/detail', [CommentController::class, 'detail']);
+    Route::get('/comment/detail/{id}', [CommentController::class, 'detail']);
+    Route::get('/comment/getDataComments', [CommentController::class, 'getDataComments']);
+    Route::post('/comment/activenon', [CommentController::class, 'activenon'])->name('activenon.comments');
+    Route::post('/comment/reject/{id}', [CommentController::class, 'rejectComment']);
+    Route::post('/comment/approve/{id}', [CommentController::class, 'approveComment']);
     Route::get('/gallery', [GallerydataController::class, 'index']);
     Route::get('/video', [VideodataController::class, 'index']);
     Route::get('/video/data-video', [VideodataController::class, 'getDataVideo']);
@@ -111,9 +115,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
 });
 // LFM
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 
 Route::middleware(['auth', 'second'])->group(function () {
 

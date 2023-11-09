@@ -68,11 +68,11 @@ class VideodataController extends Controller
     {
         $orderBy = 'galleryvideos.judul';
         if ($request->has('order.3.column')) {
-        switch ($request->input('order.3.column')) {
-        case '1':
-        $orderBy = 'galleryvideos.judul';
-        break;
-        }
+            switch ($request->input('order.3.column')) {
+                case '1':
+                $orderBy = 'galleryvideos.judul';
+                break;
+            }
         }
 
         $searchValue = $request->input('search.value');
@@ -80,20 +80,20 @@ class VideodataController extends Controller
         $data = Galleryvideo::where('jenis', 'Video');
 
         if (!empty($searchValue)) {
-        $data = $data->where(function($q) use ($searchValue) {
-        $q->whereRaw('LOWER(judul) like ?', ['%' . strtolower($searchValue) . '%']);
-        });
+            $data = $data->where(function($q) use ($searchValue) {
+                $q->whereRaw('LOWER(judul) like ?', ['%' . strtolower($searchValue) . '%']);
+            });
         }
 
         $recordsFiltered = $data->count();
 
         if ($request->input('length') != -1) {
-        $data = $data->orderBy($orderBy, 'asc')
-        ->skip($request->input('start'))
-        ->take($request->input('length'))
-        ->get();
+            $data = $data->orderBy($orderBy, 'asc')
+            ->skip($request->input('start'))
+            ->take($request->input('length'))
+            ->get();
         } else {
-        $data = $data->orderBy($orderBy, 'asc')->get();
+            $data = $data->orderBy($orderBy, 'asc')->get();
         }
 
         $recordsTotal = $recordsFiltered; // Total data setelah filter
@@ -101,23 +101,22 @@ class VideodataController extends Controller
         $data1 = array();
         $no = $request->input('start');
         foreach ($data as $x) {
-        $no++;
-        $row = [];
-        $row[] = $no;
-        $row[] = $this->_iframe($x);
-        $row[] = $this->_toggle($x);
-        $row[] = $this->_btn_detail($x);
-        $data1[] = $row;
+            $no++;
+            $row = [];
+            $row[] = $no;
+            $row[] = $this->_iframe($x);
+            $row[] = $this->_toggle($x);
+            $row[] = $this->_btn_detail($x);
+            $data1[] = $row;
         }
 
         return response()->json([
-        'draw' => $request->input('draw'),
-        'recordsTotal' => $recordsTotal,
-        'recordsFiltered' => $recordsFiltered,
-        'data' => $data1,
+            'draw' => $request->input('draw'),
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data1,
         ]);
     }
-
 
     private function _btn_detail($x)
     {

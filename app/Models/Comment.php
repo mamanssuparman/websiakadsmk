@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,8 @@ class Comment extends Model
         'articleid',
         'comment',
         'isactivecomments',
-        'status'
+        'status',
+        'usersid'
     ];
     protected $table = 'comments';
 
@@ -21,5 +23,11 @@ class Comment extends Model
     public function article()
     {
         return $this->belongsTo(Article::class, 'articleid', 'id');
+    }
+
+    // Relasi untuk mengambil id user
+    public function user_nama()
+    {
+        return $this->belongsTo(User::class, 'usersid', 'id');
     }
 }
