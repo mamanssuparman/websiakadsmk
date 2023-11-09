@@ -12,7 +12,8 @@ class Comment extends Model
     protected $fillable = [
         'articleid',
         'comment',
-        'isactivecomments'
+        'isactivecomments',
+        'status'
     ];
     protected $table = 'comments';
 
