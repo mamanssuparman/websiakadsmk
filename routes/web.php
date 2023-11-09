@@ -51,6 +51,7 @@ Route::get('/signout',[AuthController::class, 'logout']);
 Route::post('/auth', [AuthController::class, 'check']);
 Route::get('/gtk/getDataGtk', [GtkDataController::class, 'getDataGtk']);
 Route::get('/prodi/getDataProdi', [ProdiController::class, 'getDataProdi']);
+Route::get('/article/getDataArticle',[ArticledataController::class, 'getDataArticle']);
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);
@@ -88,7 +89,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/categoryarticle', [CategoryarticleController::class, 'index']);
     Route::get('/article', [ArticledataController::class, 'index']);
     Route::get('/article/add', [ArticledataController::class, 'add']);
-    Route::get('/article/edit', [ArticledataController::class, 'edit']);
+    Route::post('/article/add', [ArticledataController::class, 'stored']);
+    Route::get('/article/edit/{id}', [ArticledataController::class, 'edit']);
+    Route::post('/article/edit/{id}', [ArticledataController::class, 'update']);
+    Route::post('/article/activenon', [ArticledataController::class, 'activenon']);
+    Route::get('/article/checkSlug', [ArticledataController::class, 'checkslug']);
     Route::get('/comment', [CommentController::class, 'index']);
     Route::get('/comment/detail', [CommentController::class, 'detail']);
     Route::get('/gallery', [GallerydataController::class, 'index']);
@@ -96,7 +101,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
 });
 // LFM
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 Route::middleware(['auth', 'second'])->group(function () {

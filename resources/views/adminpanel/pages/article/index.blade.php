@@ -53,8 +53,9 @@
             <div></div>
             <a href="{{ url('admin') }}/article/add"> <div class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-lg"><i class="bi bi-plus"></i>Tambah Article</div></a>
         </div>
+        @csrf
         <div class="overflow-y-auto">
-            <table id="example" class="w-full bg-white border rounded-md display border-slate-300">
+            <table id="example2" class="w-full bg-white border rounded-md display border-slate-300">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -66,50 +67,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                   <tr>
-                    <td>1</td>
-                    <td>PPDB 2025</td>
-                    <td>Informasi</td>
-                    <td>1000 x</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                    </td>
-                    <td>
-                        <a href="{{ url('admin') }}/article/edit">
-                            <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-list"></i>
-                        </a>
-                    </td>
-                   </tr>
-                   <tr>
-                    <td>2</td>
-                    <td>PPDB 2025</td>
-                    <td>Informasi</td>
-                    <td>1000 x</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                    </td>
-                    <td>
-                        <a href="{{ url('admin') }}/article/edit">
-                            <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-list"></i>
-                        </a>
-                    </td>
-                   </tr>
-                   <tr>
-                    <td>3</td>
-                    <td>PPDB 2025</td>
-                    <td>Informasi</td>
-                    <td>1000 x</td>
-                    <td>
-                        <input type="checkbox" title="Dead Part" id="toggle" checked class="">
-                    </td>
-                    <td>
-                        <a href="{{ url('admin') }}/article/edit">
-                            <i class="px-2 py-1 text-white bg-blue-700 rounded-md hover:bg-blue-800 bi bi-list"></i>
-                        </a>
-                    </td>
-                   </tr>
+
                 </tbody>
             </table>
         </div>
     </div>
 @endsection
+@push('jsexternal')
+<script src="/jsadmin/article/index.js"></script>
+
+@endpush
