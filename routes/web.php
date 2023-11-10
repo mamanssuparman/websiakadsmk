@@ -135,12 +135,15 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/video/{video}/edit', [VideodataController::class, 'edit']);
     Route::put('/video/{video}/update', [VideodataController::class, 'update']);
     Route::post('/video/activenon', [VideodataController::class, 'activenon'])->name('activenon.video');
+
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
+    Route::post('/profileuser/update_profile_user', [ProfileuserController::class, 'update_profile_user']);
+    Route::post('/profileuser/change_pass', [ProfileuserController::class, 'update_pass']);
 });
 // LFM
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 
 // Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
 //     \UniSharp\LaravelFilemanager\Lfm::routes();
