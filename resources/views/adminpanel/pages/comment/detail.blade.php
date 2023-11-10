@@ -14,8 +14,8 @@
             </div>
         </div>
     </div>
-    @dd($comment)
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
+        @csrf
         <div class="bg-white border-2 border-dashed rounded-md">
             <div class="overflow-x-auto">
                 <table class="mb-10 text-sm">

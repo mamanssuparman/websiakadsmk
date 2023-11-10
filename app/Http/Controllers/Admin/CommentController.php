@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
@@ -65,8 +66,8 @@ class CommentController extends Controller
 
         $orderSort = $request->input('order.0.dir');
 
-        $data = Comment::query();
-        $data->join('users', 'comments.usersid', '=', 'users.id');
+        $data = DB::table('comments')->leftJoin('users', 'comments.usersid', '=', 'users.id')->leftJoin('articles','comments.articleid','=','articles.id') ->select('comments.*', 'users.nama','articles.judul');
+        // $data->join('users', 'comments.usersid', '=', 'users.id');
         // $data->join('articles', 'comments.articleid', '=', 'articles.id');
 
         if ($request->input('search.value') != null) {
@@ -88,8 +89,8 @@ class CommentController extends Controller
             $no++;
             $row = [];
             $row[] = $no;
-            $row[] = $x->user_nama->nama;
-            $row[] = $x->article->judul;
+            $row[] = $x->nama;
+            $row[] = $x->judul;
             $row[] = $this->_status($x);
             $row[] = $this->_toggle($x);
             $row[] = $this->_btn_detail($x);
