@@ -111,6 +111,7 @@
                         <input id="categoryname" name="categoryname" type="text"
                             class="w-full border rounded-md border-slate-300 ">
                             <small id="categorynameError" class="error-messages italic text-yellow-500"></small>
+                            <input type="hidden" name="slug" id="slug">
                     </div>
                     <div class="mb-5">
                         <label for="deskripsi" class="block ">Deskripsi </label>

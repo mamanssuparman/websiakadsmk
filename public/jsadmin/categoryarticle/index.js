@@ -92,5 +92,15 @@ function aktifnoncategory(txt, id) {
     })
 }
 
+// Check Slug
+const title = document.querySelector('#categoryname')
+const slug = document.querySelector('#slug')
+
+title.addEventListener('change', function() {
+    fetch('/admin/category/checkSlug?title=' + title.value)
+        .then(response => response.json())
+        .then(data => slug.value = data.slug+'.html')
+})
+
 
     

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use DataTables;
 use App\Models\Categori;
 use Illuminate\Http\Request;
-use DataTables;
+use App\Http\Controllers\Controller;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+
 class CategoryarticleController extends Controller
 {
     // show index category article
@@ -87,6 +89,14 @@ class CategoryarticleController extends Controller
         return $togle;
     }
 
+    // slug check
+    public function checkslug(Request $request)
+    {
+        $slug = SlugService::createSlug(Categori::class, 'slug', $request->title);
+        return response()->json([
+            'slug'      => $slug
+        ]);
+    }
 
     // store category
     public function store(Request $request){
@@ -97,7 +107,7 @@ class CategoryarticleController extends Controller
 
         $data = [
             "categoryname" => $request->categoryname,
-            "slug"  => strtolower(preg_replace('/\s+/', '-', $request->categoryname)),
+            "slug"  => $request->slug,
             'deskripsi' => $request->deskripsi
         ];
 

@@ -22,8 +22,10 @@ class VerifyCsrfToken extends Middleware
         "admin/mapel/store",
         "admin/mapel/activenon",
         "admin/mapel/*/update",
-        //Ekstrakulikuler Sekolah
         'admin/ekstrakurikuler/activenon',
         "admin/comment/activenon",
+        "/admin/gallery/store",
+        "/admin/gallery/activenon",
+        '/admin/gallery/*/update'
     ];
 }
