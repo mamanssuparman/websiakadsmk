@@ -14,7 +14,7 @@ class Ekstra extends Model
     use sluggable;
     protected $fillable = [
         'pembinaid',
-        'sinomim',
+        'sinonim',
         'judul',
         'slug',
         'headerpicture',

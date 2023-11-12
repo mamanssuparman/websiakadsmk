@@ -24,7 +24,7 @@ class Profile extends Model
     {
         return [
             'slug' => [
-                'source' => 'judul'
+                'source' => 'title'
             ]
         ];
     }

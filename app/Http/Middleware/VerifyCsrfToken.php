@@ -18,6 +18,14 @@ class VerifyCsrfToken extends Middleware
         "admin/categoryarticle/*/update",
         "admin/video/save-data",
         "admin/video/activenon",
-        "admin/video/*/update"
+        "admin/video/*/update",
+        "admin/mapel/store",
+        "admin/mapel/activenon",
+        "admin/mapel/*/update",
+        'admin/ekstrakurikuler/activenon',
+        "admin/comment/activenon",
+        "/admin/gallery/store",
+        "/admin/gallery/activenon",
+        '/admin/gallery/*/update'
     ];
 }

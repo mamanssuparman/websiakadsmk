@@ -56,7 +56,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);
     Route::get('/profile/add', [ProfileSekolahController::class, 'add']);
-    Route::get('/profile/edit', [ProfileSekolahController::class, 'edit']);
+    Route::post('/profile/add', [ProfileSekolahController::class, 'stored']);
+    Route::get('/profile/edit/{id}', [ProfileSekolahController::class, 'edit']);
+    Route::post('/profile/edit/{id}', [ProfileSekolahController::class, 'updated']);
+    Route::get('/profile/getDataProfile', [ProfileSekolahController::class, 'getDataProfile']);
+    Route::get('/profile/checkSlug',[ProfileSekolahController::class, 'checkslug']);
+    Route::post('/profile/activenon', [ProfileSekolahController::class, 'activenon']);
     Route::get('/gtk', [GtkDataController::class, 'index']);
     Route::get('/gtk/add', [GtkDataController::class, 'add']);
     Route::post('/gtk/add',[GtkDataController::class, 'stored']);
@@ -68,7 +73,21 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/gtk/addmapelajar', [GtkDataController::class, 'addMapelAjar']);
     Route::post('/gtk/updateprofile',[GtkDataController::class, 'updateprofile']);
     Route::post('/gtk/updatepassword',[GtkDataController::class, 'updatepassword']);
+
+
+
+
     Route::get('/mapel',[MapelController::class, 'index']);
+    Route::get('/getMapel', [MapelController::class, 'getMapel']);
+    Route::post('/mapel/store', [MapelController::class, 'store']);
+    Route::post('/mapel/activenon', [MapelController::class, 'activenon']);
+    Route::get('/mapel/{id}/edit', [MapelController::class, 'edit']);
+    Route::put('/mapel/{id}/update', [MapelController::class, 'update']);
+
+
+
+
+
     Route::get('/prodi', [ProdiController::class, 'index']);
     Route::get('/prodi/add', [ProdiController::class, 'add']);
     Route::get('/prodi/detail/{id}', [ProdiController::class, 'detail']);
@@ -83,15 +102,25 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/prodi/removePrestasi',[ProdiController::class, 'removePrestasi']);
     Route::post('/prodi/addMapelAjar',[ProdiController::class, 'addMapelAjar']);
     Route::post('/prodi/removeMapelAjar',[ProdiController::class, 'removeMapelAjar']);
+
+
     Route::get('/ekstrakurikuler', [EkstrakurikulersekolahController::class, 'index']);
+    Route::get('/ekstrakurikuler/checkSlug', [EkstrakurikulersekolahController::class, 'checkslug']);
     Route::get('/ekstrakurikuler/add', [EkstrakurikulersekolahController::class, 'add']);
-    Route::get('/ekstrakurikuler/edit', [EkstrakurikulersekolahController::class, 'edit']);
+    Route::post('/ekstrakurikuler/store', [EkstrakurikulersekolahController::class, 'store']);
+    Route::post('/ekstrakurikuler/update/{ekstra}', [EkstrakurikulersekolahController::class, 'update']);
+    Route::get('/ekstrakurikuler/edit/{ekstra}', [EkstrakurikulersekolahController::class, 'edit']);
+    Route::get('/getEkstrakulikuler', [EkstrakurikulersekolahController::class, 'getEkstrakulikuler']);
+    Route::post('/ekstrakurikuler/activenon', [EkstrakurikulersekolahController::class, 'activenon']);
+
     Route::get('/categoryarticle', [CategoryarticleController::class, 'index']);
     Route::get('/getCategoryarticle', [CategoryarticleController::class, 'getCategoryarticle']);
     Route::post('/categoryarticle/store', [CategoryarticleController::class, 'store']);
     Route::post('/categoryarticle/activenon', [CategoryarticleController::class, 'activenon']);
     Route::get('/categoryarticle/{category}/edit', [CategoryarticleController::class, 'edit']);
     Route::put('/categoryarticle/{category}/update', [CategoryarticleController::class, 'update']);
+    Route::get('/category/checkSlug', [CategoryarticleController::class, 'checkSlug']);
+
     Route::get('/article', [ArticledataController::class, 'index']);
     Route::get('/article/add', [ArticledataController::class, 'add']);
     Route::post('/article/add', [ArticledataController::class, 'stored']);
@@ -100,18 +129,30 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/article/activenon', [ArticledataController::class, 'activenon']);
     Route::get('/article/checkSlug', [ArticledataController::class, 'checkslug']);
     Route::get('/comment', [CommentController::class, 'index']);
-    Route::get('/comment/detail', [CommentController::class, 'detail']);
+    Route::get('/comment/detail/{id}', [CommentController::class, 'detail']);
+    Route::get('/comment/getDataComments', [CommentController::class, 'getDataComments']);
+    Route::post('/comment/activenon', [CommentController::class, 'activenon'])->name('activenon.comments');
+    Route::post('/comment/reject/{id}', [CommentController::class, 'rejectComment']);
+    Route::post('/comment/approve/{id}', [CommentController::class, 'approveComment']);
     Route::get('/gallery', [GallerydataController::class, 'index']);
+    Route::get('/getGallery', [GallerydataController::class, 'getGallery']);
+    Route::post('/gallery/store', [GallerydataController::class, 'store']);
+    Route::get('/gallery/{photo}/edit', [GallerydataController::class, 'edit']);
+    Route::post('/gallery/{photo}/update', [GallerydataController::class, 'update']);
+    Route::post('/gallery/activenon', [GallerydataController::class, 'activenon']);
     Route::get('/video', [VideodataController::class, 'index']);
     Route::get('/video/data-video', [VideodataController::class, 'getDataVideo']);
     Route::post('/video/save-data', [VideodataController::class, 'stored'])->name('save.data');
     Route::get('/video/{video}/edit', [VideodataController::class, 'edit']);
     Route::put('/video/{video}/update', [VideodataController::class, 'update']);
     Route::post('/video/activenon', [VideodataController::class, 'activenon'])->name('activenon.video');
+
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
+    Route::post('/profileuser/update_profile_user', [ProfileuserController::class, 'update_profile_user']);
+    Route::post('/profileuser/change_pass', [ProfileuserController::class, 'update_pass']);
 });
 // LFM
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['guest']], function () {
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
