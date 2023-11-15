@@ -28,27 +28,27 @@ class GallerydataController extends Controller
         $orderBy = 'galleryvideos.judul';
 
         switch ($request->input('order.3.column')) {
-            case '1': 
+            case '1':
                 $orderBy = 'galleryvideos.judul';
                 break;
         }
 
         $orderSort = $request->input('order.0.dir');
-        
+
         $data = Galleryvideo::where('jenis', 'Gallery');
-        
+
         if($request->input('search.value')!= null){
             $data = $data->where(function($q)use($request){
                 $q->whereRaw('LOWER(judul) like ?',['%'.$request->input('search.value').'%']);
             });
         }
 
-        $recordsFiltered = $data->count(); 
-        
+        $recordsFiltered = $data->count();
+
         if($request->input('length')!= -1)$data = $data->skip($request->input('start'))->take($request->input('length'));
         $data = $data->orderBy($orderBy,  'asc')->get();
-        
-        $recordsTotal = $data->count(); 
+
+        $recordsTotal = $data->count();
         $data1 = array();
         $no = $request->input('start');
         foreach ($data as $value) {
@@ -74,7 +74,7 @@ class GallerydataController extends Controller
     // button detail
     private function _btn_detail($value)
     {
-        $btn_detail = '<button type="button" data-id="'.$value->id.'" id="detail" class="edit px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></button>';
+        $btn_detail = '<button type="button" data-id="'.$value->id.'" id="detail" class="px-1 text-white bg-blue-800 rounded-sm edit "><i class="bi bi-list"></i></button>';
         return $btn_detail;
     }
 
@@ -95,7 +95,7 @@ class GallerydataController extends Controller
     {
         $htmlGallery = '
             <img src="/images/'.$value->picture.'" alt="foto" width="200" class="rounded-md"></td>
-        '; 
+        ';
         return $htmlGallery;
     }
 
@@ -121,12 +121,12 @@ class GallerydataController extends Controller
     }
 
 
-    // store gallery 
+    // store gallery
     public function store(Request $request){
         $request->validate([
             "judul"         => ['required', 'unique:ekstras,judul'],
-            "jenis"         => ['required'],
-            "foto"          => ['required', 'mimes:png,jpg,webp,pdf,png,jpeg, gif'], 
+            // "jenis"         => ['required'],
+            "foto"          => ['required', 'mimes:png,jpg,webp,pdf,png,jpeg, gif'],
         ]);
 
         $file_foto        = $request->file('foto');
@@ -134,10 +134,10 @@ class GallerydataController extends Controller
         $nama_foto        = date('dmyhis').'.'.$ekstensi_foto;
         $file_foto->move(public_path('/images'), $nama_foto);
         $foto = $nama_foto;
-    
+
         $data_ekstra = [
             "judul"             =>  $request->judul,
-            "jenis"             =>  $request->jenis,
+            "jenis"             =>  "Gallery",
             "picture"           =>  $foto,
             "usersid"            =>  Auth::id()
         ];
@@ -159,18 +159,20 @@ class GallerydataController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             "judul"    => ['required'],
-            "jenis"    => ['required'],
-            "foto"     => ['mimes:png,jpg,webp,pdf,png,jpeg, gif'], 
+            // "jenis"    => ['required'],
+            // "foto"     => ['mimes:png,jpg,webp,pdf,png,jpeg, gif'],
         ]);
 
         $data_gallery = [
             "judul"       => $request->judul,
-            "jenis"       => $request->jenis,
         ];
 
         $gallery = Galleryvideo::find($id);
 
         if ($request->hasFile('foto')) {
+            $request->validate([
+                'foto'    => 'required'
+            ]);
             $file_gambar        = $request->file('foto');
             $ekstensi_gambar    = $file_gambar->extension();
             $nama_gambar        = date('dmyhis').'.'.$ekstensi_gambar;

@@ -51,7 +51,7 @@ $(document).ready(function() {
                 setTimeout(function() {
                     $(alert).addClass('hidden').removeClass('flex');
                 }, 3000);
-                
+
                 $('#form-gallery')[0].reset();
                 $('#preview-edit').hide();
                 $('#preview').hide();
@@ -74,12 +74,12 @@ $(document).ready(function() {
         var id = $(this).data('id');
         $.get('/admin/gallery/' + id + '/edit', function(data) {
             $('#judul').val(data.judul);
-            $('#jenis').val(data.jenis);
+            // $('#jenis').val(data.jenis);
             $('#idGallery').val(data.id);
             $('#preview-edit').attr('src', '/images/'+data.picture);
             $('#btn-add-edit').replaceWith("<button id='btn-add-edit' class='px-5 py-3 font-semibold text-slate-500 bg-yellow-300 rounded-md mt-9 hover:bg-yellow-400'><i class='bi bi-pencil-fill'></i></i> Edit Photo</button>")
         })
-    })    
+    })
 
 })
 
@@ -112,4 +112,3 @@ function aktifnoncategory(txt, id) {
         }
         reader.readAsDataURL(event.target.files[0]);
     }
-    
