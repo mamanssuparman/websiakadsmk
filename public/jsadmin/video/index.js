@@ -64,7 +64,7 @@ $(document).ready(function () {
 		var id = $(this).data('id');
 		$.get('/admin/video/' + id + '/edit', function (data) {
 			$('#judul').val(data.judul);
-			$('#jenis').val(data.jenis);
+			// $('#jenis').val(data.jenis);
 			$('#urlvideo').val(data.urlvideo);
 			$('#idVideo').val(data.id);
 			$('#btn-add-edit').replaceWith("<button id='btn-add-edit' class='px-5 py-3 font-semibold text-slate-500 bg-yellow-300 rounded-md mt-9 hover:bg-yellow-400'><i class='bi bi-pencil-fill'></i></i> Edit Video</button>")
