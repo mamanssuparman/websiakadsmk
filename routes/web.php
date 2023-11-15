@@ -103,7 +103,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/prodi/removePrestasi',[ProdiController::class, 'removePrestasi']);
     Route::post('/prodi/addMapelAjar',[ProdiController::class, 'addMapelAjar']);
     Route::post('/prodi/removeMapelAjar',[ProdiController::class, 'removeMapelAjar']);
-
+    Route::get('/prodi/views/{id}', [ProdiController::class, 'views']);
 
     Route::get('/ekstrakurikuler', [EkstrakurikulersekolahController::class, 'index']);
     Route::get('/ekstrakurikuler/checkSlug', [EkstrakurikulersekolahController::class, 'checkslug']);
