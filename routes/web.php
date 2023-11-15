@@ -113,6 +113,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/ekstrakurikuler/edit/{ekstra}', [EkstrakurikulersekolahController::class, 'edit']);
     Route::get('/getEkstrakulikuler', [EkstrakurikulersekolahController::class, 'getEkstrakulikuler']);
     Route::post('/ekstrakurikuler/activenon', [EkstrakurikulersekolahController::class, 'activenon']);
+    Route::get('/ekstrakurikuler/views/{id}', [EkstrakurikulersekolahController::class, 'views']);
 
     Route::get('/categoryarticle', [CategoryarticleController::class, 'index']);
     Route::get('/getCategoryarticle', [CategoryarticleController::class, 'getCategoryarticle']);
