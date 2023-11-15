@@ -62,6 +62,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profile/getDataProfile', [ProfileSekolahController::class, 'getDataProfile']);
     Route::get('/profile/checkSlug',[ProfileSekolahController::class, 'checkslug']);
     Route::post('/profile/activenon', [ProfileSekolahController::class, 'activenon']);
+    Route::get('/profile/view/{id}', [ProfileSekolahController::class, 'views']);
     Route::get('/gtk', [GtkDataController::class, 'index']);
     Route::get('/gtk/add', [GtkDataController::class, 'add']);
     Route::post('/gtk/add',[GtkDataController::class, 'stored']);
