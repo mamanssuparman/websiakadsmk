@@ -41,7 +41,7 @@
 @endpush
 @section('content')
     {{-- notif add--}}
-    <div id="alert-1" class="hidden success items-center p-4 mx-8 mt-4 text-white bg-green-800 rounded-lg " role="alert">
+    <div id="alert-1" class="items-center hidden p-4 mx-8 mt-4 text-white bg-green-800 rounded-lg success " role="alert">
         <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
         </svg>
@@ -58,7 +58,7 @@
     </div>
     {{-- end notif --}}
     {{-- notif edit--}}
-    <div id="alert-2" class="hidden success items-center p-4 mx-8 mt-4 text-slate-100 bg-yellow-500 rounded-lg " role="alert">
+    <div id="alert-2" class="items-center hidden p-4 mx-8 mt-4 bg-yellow-500 rounded-lg success text-slate-100 " role="alert">
         <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
         </svg>
@@ -101,12 +101,12 @@
             </div>
             <div class="w-full p-12 border rounded-md border-slate-300 sm:flex-1">
                 <form id="form-gallery" action="" method="post" enctype="multipart/form-data">
-                    <input type="text" name="idGallery" id="idGallery">
+                    <input type="hidden" name="idGallery" id="idGallery">
                     <div class="mb-6">
                         <label for="judul" class="block mb-2 text-sm font-medium text-gray-900">Judul Foto</label>
                         <input type="text" id="judul" name="judul"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-8">
-                        <small id="judulError" class="error-messages italic text-yellow-500"></small>
+                        <small id="judulError" class="italic text-yellow-500 error-messages"></small>
                     </div>
                     <div class="mb-6">
                         <label for="jenis" class="block">Jenis</label>
@@ -116,14 +116,14 @@
                             <option value="Gallery">Gallery</option>
                             <option value="Video" disabled>Video</option>
                         </select>
-                        <small id="jenisError" class="error-messages italic text-yellow-500"></small>
+                        <small id="jenisError" class="italic text-yellow-500 error-messages"></small>
                     </div>
                     <div class="mb-6">
                         <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Foto</label>
                         <input
-                            class="block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
                             id="file_input" type="file" onchange="previewImage(event)" name="foto">
-                        <small id="fotoError" class="error-messages italic text-yellow-500"></small>
+                        <small id="fotoError" class="italic text-yellow-500 error-messages"></small>
                     </div>
                     <div class="mb-6 rounded-md border-slate-300">
                         <img src="" alt="" width="200" class="rounded-md"
