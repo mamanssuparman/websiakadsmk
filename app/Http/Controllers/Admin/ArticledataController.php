@@ -77,7 +77,7 @@ class ArticledataController extends Controller
             $row[] = $x->categoryname;
             $row[] = '100 x views';
             $row[] = $this->_toggle($x);
-            $row[] = $this->_btn_detail($x);
+            $row[] = $this->_btn_detail($x).' '.$this->_views_detail($x);
             $data1 [] = $row;
         }
         return response()->json([
@@ -86,6 +86,11 @@ class ArticledataController extends Controller
             'recordsFiltered'   => $recordsFiltered,
             'data'  => $data1,
         ]);
+    }
+    private function _views_detail($x)
+    {
+        $views_detail = '<a class="px-1 text-white bg-green-500" href="'.url('admin').'/article/views/'.base64_encode($x->id).'"><i class="bi bi-eye-fill"></i></a>';
+        return $views_detail;
     }
     private function _toggle($x)
     {
@@ -196,5 +201,16 @@ class ArticledataController extends Controller
         } catch (Exception $error) {
             return redirect()->back()->with('message', 'Data Article gagal di simpan.!');
         }
+    }
+    public function views(Request $request, $id)
+    {
+        $data = [
+            'title'         => 'S-Panel | Article',
+            'head'          => 'Article',
+            'breadcumb1'    => 'Article',
+            'breadcumb2'    => 'Views',
+            'dataArticle'   => Article::with(['user','categori'])->where('id', base64_decode($id))->firstOrFail()
+        ];
+        return view('adminpanel.pages.article.views', $data);
     }
 }

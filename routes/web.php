@@ -130,6 +130,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/article/edit/{id}', [ArticledataController::class, 'update']);
     Route::post('/article/activenon', [ArticledataController::class, 'activenon']);
     Route::get('/article/checkSlug', [ArticledataController::class, 'checkslug']);
+    Route::get('/article/views/{id}', [ArticledataController::class, 'views']);
     Route::get('/comment', [CommentController::class, 'index']);
     Route::get('/comment/detail/{id}', [CommentController::class, 'detail']);
     Route::get('/comment/getDataComments', [CommentController::class, 'getDataComments']);
