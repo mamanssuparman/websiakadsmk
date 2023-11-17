@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MapelController;
 use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\GtkDataController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Users\ArticleController;
 use App\Http\Controllers\Users\GalleryController;
 use App\Http\Controllers\Users\ProfileController;
@@ -153,6 +154,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
     Route::post('/profileuser/update_profile_user', [ProfileuserController::class, 'update_profile_user']);
     Route::post('/profileuser/change_pass', [ProfileuserController::class, 'update_pass']);
+
+    // Route Settings
+    Route::get('/settings', [SettingController::class, 'index']);
+    Route::post('/settings/getdatasettings', [SettingController::class, 'getdatasettings']);
+    Route::post('/settings/stored', [SettingController::class, 'stored']);
+    Route::post('/settings/update',[SettingController::class, 'updated']);
 });
 // LFM
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {

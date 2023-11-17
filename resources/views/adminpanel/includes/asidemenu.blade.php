@@ -89,6 +89,13 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Profile User</span>
                 </a>
             </li>
+            <li class="h-[1px] w-full bg-slate-300"></li>
+            <li>
+                <a href="{{ url('admin') }}/settings" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 {{ $head == 'Settings' ? 'bg-gray-200' : '' }} ">
+                    <i class="bi bi-gear-fill"></i>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Settings</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>
