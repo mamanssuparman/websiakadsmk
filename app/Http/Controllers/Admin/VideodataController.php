@@ -24,14 +24,14 @@ class VideodataController extends Controller
     {
         $request->validate([
             'judul' => 'required|unique:galleryvideos,judul',
-            'jenis' => 'required',
+            // 'jenis' => 'required',
             'urlvideo' => 'required|unique:galleryvideos,urlvideo'
         ]);
 
         $dataStored = [
             'usersid' => Auth::id(),
             'judul' => $request->judul,
-            'jenis' => $request->jenis,
+            'jenis' => "Video",
             'urlvideo' => $request->urlvideo
         ];
 
@@ -121,7 +121,7 @@ class VideodataController extends Controller
     private function _btn_detail($x)
     {
         $btn_detail = '<button type="button" data-id="'.$x->id.'" id="detail"
-            class="edit px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></button>';
+            class="px-1 text-white bg-blue-800 rounded-sm edit "><i class="bi bi-list"></i></button>';
         return $btn_detail;
     }
 
@@ -130,7 +130,7 @@ class VideodataController extends Controller
         $html = '<div class="w-40 h-24 overflow-hidden rounded-md">
             <iframe
                 class="object-cover w-full h-full transition ease-out rounded-md sm:h-42 hover:scale-105 hover:rounded-none"
-                src="'.$x->urlvideo.'" title="YouTube video player"
+                src="https://www.youtube.com/embed/'.$x->urlvideo.'" title="YouTube video player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>

@@ -42,7 +42,7 @@
 @section('content')
 
     {{-- notif add --}}
-    <div id="alert-1" class="hidden success items-center p-4 mx-8 mt-4 text-white bg-green-800 rounded-lg " role="alert">
+    <div id="alert-1" class="items-center hidden p-4 mx-8 mt-4 text-white bg-green-800 rounded-lg success " role="alert">
         <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
             viewBox="0 0 20 20">
             <path
@@ -64,7 +64,7 @@
     </div>
     {{-- end notif --}}
     {{-- notif edit --}}
-    <div id="alert-2" class="hidden success items-center p-4 mx-8 mt-4 text-slate-100 bg-yellow-500 rounded-lg "
+    <div id="alert-2" class="items-center hidden p-4 mx-8 mt-4 bg-yellow-500 rounded-lg success text-slate-100 "
         role="alert">
         <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
             viewBox="0 0 20 20">
@@ -120,23 +120,13 @@
                         <label for="judul" class="block">Judul Video</label>
                         <input id="judul" name="judul" type="text"
                             class="w-full border rounded-lg border-slate-300">
-                        <small id="judulError" class="error-messages italic text-yellow-500"></small>
-                    </div>
-                    <div class="mb-5">
-                        <label for="jenis" class="block">Jenis</label>
-                        <select name="jenis" id="jenis"
-                            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option selected value="">--Pilih Jenis Media--</option>
-                            <option value="Gallery">Gallery</option>
-                            <option value="Video">Video</option>
-                        </select>
-                        <small id="jenisError" class="error-messages italic text-yellow-500"></small>
+                        <small id="judulError" class="italic text-yellow-500 error-messages"></small>
                     </div>
                     <div class="mb-5">
                         <label for="urlvideo" class="block">Embeded Youtube</label>
                         <input id="urlvideo" name="urlvideo" type="text"
                             class="w-full border rounded-lg border-slate-300">
-                        <small id="urlvideoError" class="error-messages italic text-yellow-500"></small>
+                        <small id="urlvideoError" class="italic text-yellow-500 error-messages"></small>
                     </div>
                     <div class="flex justify-end">
                         <button type="submit" id="btn-add-edit"

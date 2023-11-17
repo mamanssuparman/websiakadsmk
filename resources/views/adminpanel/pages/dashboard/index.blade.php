@@ -40,17 +40,84 @@
     </style>
 @endpush
 @section('content')
-    <div class="h-16 p-4 mx-8 mt-8 bg-blue-800 rounded-tl-lg rounded-tr-lg">
-        <div class="flex flex-row justify-between">
-            <div class="flex font-semibold text-white">
-                {{ $head }}
+
+    <div class="p-4 mx-8 ">
+        <section>
+            <div class="w-full px-4 py-4">
+                <h1 class="font-thin text-gray-400">#INFO USER</h1>
+                <div class="flex gap-4 ">
+                    <div class="flex flex-wrap w-1/2 gap-4 bg-white p-9">
+                        <i class="text-5xl text-gray-500 bi bi-people"></i>
+                        <h3 class="mt-2 text-xl font-thin">Jumlah Users</h3>
+                        <h1 class="ml-auto text-5xl font-bold text-gray-500">{{ $dataJumlahUser }}</h1>
+                    </div>
+                    <div class="flex flex-wrap w-1/2 gap-4 bg-white p-9">
+                        <i class="text-5xl text-gray-500 bi bi-people"></i>
+                        <h3 class="mt-2 text-xl font-thin">Jumlah Staff</h3>
+                        <h1 class="ml-auto text-5xl font-bold text-gray-500">{{ $dataJumlahTenagaKependidikan }}</h1>
+                    </div>
+                    <div class="flex flex-wrap w-1/2 gap-4 bg-white p-9">
+                        <i class="text-5xl text-gray-500 bi bi-people"></i>
+                        <h3 class="mt-2 text-xl font-thin">Tenaga Pendidik</h3>
+                        <h1 class="ml-auto text-5xl font-bold text-gray-500">{{ $dataJumlahTenagaPendidik }}</h1>
+                    </div>
+                </div>
             </div>
+        </section>
 
-        </div>
-    </div>
-    <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
-        <div class="flex flex-row justify-between">
-        </div>
+        <section>
+            <div class="w-full px-4 py-4">
+                <h1 class="font-thin text-gray-400">#INFO PENGADUAN</h1>
+                <div class="flex gap-4">
+                    <div class="flex flex-wrap w-1/2 gap-4 bg-white p-9">
+                        <i class="text-5xl text-gray-500 bi bi-clipboard-pulse"></i>
+                        <h3 class="mt-2 text-xl font-thin">Category Article</h3>
+                        <h1 class="ml-auto text-5xl font-bold text-gray-500">{{ $dataJumlahKategoriArticle }}</h1>
+                    </div>
+                    <div class="flex flex-wrap w-1/2 gap-4 bg-white p-9">
+                        <i class="text-5xl text-gray-500 bi bi-postcard-heart-fill"></i>
+                        <h3 class="mt-2 text-xl font-thin">Jumlah Article</h3>
+                        <h1 class="ml-auto text-5xl font-bold text-gray-500">{{ $dataJumlahArticle }}</h1>
+                    </div>
+                </div>
 
+                <div class="px-4 py-4 mt-10 bg-white">
+                    <div class="flex mb-4 text-xl font-semibold text-gray-600">
+                        Data Article Favorite
+                    </div>
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Judul Article</th>
+                                <th>Kategori </th>
+                                <th>Tanggal Pengaduan</th>
+                                <th>Jumlah View</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>System Architect</td>
+                                <td>Edinburgh</td>
+                                <td>20 Januari 2050</td>
+                                <td>
+                                    <i class="bi bi-list"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>20 Januari 2050</td>
+                                <td>
+                                    <i class="bi bi-list"></i>
+                                </td>
+                            </tr>
+                    </table>
+
+                </div>
+            </div>
+        </section>
     </div>
 @endsection
