@@ -72,7 +72,7 @@ class ProfileSekolahController extends Controller
             $row[] = $no;
             $row[] = $x->judul;
             $row[] = $this->_toggle($x);
-            $row[] = $this->_btn_detail($x);
+            $row[] = $this->_btn_detail($x).' '.$this->_view_detail($x);
             $data1 [] = $row;
         }
         return response()->json([
@@ -81,6 +81,11 @@ class ProfileSekolahController extends Controller
             'recordsFiltered'   => $recordsFiltered,
             'data'  => $data1,
         ]);
+    }
+    private function _view_detail($x)
+    {
+        $btn_view = '<a href="'.url('admin/profile/view/'.base64_encode($x->id)).'" class="px-1 text-white bg-green-800 rounded-sm" title="Detail Profile"><i class="bi bi-eye-fill"></i></a>';
+        return $btn_view;
     }
     private function _toggle($x)
     {
@@ -150,5 +155,17 @@ class ProfileSekolahController extends Controller
         ];
         Profile::where('id',base64_decode($id))->update($dataStore);
         return redirect()->back()->with('message', 'Data Profile berhasil di perbaharui.!');
+    }
+    public function views(Request $request, $id)
+    {
+        $data = [
+            'title'         => 'S-Panel | Profile',
+            'head'          => 'Profile',
+            'breadcumb1'    => 'Profile',
+            'breadcumb2'    => 'Views',
+            'dataProfile'   => Profile::where('id', base64_decode($id))->first()
+        ];
+        // ddd($data);
+        return view('adminpanel.pages.profile.view', $data);
     }
 }

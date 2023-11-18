@@ -80,7 +80,7 @@ class ProdiController extends Controller
             $row[] = $no;
             $row[] = $x->judul;
             $row[] = $this->_toggle($x);
-            $row[] = $this->_btn_detail($x);
+            $row[] = $this->_btn_detail($x).' '.$this->_views_detail($x);
             $data1 [] = $row;
         }
         return response()->json([
@@ -89,6 +89,11 @@ class ProdiController extends Controller
             'recordsFiltered'   => $recordsFiltered,
             'data'  => $data1,
         ]);
+    }
+    private function _views_detail($x)
+    {
+        $views= '<a href="'.url('admin').'/prodi/views/'.base64_encode($x->id).'" class="px-1 bg-green-600 rounded-sm" title="Views Detail Program Studi"><i class="text-white bi bi-eye-fill"></i></a>';
+        return $views;
     }
     private function _toggle($x)
     {
@@ -397,5 +402,19 @@ class ProdiController extends Controller
         } catch (Exception $error) {
             return redirect()->back()->with('message', $error);
         }
+    }
+    public function views(Request $request, $id)
+    {
+        $data = [
+            'title'         => 'S-Panel | Program Studi',
+            'head'          => 'Program Studi',
+            'breadcumb1'    => 'Program Studi',
+            'breadcumb2'    => 'Views Detail',
+            'dataprodi'     => Prodi::with(['kajur'])->where('id', base64_decode($id))->firstOrFail(),
+            'datamapel'     => Mapelproduktif::where('prodiid', base64_decode($id))->get(),
+            'datapekerjaan' => Pekerjaanproduktif::where('prodiid', base64_decode($id))->get(),
+            'dataprestasi'  => Prestasiprodi::where('prodiid', base64_decode($id))->get()
+        ];
+        return view('adminpanel.pages.programstudi.views', $data);
     }
 }

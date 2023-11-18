@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MapelController;
 use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\GtkDataController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Users\ArticleController;
 use App\Http\Controllers\Users\GalleryController;
 use App\Http\Controllers\Users\ProfileController;
@@ -62,6 +63,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profile/getDataProfile', [ProfileSekolahController::class, 'getDataProfile']);
     Route::get('/profile/checkSlug',[ProfileSekolahController::class, 'checkslug']);
     Route::post('/profile/activenon', [ProfileSekolahController::class, 'activenon']);
+    Route::get('/profile/view/{id}', [ProfileSekolahController::class, 'views']);
     Route::get('/gtk', [GtkDataController::class, 'index']);
     Route::get('/gtk/add', [GtkDataController::class, 'add']);
     Route::post('/gtk/add',[GtkDataController::class, 'stored']);
@@ -102,7 +104,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/prodi/removePrestasi',[ProdiController::class, 'removePrestasi']);
     Route::post('/prodi/addMapelAjar',[ProdiController::class, 'addMapelAjar']);
     Route::post('/prodi/removeMapelAjar',[ProdiController::class, 'removeMapelAjar']);
-
+    Route::get('/prodi/views/{id}', [ProdiController::class, 'views']);
 
     Route::get('/ekstrakurikuler', [EkstrakurikulersekolahController::class, 'index']);
     Route::get('/ekstrakurikuler/checkSlug', [EkstrakurikulersekolahController::class, 'checkslug']);
@@ -112,6 +114,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/ekstrakurikuler/edit/{ekstra}', [EkstrakurikulersekolahController::class, 'edit']);
     Route::get('/getEkstrakulikuler', [EkstrakurikulersekolahController::class, 'getEkstrakulikuler']);
     Route::post('/ekstrakurikuler/activenon', [EkstrakurikulersekolahController::class, 'activenon']);
+    Route::get('/ekstrakurikuler/views/{id}', [EkstrakurikulersekolahController::class, 'views']);
 
     Route::get('/categoryarticle', [CategoryarticleController::class, 'index']);
     Route::get('/getCategoryarticle', [CategoryarticleController::class, 'getCategoryarticle']);
@@ -128,6 +131,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/article/edit/{id}', [ArticledataController::class, 'update']);
     Route::post('/article/activenon', [ArticledataController::class, 'activenon']);
     Route::get('/article/checkSlug', [ArticledataController::class, 'checkslug']);
+    Route::get('/article/views/{id}', [ArticledataController::class, 'views']);
     Route::get('/comment', [CommentController::class, 'index']);
     Route::get('/comment/detail/{id}', [CommentController::class, 'detail']);
     Route::get('/comment/getDataComments', [CommentController::class, 'getDataComments']);
@@ -150,6 +154,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/profileuser',[ProfileuserController::class, 'index']);
     Route::post('/profileuser/update_profile_user', [ProfileuserController::class, 'update_profile_user']);
     Route::post('/profileuser/change_pass', [ProfileuserController::class, 'update_pass']);
+
+    // Route Settings
+    Route::get('/settings', [SettingController::class, 'index']);
+    Route::post('/settings/getdatasettings', [SettingController::class, 'getdatasettings']);
+    Route::post('/settings/stored', [SettingController::class, 'stored']);
+    Route::post('/settings/update',[SettingController::class, 'updated']);
 });
 // LFM
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
