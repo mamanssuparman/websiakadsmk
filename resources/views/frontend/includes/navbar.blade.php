@@ -49,17 +49,11 @@
                         </button>
                         <div id="profileNavbar"
                             class="z-10 hidden w-56 font-normal bg-gray-100 border border-gray-200 divide-y divide-gray-200 rounded-lg">
-                            <ul class="py-2 text-sm text-gray-700">
-                                <li>
-                                    <a href="{{ url('') }}/profile"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">Visi
-                                        & Misi SMKN 3
-                                        Banjar</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/profile"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">Sejarah</a>
-                                </li>
+                            <ul class="py-2 text-sm text-gray-700" >
+                                <div id="menu_profile">
+                                   
+                                </div>
+                               
                             </ul>
                         </div>
                         <div
@@ -78,30 +72,10 @@
                         <div id="programStudiNavbar"
                             class="z-10 hidden font-normal bg-gray-100 border border-gray-200 divide-y divide-gray-200 rounded-lg w-44">
                             <ul class="py-2 text-sm text-gray-700">
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">APHP</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">APAT</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">RPL</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">AKL</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">TBSM</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">TKRO</a>
-                                </li>
+                                <div id="menu_prodi">
+                                    
+                                </div>
+
                             </ul>
                         </div>
                         <div
@@ -120,26 +94,9 @@
                         <div id="ekstrakurikulerId"
                             class="z-10 hidden font-normal bg-gray-100 border border-gray-200 divide-y divide-gray-200 rounded-lg w-44">
                             <ul class="py-2 text-sm text-gray-700">
-                                <li>
-                                    <a href="{{ url('') }}/ekstrakurikuler"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">OSIS</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/ekstrakurikuler"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">Pramuka</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/ekstrakurikuler"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">Paskibra</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/ekstrakurikuler"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">PMR</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/ekstrakurikuler"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">Rohis</a>
-                                </li>
+                                <div id="menu_ekstra">
+
+                                </div>
                             </ul>
                         </div>
                         <div

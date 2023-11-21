@@ -18,128 +18,19 @@
         </div>
         <div>
             <div class="flex gap-5 pt-10 overflow-x-auto snap-x scroll-smooth scrollbar-hidden">
+                @foreach ($dataGtk as $gtk)    
                 <div class="block space-y-2 snap-start">
                     <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
+                        <img src="/images/{{ $gtk->photos }}"
                             class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
                             alt="gallery1">
                     </div>
 
                     <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
+                        <span class="text-base tracking-tight text-gray-900">{{ $gtk->nama }}</span>
                     </div>
                 </div>
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
-                            class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
-                            alt="gallery1">
-                    </div>
-
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
-                    </div>
-                </div>
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
-                            class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
-                            alt="gallery1">
-                    </div>
-
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
-                    </div>
-                </div>
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
-                            class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
-                            alt="gallery1">
-                    </div>
-
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
-                    </div>
-                </div>
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
-                            class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
-                            alt="gallery1">
-                    </div>
-
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
-                    </div>
-                </div>
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
-                            class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
-                            alt="gallery1">
-                    </div>
-
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
-                    </div>
-                </div>
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
-                            class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
-                            alt="gallery1">
-                    </div>
-
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
-                    </div>
-                </div>
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
-                            class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
-                            alt="gallery1">
-                    </div>
-
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
-                    </div>
-                </div>
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
-                            class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
-                            alt="gallery1">
-                    </div>
-
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
-                    </div>
-                </div>
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
-                            class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
-                            alt="gallery1">
-                    </div>
-
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
-                    </div>
-                </div>
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/contohfoto.jpg"
-                            class="object-cover max-w-md transition ease-out rounded-lg h-44 sm:h-56 hover:scale-105 "
-                            alt="gallery1">
-                    </div>
-
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">Maman Suparman</span>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
 

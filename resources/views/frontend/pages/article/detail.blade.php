@@ -19,40 +19,21 @@
                         <div class="flex pb-4 ">
                             <div class="flex flex-col">
                                 <div class="text-xl font-semibold text-slate-900">
-                                    Judul Berita/ Article
+                                    {{ $detailArticle->judul }}
                                 </div>
                                 <div class="text-sm text-slate-500">
-                                    Posted By <i class="bi bi-person-fill"></i> Admin, <i class="bi bi-calendar-date"></i>
-                                    19 Oktober 2024 <i class="bi bi-bookmark-fill"></i> Informasi
+                                    Posted By <i class="bi bi-person-fill"></i> {{ $detailArticle->user->nama }}, <i class="bi bi-calendar-date"></i>
+                                    {{ $detailArticle->created_at }}<i class="bi bi-bookmark-fill"></i><a href="{{ url('article') }}?category={{ $detailArticle->categori->slug }}"> {{ $detailArticle->categori->categoryname }}</a>
                                 </div>
                             </div>
                         </div>
                         <div class="text-sm">
                             <div class="flex flex-col">
                                 <div class="flex w-auto lg:w-96">
-                                    <img src="/images/bkk.png" alt="">
+                                    <img src="/images/{{ $detailArticle->headerpicture }}" alt="">
                                 </div>
                                 <div class="text-justify text-slate-950">
-                                    <p>
-                                        amet, eget eget Nullam urna. commodo vel lorem. sollicitudin. tortor. nulla, Nunc
-                                        elementum maximus Quisque Morbi adipiscing scelerisque ipsum sapien Praesent quam
-                                        felis, sit ex dignissim, Morbi hendrerit ullamcorper sit adipiscing leo.
-                                    </p>
-                                    <p>
-                                        Cras dolor tortor. fringilla tempor est. non non at, Nunc facilisis lorem. tincidunt
-                                        sit tincidunt placerat eget Ut nec Nam ultrices nec elit luctus amet, quis lobortis,
-                                        eget nisi quis gravida sit cursus fringilla elit non vitae dui. vel
-                                    </p>
-                                    <p>
-                                        Cras libero, hendrerit hendrerit efficitur. sit malesuada sollicitudin. Nunc massa
-                                        Praesent odio at, ultrices nec porta risus turpis commodo sed urna. Ut tempor eu Ut
-                                        venenatis Vestibulum vel consectetur vitae consectetur non. lorem. eget
-                                    </p>
-                                    <p>
-                                        efficitur. dui. odio dignissim, ex non. id vitae tortor. at nec Cras elementum
-                                        tempor venenatis nec Nunc convallis. dui. at eget sed non ex. amet, eu Ut ultrices
-                                        odio dui amet, odio volutpat non, id nibh placerat quam eget Donec quis dui.
-                                    </p>
+                                    {!! $detailArticle->article !!}
 
                                 </div>
                             </div>
@@ -125,8 +106,10 @@
                         <div class="flex flex-col w-full mt-8">
                             <div class="text-xl font-semibold">Cari Berita</div>
                             <div class="mt-2">
+                                <form action="{{ url('article') }}" method="get">
                                 <input type="text" class="w-full h-8 rounded-md border-slate-500"
-                                    placeholder="Search ....">
+                                    placeholder="Search ...." name="search">
+                                </form>
                             </div>
                             <div class="mt-8 text-xl font-semibold text-slate-900">
                                 Kategori Article
@@ -136,15 +119,9 @@
                             </div>
                             <div class="mt-3">
                                 <ul class="pl-8">
-                                    <li type="circle">Kategori A</li>
-                                    <li type="circle">Kategori A</li>
-                                    <li type="circle">Kategori A</li>
-                                    <li type="circle">Kategori A</li>
-                                    <li type="circle">Kategori A</li>
-                                    <li type="circle">Kategori A</li>
-                                    <li type="circle">Kategori A</li>
-                                    <li type="circle">Kategori A</li>
-
+                                    @foreach ($listCategori as $categori)
+                                       <a href="{{ url('article') }}?category={{ $categori->slug }}"> <li type="circle">{{ $categori->categoryname }}</li></a>
+                                    @endforeach
                                 </ul>
                             </div>
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Users\GtkController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Users\HomeController;
 use App\Http\Controllers\Admin\MapelController;
 use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\CommentController;
@@ -33,16 +34,14 @@ use App\Http\Controllers\Admin\EkstrakurikulersekolahController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
-
-Route::get('/profile', [ProfileController::class, 'detail']);
-Route::get('/programstudi', [ProgramstudiController::class, 'detail']);
-Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'detail']);
+Route::get('/',[HomeController::class, 'index']);
+Route::get('/users/getDataMain',[HomeController::class, 'getDataFooter']);
+Route::get('/profile/{slug}', [ProfileController::class, 'detail']);
+Route::get('/programstudi/{slug}', [ProgramstudiController::class, 'detail']);
+Route::get('/ekstrakurikuler/{slug}', [EkstrakurikulerController::class, 'detail']);
 Route::get('/gtk',[GtkController::class,'index']);
 Route::get('/article', [ArticleController::class, 'index']);
-Route::get('/article/detail', [ArticleController::class, 'detail']);
+Route::get('/article/{id}', [ArticleController::class, 'detail']);
 Route::get('/gallery', [GalleryController::class, 'foto']);
 Route::get('/video', [GalleryController::class, 'video']);
 

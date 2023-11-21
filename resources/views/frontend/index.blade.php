@@ -13,6 +13,7 @@
           display: none;
         }
     </style>
+    <script src="/assetsadmin/js/jquery-3.7.0.js"></script>
     @stack('jscssexternal')
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
