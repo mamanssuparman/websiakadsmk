@@ -24,7 +24,7 @@
                 <hr class="my-5 border-gray-800">
                 <div class="flex flex-wrap gap-12">
                     <div class="w-32 overflow-hidden">
-                        <img src="/images/contohfoto.jpg" alt="Photos Kajur" class="object-cover w-full h-auto rounded-md min-h-32">
+                        <img src="/images/{{ $dataprodi->kajur->photos }}" alt="Photos Kajur" class="object-cover w-full h-auto rounded-md min-h-32">
                     </div>
                     <div>
                         <h1 class="text-xl font-thin">Ketua Jurusan</h1>

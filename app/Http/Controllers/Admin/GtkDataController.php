@@ -229,7 +229,7 @@ class GtkDataController extends Controller
             'textalamat'                => 'required',
             'selectpendidikanTerakhir'  => 'required',
             'selectjabatan'             => 'required',
-            'selecttugasTambahan'       => 'required',
+            // 'selecttugasTambahan'       => 'required',
             'selectrole'                => 'required',
             // 'email'                     => 'required|unique:users,email,'.$request->email.',email',
             'email'                     => 'required|unique:users,email,'.base64_decode($request->guruid).',id',
@@ -281,7 +281,7 @@ class GtkDataController extends Controller
             'textAlamat'            => 'required',
             'selectPendidikanTerakhir'          => 'required',
             'selectJabatan'                     => 'required',
-            'selectTugasTambahan'               => 'required',
+            // 'selectTugasTambahan'               => 'required',
             'selectRole'                        => 'required',
             'textemail'                         => 'unique:users,email'
         ]);

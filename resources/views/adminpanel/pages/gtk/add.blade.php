@@ -115,8 +115,8 @@
                     <div class="mb-5">
                         <label for="tugasTambahan" class="block ">Tugas Tambahan</label>
                         <select id="tugasTambahan" name="selectTugasTambahan"
-                            class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500" required>
-                                <option value="-">--Pilih Tugas Tambahan--</option>
+                            class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500" >
+                                <option value="">--Pilih Tugas Tambahan--</option>
                                 <option value="Wakasek Kurikulum" {{ old('selectTugasTambahan') == 'Wakasek Kurikulum' ? 'selected' : '' }}>Wakasek Kurikulum</option>
                                 <option value="Wakasek Humas" {{ old('selectTugasTambahan') == 'Wakasek Humas' ? 'selected' : '' }}>Wakasek Humas</option>
                                 <option value="Wakasek Kesiswaan" {{ old('selectTugasTambahan') == 'Wakasek Kesiswaan' ? 'selected' : '' }}>Wakasek Kesiswaan</option>

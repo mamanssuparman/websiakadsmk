@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Prodi;
+use App\Models\Banner;
 use App\Models\Ekstra;
 use App\Models\Article;
 use App\Models\Comment;
@@ -93,5 +94,10 @@ class User extends Authenticatable
     public function comment()
     {
         return $this->hasMany(Comment::class, 'usersid', 'id');
+    }
+
+    // Relasi 1 : M to Banners
+    public function banners(){
+        return $this->hasMany(Banner::class, 'usersid', 'id');
     }
 }

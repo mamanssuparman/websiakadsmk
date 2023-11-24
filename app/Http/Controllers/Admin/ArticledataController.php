@@ -77,7 +77,7 @@ class ArticledataController extends Controller
             $row[] = $x->categoryname;
             $row[] = '100 x views';
             $row[] = $this->_toggle($x);
-            $row[] = $this->_btn_detail($x).' '.$this->_views_detail($x);
+            $row[] = $this->_btn_detail($x).' '.$this->_views_detail($x).' '.$this->_copy_button($x);
             $data1 [] = $row;
         }
         return response()->json([
@@ -87,9 +87,15 @@ class ArticledataController extends Controller
             'data'  => $data1,
         ]);
     }
+    private function _copy_button($x)
+    {
+        $slug = $x->slug;
+        $copy_button = '<buton class="px-1 text-white bg-yellow-600 rounded-sm" onclick="copyUrl(this, '."'$x->slug'".')"><i class="bi bi-copy"></i></buton>';
+        return $copy_button;
+    }
     private function _views_detail($x)
     {
-        $views_detail = '<a class="px-1 text-white bg-green-500" href="'.url('admin').'/article/views/'.base64_encode($x->id).'"><i class="bi bi-eye-fill"></i></a>';
+        $views_detail = '<a class="px-1 rounded-sm text-white bg-green-500" href="'.url('admin').'/article/views/'.base64_encode($x->id).'"><i class="bi bi-eye-fill"></i></a>';
         return $views_detail;
     }
     private function _toggle($x)

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Users\HomeController;
 use App\Http\Controllers\Admin\MapelController;
 use App\Http\Controllers\Admin\ProdiController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\GtkDataController;
 use App\Http\Controllers\Admin\SettingController;
@@ -51,7 +52,7 @@ Route::get('/signout',[AuthController::class, 'logout']);
 Route::post('/auth', [AuthController::class, 'check']);
 Route::get('/gtk/getDataGtk', [GtkDataController::class, 'getDataGtk']);
 Route::get('/prodi/getDataProdi', [ProdiController::class, 'getDataProdi']);
-Route::get('/article/getDataArticle',[ArticledataController::class, 'getDataArticle']);
+Route::get('/articledata/getDataArticle',[ArticledataController::class, 'getDataArticle']);
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);
@@ -159,6 +160,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/settings/getdatasettings', [SettingController::class, 'getdatasettings']);
     Route::post('/settings/stored', [SettingController::class, 'stored']);
     Route::post('/settings/update',[SettingController::class, 'updated']);
+
+    //Route Banners
+    Route::get('/banner', [BannerController::class, 'index']);
+    Route::get('/banner/getBanner', [BannerController::class, 'getBanner']);
+    Route::post('/banner/stored', [BannerController::class, 'store']);
+    Route::post('/banner/getDataBanner', [BannerController::class, 'getDataBanner']);
+    Route::post('/banner/{id}/update', [BannerController::class, 'update']);
+    Route::post('/banner/activenon', [BannerController::class, 'activenon']);
 });
 // LFM
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
