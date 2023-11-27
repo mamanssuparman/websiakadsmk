@@ -163,3 +163,33 @@ function updatePassword(){
         }
     })
 }
+
+// Prosess Save atau Update Profile 
+$('#form-profile').on('submit', function(e){
+    e.preventDefault()
+    $.ajax({
+        url: baseurl + '/admin/gtk/updateprofile',
+        type: "POST",
+        dataType: "JSON",
+        data: new FormData(this),
+        contentType: false, 
+        processData: false, 
+        success: function(res){
+            location.reload()
+            console.log(res)
+        },
+        error: function(res){
+            console.log(res)
+            $('#errNuptk').html(res.responseJSON.errors.email)
+            $('#errTextNip').html(res.responseJSON.errors.nip)
+            $('#errTextNama').html(res.responseJSON.errors.textnama)
+            $('#errSelectJenisKelamin').html(res.responseJSON.errors.selectJenisKelamin)
+            $('#errTextAlamat').html(res.responseJSON.errors.textalamat)
+            $('#errSelectPendidikanTerakhir').html(res.responseJSON.errors.selectpendidikanTerakhir)
+            $('#errSelectTugasTambahan').html(res.responseJSON.errors.selecttugasTambahan)
+            $('#errSelectRole').html(res.responseJSON.errors.selectrole)
+            $('#errEmail').html(res.responseJSON.errors.email)
+            // res.responseJSON.errors('')
+        }
+    })
+})
