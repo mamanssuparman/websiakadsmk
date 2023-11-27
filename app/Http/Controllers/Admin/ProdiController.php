@@ -140,7 +140,7 @@ class ProdiController extends Controller
                 'deskripsi'             => 'required',
                 'logo'                  => ['required',File::image()->max('2mb')]
             ]);
-            $imagesName = time().'.'.$request->logo->extension();
+            $imagesName = 'prodi-'.time().'.'.$request->logo->extension();
             $request->logo->move(public_path('images'),$imagesName);
             $dataStoreProdis = [
                 'kajurid'       => $request->ketua_jurusan,
@@ -377,7 +377,7 @@ class ProdiController extends Controller
                 $request->validate([
                     'logo'      =>      'required|mimes:png,jpg|max:2048'
                 ]);
-                $imagesName = time().'.'.$request->logo->extension();
+                $imagesName = 'prodi-'.time().'.'.$request->logo->extension();
                 $request->logo->move(public_path('images'), $imagesName);
                 $dataUpdateProdi = [
                     'kajurid'       => $request->ketua_jurusan,

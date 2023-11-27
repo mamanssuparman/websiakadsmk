@@ -12,9 +12,9 @@
         </div>
     </div>
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
-        <div class="flex flex-col lg:flex-row">
-            <div class="flex justify-center w-full p-2 bg-gray-100 rounded-md lg:w-1/3">
-                <img src="/images/{{ $dataprodi->logoprodi }}" alt="" class="w-auto h-auto rounded-md" alt="Logo Jurusan">
+        <div class="flex flex-col lg:flex-row items-center">
+            <div class="flex w-full p-2 bg-gray-100 rounded-md lg:w-1/3">
+                <img src="/images/{{ $dataprodi->logoprodi }}" alt="" class="" alt="Logo Jurusan">
             </div>
             <div class="mx-2 lg:w-2/3">
                 <h1 class="text-2xl font-semibold">{{ $dataprodi->judul }}</h1>

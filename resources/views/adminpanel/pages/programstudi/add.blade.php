@@ -42,7 +42,7 @@
                     <div>
                         <label for="nama_prodi" class="block mb-2 text-sm font-medium text-gray-900">Nama
                             Prodi</label>
-                        <input type="text" id="nama_prodi" name="nama_prodi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                        <input type="text" id="nama_prodi" name="nama_prodi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value="{{ old('nama_prodi') }}">
                         <input type="hidden" name="slug" id="slug">
                         @error('nama_prodi')
                             <small class="italic text-yellow-800">{{ $message }}</small>
@@ -57,7 +57,7 @@
                     </div>
                     <div>
                         <label for="singkatan" class="block mb-2 text-sm font-medium text-gray-900">Singkatan</label>
-                        <input type="text" id="singkatan" name="singkatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                        <input type="text" id="singkatan" name="singkatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value="{{ old('singkatan') }}">
                         @error('singkatan')
                             <small class="italic text-yellow-800">{{ $message }}</small>
                         @enderror
@@ -77,7 +77,7 @@
                     </div>
                     <div>
                         <label for="deskripsi" class="block mb-2 text-sm font-medium text-gray-900">Deskripsi</label>
-                        <textarea id="deskripsi" name="deskripsi" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        <textarea id="deskripsi" name="deskripsi" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{ old('deskripsi') }}</textarea>
                         @error('deskripsi')
                             <small class="italic text-yellow-800">{{ $message }}</small>
                         @enderror
