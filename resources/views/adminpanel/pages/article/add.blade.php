@@ -38,7 +38,7 @@
     </div>
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
         <div class="px-4 overflow-y-auto">
-            <form action="{{ url('admin') }}/article/add" method="POST" enctype="multipart/form-data">
+            <form action="#" method="POST" enctype="multipart/form-data" id="form-add-article">
                 @csrf
                 <div class="flex flex-col">
                     <div class="flex text-slate-800">
@@ -78,7 +78,7 @@
                             Isi Article
                         </div>
                         <div>
-                            <textarea name="editor1" id="" cols="20" class="w-full h-64 rounded-md border-slate-300"></textarea>
+                            <textarea name="editor1" id="editor1" cols="20" class="w-full h-64 rounded-md border-slate-300"></textarea>
                             <small class="italic text-yellow-800" id="information-isiarticle"></small>
                         </div>
                     </div>
@@ -93,25 +93,5 @@
     </div>
 @endsection
 @push('jsexternal')
-    <script>
-        var options = {
-            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Image',
-            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
-            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token=',
-            clipboard_handleImages: false
-        }
-        CKEDITOR.replace('editor1', options);
-
-        // Check Slug
-        const title = document.querySelector('#judul')
-        const slug = document.querySelector('#slug')
-
-        title.addEventListener('change', function() {
-            fetch('/admin/article/checkSlug?title=' + title.value)
-                .then(response => response.json())
-                .then(data => slug.value=data.slug)
-        })
-
-    </script>
+    <script src="/jsadmin/article/add.js"></script>
 @endpush

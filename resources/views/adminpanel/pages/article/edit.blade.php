@@ -45,14 +45,14 @@
                         Judul
                     </div>
                     <div>
-                        <input type="text" name="judul" id="" class="w-full h-8 rounded-md border-slate-300" value="{{ $dataarticle->judul, old('judul') }}">
+                        <input type="text" name="judul" id="judul" class="w-full h-8 rounded-md border-slate-300" value="{{ $dataarticle->judul }}">
                     </div>
                     <div class="mt-2">
                         <div class="text-slate-800">
                             Nama Category
                         </div>
                         <div>
-                            <select name="selectcategory" id="" class="w-full h-8 px-4 py-1 rounded-md border-slate-300 text-slate-800">
+                            <select name="selectcategory" id="selectCategory" class="w-full h-8 px-4 py-1 rounded-md border-slate-300 text-slate-800">
                                 <option value="-">-- Pilih Category --</option>
                                 @foreach ($datacategory as $category)
                                     <option value="{{ $category->id }}" {{ $dataarticle->categoriesid == $category->id ? 'selected' : '' }}>{{ $category->categoryname }}</option>
@@ -89,14 +89,7 @@
     </div>
 @endsection
 @push('jsexternal')
-    <script>
-        var options = {
-            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Image',
-            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
-            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token=',
-            clipboard_handleImages: false
-        }
-        CKEDITOR.replace('editor1', options);
+    <script src="/jsadmin/article/edit.js">
+
     </script>
 @endpush

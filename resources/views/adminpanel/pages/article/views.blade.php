@@ -20,14 +20,14 @@
                                 {{ $dataArticle->judul }}
                             </div>
                             <div class="text-sm text-slate-500">
-                                Posted By <i class="bi bi-person-fill"></i> {{ $dataArticle->user->role }} , <i class="bi bi-calendar-date"></i> {{ $dataArticle->created_at }}, <i class="bi bi-bookmark-fill"></i>{{ $dataArticle->categori->categoryname }}
+                                Posted By <i class="bi bi-person-fill"></i> {{ $dataArticle->user->role }} , <i class="bi bi-calendar-date"></i> {{  $dataArticle->created_at->diffForHumans() }}, <i class="bi bi-bookmark-fill"></i>{{ $dataArticle->categori->categoryname }}
                             </div>
                         </div>
                     </div>
                     <div class="text-sm">
                         <div class="flex flex-col">
                             <div class="flex w-auto lg:w-96">
-                                <img src="/images/{{ $dataArticle->headerpicture }}" alt="Header Berita">
+                                <img src="/images/{{ $dataArticle->headerpicture }}" alt="Header Berita" class="{{ $dataArticle->headerpicture == "headerdefault.jpg" ? "hidden" : '' }}">
                             </div>
                             <div class="text-justify text-slate-950">
                                 {!! $dataArticle->article !!}
