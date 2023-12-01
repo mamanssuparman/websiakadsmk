@@ -110,15 +110,17 @@
                     </div>
                     <div class="mb-6 rounded-md border-slate-300">
                         <label for="urls" class="block mb-2 text-sm font-medium text-gray-900">Url</label>
-                        <input type="text" name="urls" id="urls" class="px-2 py-1 border-gray-300 rounded-md w-full focus:ring-blue-500 focus:border-blue-500 block text-sm">
-                        <small id="urlsError" class="italis text-yellow-500 block text-sm"></small>
+                        <input type="text" name="urls" id="urls" class="block w-full px-2 py-1 text-sm border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <small id="urlsError" class="block text-sm text-yellow-500 italis"></small>
                     </div>
                     <div class="mb-6">
                         <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Foto</label>
                         <input
                             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
                             id="file_input" type="file" onchange="previewImage(event)" name="foto">
+                        <small class="text-xs italic text-red-500">* Gambar Maksimal berukuran 2000 px X 670 px</small>
                         <small id="fotoError" class="italic text-yellow-500 error-messages"></small>
+
                     </div>
                     <div class="mb-6 rounded-md border-slate-300">
                         <img src="" alt="" width="200" class="rounded-md"
@@ -128,7 +130,7 @@
                         <img src="" alt="" width="200" class="rounded-md"
                             id="preview-edit">
                     </div>
-                    
+
                     <div class="flex justify-end mt-9">
                         <button id='btn-add-edit' class='px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800' type="submit"><i class='bi bi-plus'></i>Save Banner</button>
                     </div>

@@ -20,7 +20,7 @@ class BannerController extends Controller
         ];
         return view('adminpanel.pages.banner.index', $data);
     }
-    // get data Banner 
+    // get data Banner
     public function getBanner(Request $request)
     {
         $orderBy = 'banners.judul';
@@ -77,7 +77,7 @@ class BannerController extends Controller
     }
     private function _detail($x)
     {
-        $btndetail = '<button class="bg-blue-500 rounded-sm px-1 text-white text-sm" onclick="detail(this,'."'$x->id'".')"><i class="bi bi-list"></i></button>';
+        $btndetail = '<button class="px-1 text-sm text-white bg-blue-500 rounded-sm" onclick="detail(this,'."'$x->id'".')"><i class="bi bi-list"></i></button>';
         return $btndetail;
     }
     public function store(Request $request)
@@ -90,7 +90,7 @@ class BannerController extends Controller
             ]);
             $file_foto      = $request->file('foto');
             $ekstensi_foto  = $file_foto->extension();
-            $nama_foto      = date('dmyhis').'.'.$ekstensi_foto;
+            $nama_foto      = 'banners-'.date('dmyhis').'.'.$ekstensi_foto;
             $file_foto->move(public_path('/images'),$nama_foto);
             $foto = $nama_foto;
             $data_banner = [
