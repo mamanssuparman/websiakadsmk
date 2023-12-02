@@ -36,31 +36,31 @@
         </div>
     </div>
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
-        <form action="{{ url('admin')}}/ekstrakurikuler/store" method="post" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data" id="form-ekstrakurikuler">
             @csrf
             <div class="flex flex-wrap gap-3">
                 <div class="w-full sm:w-1/2">
                     <div class="mb-5">
                         <label for="namaEskul" class="block">Nama Ekstrakurikuler</label>
                         <input id="namaEskul" name="namaEskul" type="text" class="w-full border rounded-md border-slate-300" value="{{ old('namaEskul') }}">
-                        @error('namaEskul')
-                            <small small class="italic text-yellow-500">{{ $message }}</small>
-                        @enderror
+
+                            <small small class="italic text-yellow-500" id="errNamaEskul"></small>
+
                         <input type="hidden" name="slug" id="slug">
                     </div>
                     <div class="mb-5">
-                        <label for="sinonim" class="block ">sinonim</label>
-                        <input id="sinonim" name="sinonim" type="text" class="w-full border rounded-md border-slate-300" value="{{ old('sinonim') }}">
-                        @error('sinonim')
-                            <small class="italic text-yellow-500">{{ $message }}</small>
-                        @enderror
+                        <label for="sinonim" class="block ">Sinonim</label>
+                        <input id="sinonim" name="textSinonim" type="text" class="w-full border rounded-md border-slate-300" value="{{ old('sinonim') }}">
+
+                            <small class="italic text-yellow-500" id="errSinonim"></small>
+
                     </div>
                     <div class="mb-5">
                         <label for="deskripsi" class="block ">Deskripsi</label>
                         <textarea id="deskripsi" name="deskripsi" type="text" class="w-full p-3 rounded-md border-slate-300" rows="6" {{ old('deskripsi') }}></textarea>
-                        @error('deskripsi')
-                            <small class="italic text-yellow-500">{{ $message }}</small>
-                        @enderror
+
+                            <small class="italic text-yellow-500" id="errDeskripsi"></small>
+
                     </div>
                 </div>
                 <div class="w-full sm:flex-1">
@@ -68,9 +68,9 @@
                         <label for="logo" class="block ">Logo</label>
                         <input id="logo" name="logo" type="file"
                             class="w-full border rounded-md selec border-slate-300">
-                            @error('logo')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+
+                                <small class="italic text-yellow-500" id="errLogo"></small>
+
                     </div>
                     <div class="mb-5">
                         <label for="pembinaEkstra" class="block ">Pembina Ekstra</label>
@@ -81,14 +81,14 @@
                                 <option value="{{ $data->id }}">{{ $data->nama }} | {{ $data->jabatan }}</option>
                             @endforeach
                         </select>
-                        @error('pembinaEkstra')
-                         <small class="italic text-yellow-500">{{ $message }}</small>
-                        @enderror
+
+                         <small class="italic text-yellow-500" id="errPembinaEkstra"></small>
+
                     </div>
                 </div>
             </div>
             <div class="flex justify-end">
-                <button class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800"><i class="bi bi-database-down"></i> Simpan</button>
+                <button class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800" type="submit"><i class="bi bi-database-down"></i> Simpan</button>
             </div>
         </form>
     </div>

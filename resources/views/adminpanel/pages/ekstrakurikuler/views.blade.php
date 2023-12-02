@@ -15,7 +15,7 @@
         <div class="flex justify-center">
             <div class="flex flex-col w-3/4 gap-12 lg:flex-row">
                 <div class="flex justify-center w-full p-2 bg-gray-100 rounded-lg lg:w-1/3">
-                    <img src="/images/{{ $dataEkstra->headerpicture }}" alt="Logo Jurusan" class="w-auto h-auto">
+                    <img src="/images/{{ $dataEkstra->headerpicture }}" alt="Logo Jurusan" class="object-cover w-full h-auto rounded-md min-h-32">
                 </div>
                 <div class="lg:w-2/3">
                     <h1 class="text-xl font-semibold">{{ $dataEkstra->judul }}</h1>
@@ -23,8 +23,8 @@
                         {{ $dataEkstra->description }}
                     </p>
                     <hr class="my-5 border-gray-400">
-                    <div class="flex flex-wrap gap-12">
-                        <div class="w-32 overflow-hidden">
+                    <div class="flex flex-wrap items-center gap-12">
+                        <div class="items-start w-32 overflow-hidden">
                             <img src="/images/{{ $dataEkstra->pembina->photos }}" alt="">
                         </div>
                         <div>
