@@ -22,7 +22,7 @@ $(() => {
 
 function activenon(txt,id){
     $.ajax({
-        url: baseurl+'/admin/articledata/activenon',
+        url: baseurl+'/admin/article/activenon',
         type: "POST",
         dataType: 'JSON',
         data: {
