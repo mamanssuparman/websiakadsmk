@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Mitra;
 use App\Models\Prodi;
 use App\Models\Banner;
 use App\Models\Ekstra;
@@ -99,5 +100,10 @@ class User extends Authenticatable
     // Relasi 1 : M to Banners
     public function banners(){
         return $this->hasMany(Banner::class, 'usersid', 'id');
+    }
+
+    // Relasi 1 : M to Mitras
+    public function mitras(){
+        return $this->hasMany(Mitra::class, 'usersid', 'id');
     }
 }
