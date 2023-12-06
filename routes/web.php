@@ -5,6 +5,7 @@ use App\Http\Controllers\Users\GtkController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Users\HomeController;
 use App\Http\Controllers\Admin\MapelController;
+use App\Http\Controllers\Admin\MitraController;
 use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CommentController;
@@ -109,12 +110,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/ekstrakurikuler', [EkstrakurikulersekolahController::class, 'index']);
     Route::get('/ekstrakurikuler/checkSlug', [EkstrakurikulersekolahController::class, 'checkslug']);
     Route::get('/ekstrakurikuler/add', [EkstrakurikulersekolahController::class, 'add']);
-    Route::post('/ekstrakurikuler/store', [EkstrakurikulersekolahController::class, 'store']);
-    Route::post('/ekstrakurikuler/update/{ekstra}', [EkstrakurikulersekolahController::class, 'update']);
+    Route::post('/ekstrakurikuler/stored', [EkstrakurikulersekolahController::class, 'store']);
+    Route::post('/ekstrakurikuler/update/{id}', [EkstrakurikulersekolahController::class, 'update']);
     Route::get('/ekstrakurikuler/edit/{ekstra}', [EkstrakurikulersekolahController::class, 'edit']);
     Route::get('/getEkstrakulikuler', [EkstrakurikulersekolahController::class, 'getEkstrakulikuler']);
     Route::post('/ekstrakurikuler/activenon', [EkstrakurikulersekolahController::class, 'activenon']);
     Route::get('/ekstrakurikuler/views/{id}', [EkstrakurikulersekolahController::class, 'views']);
+    Route::get('/ekstrakurikuler/getData/{id}', [EkstrakurikulersekolahController::class, 'getData']);
 
     Route::get('/categoryarticle', [CategoryarticleController::class, 'index']);
     Route::get('/getCategoryarticle', [CategoryarticleController::class, 'getCategoryarticle']);
@@ -168,6 +170,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/banner/getDataBanner', [BannerController::class, 'getDataBanner']);
     Route::post('/banner/{id}/update', [BannerController::class, 'update']);
     Route::post('/banner/activenon', [BannerController::class, 'activenon']);
+
+    // Route Mitra
+    Route::get('/mitra', [MitraController::class, 'index']);
+    Route::post('/getListMitra', [MitraController::class, 'getListMitra']);
+    Route::post('/mitra/stored', [MitraController::class, 'stored']);
+    Route::get('/mitra/getDataMitra/{id}',[MitraController::class, 'getDataMitra']);
+    Route::post('/mitra/Update/{id}', [MitraController::class, 'updateMitra']);
 });
 // LFM
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
