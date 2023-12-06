@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Users;
 
 use App\Models\User;
+use App\Models\Mitra;
 use App\Models\Prodi;
+use App\Models\Banner;
 use App\Models\Ekstra;
 use App\Models\Article;
 use App\Models\Profile;
@@ -20,7 +22,10 @@ class HomeController extends Controller
             'navigation'        => "Home",
             'dataMenuProfile'   => Profile::where('isactiveprofile','!=','Non Active')->get(),
             'dataArticle'       => Article::with(['categori'])->where('isactivearticle', 'Active')->limit('5')->get(),
-            'dataGtk'           => User::where('jabatan','!=','Kepala Sekolah')->get()
+            'dataGtk'           => User::where('jabatan','!=','Kepala Sekolah')->get(),
+            'dataCarousel'      => Banner::where('statusbanner', 'Active')->limit(5)->get(),
+            'dataKompetensiKeahlian'    => Prodi::where('isactiveprodi', 'Active')->get(),
+            'dataMitra'                 => Mitra::where('statusmitra','Active')->get()
         ];
         return view('frontend.index', $dataParsing);
     }
@@ -71,7 +76,7 @@ class HomeController extends Controller
                 'data'              => null
             ];
         }
-        // Get Data Menu Ekstra 
+        // Get Data Menu Ekstra
         $dataMenuEkstra     = Ekstra::where('isactiveekstra', '!=', 'Non Active')->get();
         if($dataMenuEkstra){
             $jsonMenuEkstra = [
