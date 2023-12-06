@@ -1,4 +1,4 @@
-<section class="py-10">
+<section class="py-10 {{ $dataCarousel->count() >1 ? '' : 'mt-20' }}">
     <div class="flex">
         <div class="flex flex-col w-full lg:flex-row md:flex-row">
             <!-- Start Coloumn Kiri -->
@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <div class="text-sm text-slate-500" id="body_description_video">
-                        
+
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                                             </a>
                                         </div>
                                         <div class="pb-2 text-sm">
-                                            <a href="{{ url('') }}/article?category={{ $article->categori->slug }}"><i class="bi bi-calendar-date"></i> {{ $article->created_at }} <i
+                                            <a href="{{ url('') }}/article?category={{ $article->categori->slug }}"><i class="bi bi-calendar-date"></i> {{ $article->created_at->diffForHumans() }} <i
                                                 class="bi bi-bookmark-fill"></i> {{ $article->categori->categoryname }}</a>
                                         </div>
                                         <div class="text-sm text-justify ">
