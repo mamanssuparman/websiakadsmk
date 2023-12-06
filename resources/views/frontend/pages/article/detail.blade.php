@@ -21,9 +21,9 @@
                                 <div class="text-xl font-semibold text-slate-900">
                                     {{ $detailArticle->judul }}
                                 </div>
-                                <div class="text-sm text-slate-500">
-                                    Posted By <i class="bi bi-person-fill"></i> {{ $detailArticle->user->nama }}, <i class="bi bi-calendar-date"></i>
-                                    {{ $detailArticle->created_at }}<i class="bi bi-bookmark-fill"></i><a href="{{ url('article') }}?category={{ $detailArticle->categori->slug }}"> {{ $detailArticle->categori->categoryname }}</a>
+                                <div class="text-xs text-slate-900">
+                                    Posted By <i class="bi bi-person-fill"></i> {{ $detailArticle->user->role }}, <i class="bi bi-calendar-date"></i>
+                                     {{ $detailArticle->created_at->diffForHumans() }}<i class="bi bi-bookmark-fill"></i><a href="{{ url('article') }}?category={{ $detailArticle->categori->slug }}"> {{ $detailArticle->categori->categoryname }}</a>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                             <div class="mt-3">
                                 <ul class="pl-8">
                                     @foreach ($listCategori as $categori)
-                                       <a href="{{ url('article') }}?category={{ $categori->slug }}"> <li type="circle">{{ $categori->categoryname }}</li></a>
+                                       <a href="{{ url('article') }}?category={{ $categori->slug }}"> <li>{{ $categori->categoryname }}</li></a>
                                     @endforeach
                                 </ul>
                             </div>
