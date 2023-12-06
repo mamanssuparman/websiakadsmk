@@ -17,26 +17,27 @@
                 <div class="flex px-10 lg:w-full md:w-full sm:w-full">
                     <div class="flex flex-col justify-start px-4 py-4">
                         @if (count($dataArticle))
-                            @foreach ($dataArticle as $article)    
+                            @foreach ($dataArticle as $article)
                             <div class="mx-3">
                                 <a href="{{ url('') }}/article/{{ $article->slug }}" class="mt-3 text-xl font-semibold"><h1>{{ $article->judul }}</h1></a>
-                                <small class="text-slate-800">Posted By <i class="bi bi-person-fill"></i>Admin | <i
-                                        class="bi bi-calendar-date"></i>27 Oktober 2024 | <i
+                                <small class="text-slate-800">Posted By <i class="bi bi-person-fill"></i>{{ $article->user->role }} | <i
+                                        class="bi bi-calendar-date"></i> {{ $article->created_at->diffForHumans() }} | <i
                                         class="bi bi-bookmark-fill"></i> <a href="{{ url('article') }}?category={{ $article->categori->slug }}"> {{ $article->categori->categoryname }} </a></small>
-                                <div class="w-full h-[1px] bg-slate-800"></div>
+                                <div class="h-[1px] bg-gray-200"></div>
                                 <div class="mt-3">
                                     {!! substr($article->article, 0, 150) !!} ...
                                 </div>
-                                <hr class="mt-3 mb-3">
+                                {{-- <hr class="mt-3 mb-3"> --}}
+                                <br>
                             </div>
                             @endforeach
                         @else
-                            <div class="mx-3">
-                                <h1 class="text-slate-900 font-semibold">Article tidak ditemukan</h1>
+                            <div class="flex justify-center mx-3">
+                                <h1 class="text-3xl font-semibold text-center text-slate-900">Oops.!!! Article tidak ditemukan</h1>
                             </div>
                         @endif
-                        
-                        
+
+
                         <!-- Start Pagination -->
                         <div class="mt-4">
                             {{ $dataArticle->links() }}
@@ -60,13 +61,13 @@
                             <div class="mt-8 text-xl font-semibold text-slate-900">
                                 Kategori Article
                             </div>
-                            <div class="w-full h-[2px] bg-slate-500 rounded-full mt-3">
+                            <div class="w-full h-[2px] bg-gray-400 rounded-full mt-3">
 
                             </div>
                             <div class="mt-3">
                                 <ul class="pl-8">
                                     @foreach ($listCategori as $categori)
-                                    <li type="circle"> <a href="{{ url('article') }}?category={{ $categori->slug }}"> {{ $categori->categoryname }} </a> </li>
+                                    <li> <a href="{{ url('article') }}?category={{ $categori->slug }}"> {{ $categori->categoryname }} </a> </li>
                                     @endforeach
                                 </ul>
                             </div>
