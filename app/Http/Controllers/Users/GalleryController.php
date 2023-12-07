@@ -11,7 +11,7 @@ class GalleryController extends Controller
 {
     public function foto(Request $request)
     {
-        $dataGallery = Galleryvideo::where('jenis', 'Gallery')->latest();
+        $dataGallery = Galleryvideo::where('jenis', 'Gallery')->where('isactivegallery', 'Active')->latest();
         if(request('search')){
             $dataGallery->where('judul', 'like', '%'.request('search').'%');
         }
@@ -23,7 +23,7 @@ class GalleryController extends Controller
     }
     public function video(Request $request)
     {
-        $dataGalleryVideo = Galleryvideo::where('jenis', 'Video')->latest();
+        $dataGalleryVideo = Galleryvideo::where('jenis', 'Video')->where('isactivegallery', 'Active')->latest();
         if(request('search')){
             $dataGalleryVideo->where('judul', 'like','%'.request('search').'%');
         }
