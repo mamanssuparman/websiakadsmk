@@ -22,24 +22,24 @@
                     <tr class="text-left">
                         <th class="px-6 py-3 w-44">Nama Pengirim</th>
                         <td class="pl-0">:
-                            {{ $comment->user_nama->nama }}
+                            {{ $comment->namacomentar }}
                         </td>
                     </tr>
                     <tr class="text-left">
                         <th class="w-48 px-6 py-3">Email</th>
                         <td class="pl-0">:
-                            {{ $comment->user_nama->email }}
+                            {{ $comment->email }}
                         </td>
                     </tr>
                     <tr class="text-left">
-                        <th class="w-48 px-6 py-3">Article</th>
+                        <th class="w-48 px-6 py-3">Judul Article</th>
                         <td class="pl-0">:
                             {{ $comment->article->judul }}
                         </td>
                     </tr>
                     <tr class="text-left">
                         <th class="w-48 px-6 py-3">Isi Commentar</th>
-                        <td class="pl-2 pr-9">
+                        <td class="pl-2">:
                             {{ $comment->comment }}
                         </td>
                     </tr>
