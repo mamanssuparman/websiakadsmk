@@ -91,12 +91,6 @@ class User extends Authenticatable
         return $this->hasMany(Article::class, 'usersid', 'id');
     }
 
-    // Relasi 1 : M to comment
-    public function comment()
-    {
-        return $this->hasMany(Comment::class, 'usersid', 'id');
-    }
-
     // Relasi 1 : M to Banners
     public function banners(){
         return $this->hasMany(Banner::class, 'usersid', 'id');

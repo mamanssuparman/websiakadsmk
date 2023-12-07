@@ -13,9 +13,8 @@ class Comment extends Model
     protected $fillable = [
         'articleid',
         'comment',
-        'isactivecomments',
+        'namacomentar',
         'status',
-        'usersid'
     ];
     protected $table = 'comments';
 
@@ -23,11 +22,5 @@ class Comment extends Model
     public function article()
     {
         return $this->belongsTo(Article::class, 'articleid', 'id');
-    }
-
-    // Relasi untuk mengambil id user
-    public function user_nama()
-    {
-        return $this->belongsTo(User::class, 'usersid', 'id');
     }
 }

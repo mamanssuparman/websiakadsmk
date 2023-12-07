@@ -1,10 +1,11 @@
 let csrfHash = $('input[nama="_token"]').val();
+let baseUrl = window.location.origin;
 $(document).ready(function () {
     $('#rejectBtn').on('click', function () {
         var commentId = $(this).data('comment-id');
 
         $.ajax({
-            url: '/admin/comment/reject/' + atob(commentId),
+            url: baseUrl+'/admin/comment/reject/' + atob(commentId),
             type: 'POST',
             dataType: 'json',
             data: {
@@ -14,7 +15,7 @@ $(document).ready(function () {
                 alert(data.message);
             },
             error: function (xhr, textStatus, errorThrown) {
-                console.log('Error: ' + errorThrown);
+                // console.log('Error: ' + errorThrown);
             }
         });
     });
@@ -22,17 +23,17 @@ $(document).ready(function () {
     $('#approveBtn').on('click', function () {
         var commentId = $(this).data('comment-id');
         $.ajax({
-            url: '/admin/comment/approve/' + atob(commentId),
+            url: baseUrl+ '/admin/comment/approve/' + atob(commentId),
             type: 'POST',
             dataType: 'json',
             data: {
-                _token: csrfHash
+                _token: $('input[name="_token"]').val()
             },
             success: function (res) {
                 alert(res.message);
             },
             error: function (xhr, textStatus, errorThrown) {
-                console.log('Error: ' + errorThrown);
+                // console.log('Error: ' + errorThrown);
             }
         });
     });
