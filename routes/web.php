@@ -54,6 +54,7 @@ Route::post('/auth', [AuthController::class, 'check']);
 Route::get('/gtk/getDataGtk', [GtkDataController::class, 'getDataGtk']);
 Route::get('/prodi/getDataProdi', [ProdiController::class, 'getDataProdi']);
 Route::get('/articledata/getDataArticle',[ArticledataController::class, 'getDataArticle']);
+Route::post('/sendComment/{id}', [ArticleController::class, 'storecomment']);
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);
