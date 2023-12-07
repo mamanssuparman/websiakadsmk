@@ -12,7 +12,7 @@ class ArticleController extends Controller
 {
     public function index(Request $request)
     {
-        $article = Article::with(['user','categori']);
+        $article = Article::with(['user','categori'])->where('isactivearticle', 'Active');
         if(request('search')){
             $article->where('judul','like','%'. request('search').'%');
         }
