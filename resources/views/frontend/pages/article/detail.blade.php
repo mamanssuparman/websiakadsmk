@@ -3,7 +3,7 @@
     <!-- nav title -->
     <section class="mt-24">
         <div class="p-5 text-center bg-blue-900">
-            <h1 class="text-2xl font-semibold text-white">Detail Berita</h1>
+            <h1 class="text-2xl font-semibold text-white">Detail Article</h1>
         </div>
     </section>
     <!--end nav title -->
@@ -45,55 +45,60 @@
                                 Komentar
                             </div>
                             <div class="mt-4">
+                                <form action="" id="form-commentar">
                                 <div class="flex flex-col">
-                                    <input type="text" name="" id=""
-                                        class="h-8 text-sm rounded-md border-slate-500 text-slate-800" placeholder="Nama">
-                                    <div class="py-2">
+                                        @csrf
+                                        <input type="text" name="namacomentar" id="namacomentar"
+                                            class="h-8 text-sm rounded-md border-slate-500 text-slate-800" placeholder="Nama" required>
+                                        <small id="errNamaCommentar" class="text-xs text-red-700"></small>
+                                        <div class="py-2">
+                                        </div>
+                                        <input type="text" name="email" id="email"
+                                            class="h-8 text-sm rounded-md border-slate-500 text-slate-800" placeholder="Email" required>
+                                        <small id="errEmail" class="text-xs text-red-700"></small>
+                                        <div class="py-2">
+                                        </div>
+                                        <textarea name="isicomentar" id="isicomentar" cols="10" rows="10" class="text-sm rounded-md border-slate-500"
+                                            placeholder="Isi Komentar"></textarea>
+                                        <small id="errIsiComentar" class="text-xs text-red-700"></small>
+                                        <div class="py-2"></div>
+                                        <div class="flex justify-end">
+                                            <button
+                                                class="flex px-4 py-2 text-white bg-blue-800 rounded-md hover:bg-blue-800/80"
+                                                type="button" onclick="sendComment()">
+                                                <i class="mr-2 bi bi-telegram"></i> Kirim
+                                            </button>
+                                        </div>
                                     </div>
-                                    <input type="text" name="" id=""
-                                        class="h-8 text-sm rounded-md border-slate-500 text-slate-800" placeholder="Email">
-                                    <div class="py-2">
-                                    </div>
-                                    <textarea name="" id="" cols="10" rows="10" class="text-sm rounded-md border-slate-500"
-                                        placeholder="Isi Komentar"></textarea>
-                                    <div class="py-2"></div>
-                                    <div class="flex justify-end">
-                                        <button
-                                            class="flex px-4 py-2 text-white bg-blue-800 rounded-md hover:bg-blue-800/80"
-                                            type="button">
-                                            <i class="mr-2 bi bi-telegram"></i> Kirim
-                                        </button>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                             <div class="py-4">
                                 <hr>
                             </div>
-                            <div class="flex flex-row">
-                                <div class="flex w-32 h-8 mr-1">
-                                    <img src="/dist/images/user-comment.png" alt="" class="">
-                                </div>
-                                <div class="flex flex-col">
-                                    <div class="text-lg font-semibold text-slate-900">
-                                        Nama Pengirim
+                            @if (count($getComment))
+                                @foreach ($getComment as $commentar)
+                                <div class="flex flex-row mb-2">
+                                    <div class="flex w-32 h-8 mr-1">
+                                        <img src="/images/user-comment.png" alt="" class="" class="w-auto">
                                     </div>
-                                    <div class="text-sm text-slate-600">
-                                        Kamis, 13 Januari 2024
-                                    </div>
-                                    <div class="mt-2 mb-2 text-sm text-justify text-slate-900">
-                                        <p>
-                                            commodo nibh id Nunc maximus faucibus nisi eu Nullam id Praesent sapien vitae
-                                            placerat. consectetur placerat. viverra vel odio efficitur. venenatis amet,
-                                            vitae cursus sollicitudin. id dolor amet, Praesent lacus nisi urna Vestibulum
-                                            luctus
-                                        </p>
-                                        <p>
-                                            commodo nec tortor. varius Nam est. Nunc porta dui sed Nullam non quis laoreet
-                                            vitae quis at lacus nec nibh orci libero, sit convallis. lorem. viverra dui. ex
-                                            eget volutpat Nam elit. non, Nunc faucibus dui enim. laoreet sed non, hendrerit
-                                        </p>
+                                    <div class="flex flex-col">
+                                        <div class="text-lg font-semibold text-slate-900">
+                                            {{ $commentar->namacomentar }}
+                                        </div>
+                                        <div class="text-sm text-slate-600">
+                                            {{ $commentar->created_at->diffForHumans() }}
+                                        </div>
+                                        <div class="mt-2 mb-2 text-sm text-justify text-slate-900">
+                                            <p>
+                                                {{ $commentar->comment }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
+                                @endforeach
+                            @else
+                            <h1 class="flex items-center font-semibold">Belum ada komentar.!</h1>
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -104,7 +109,7 @@
                 <div class="flex  lg:w-[700px] md:w-full sm:w-full h-full justify-start ">
                     <div class="w-full px-10">
                         <div class="flex flex-col w-full mt-8">
-                            <div class="text-xl font-semibold">Cari Berita</div>
+                            <div class="text-xl font-semibold">Cari Article</div>
                             <div class="mt-2">
                                 <form action="{{ url('article') }}" method="get">
                                 <input type="text" class="w-full h-8 rounded-md border-slate-500"
@@ -134,3 +139,6 @@
     </section>
     <!-- end Article detail -->
 @endsection
+@push('jsexternal')
+    <script src="/jsusers/detailarticle/index.js"></script>
+@endpush

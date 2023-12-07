@@ -51,7 +51,7 @@
                 <div class="flex  lg:w-[700px] md:w-full sm:w-full h-full justify-start ">
                     <div class="w-full px-10">
                         <div class="flex flex-col w-full mt-8">
-                            <div class="text-xl font-semibold">Cari Berita</div>
+                            <div class="text-xl font-semibold">Cari Article</div>
                             <form action="" method="get">
                                 <div class="mt-2">
                                     <input type="text" class="w-full h-8 rounded-md border-slate-500"

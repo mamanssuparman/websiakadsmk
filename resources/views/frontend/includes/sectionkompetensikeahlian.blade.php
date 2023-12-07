@@ -17,8 +17,8 @@
                 <div class="flex justify-between gap-4 lg:flex-row md:flex-col">
                     @foreach ($dataKompetensiKeahlian as $prodi)
                     <div
-                        class="flex w-48 h-full grid-cols-1 px-4 py-4 transition duration-500 bg-gray-200 rounded-lg shadow-lg hover:scale-105">
-                        <img src="/images/{{ $prodi->logoprodi }}" alt="">
+                        class="flex items-center w-48 h-full grid-cols-1 px-4 py-4 transition duration-500 bg-gray-200 rounded-lg shadow-lg hover:scale-105">
+                        <a href="{{ url('') }}/programstudi/{{ $prodi->slug }}"> <img src="/images/{{ $prodi->logoprodi }}" alt=""></a>
                     </div>
                     @endforeach
                 </div>
