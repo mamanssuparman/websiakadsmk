@@ -17,7 +17,7 @@
                         <hr class="my-5 border-gray-400">
                         <div class="flex flex-wrap gap-12 ">
                             <div class="w-32 overflow-hidden">
-                                <img src="/images/contohfoto.jpg" class="object-cover w-full h-auto min-h-32 rounded-md"
+                                <img src="/images/{{ $dataProdi->kajur->photos }}" class="object-cover w-full h-auto rounded-md min-h-32"
                                     alt="">
                             </div>
                             <div>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="ml-12">
                         <ol class="list-decimal">
-                            @foreach ($dataListMapelAjar as $mapelprodi)    
+                            @foreach ($dataListMapelAjar as $mapelprodi)
                                 <li>{{ $mapelprodi->deskripsi }}</li>
                             @endforeach
                         </ol>
@@ -94,7 +94,7 @@
                     <div class="ml-12">
                         <ol class="list-decimal">
                             @foreach ($dataListPrestasi as $prestasi)
-                                <li>{{ $prestasi->deskripsi }}</li> 
+                                <li>{{ $prestasi->deskripsi }}</li>
                             @endforeach
                         </ol>
                     </div>
