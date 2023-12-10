@@ -26,7 +26,7 @@
             <div class="mt-5">
                 <div class="flex flex-wrap items-start mt-12">
                     @if (count($dataGallery))
-                        @foreach ($dataGallery as $gallery)    
+                        @foreach ($dataGallery as $gallery)
                         <div class="w-full p-1 pt-8 md:w-1/3">
                             <div class="overflow-hidden rounded-lg aspect-w-16">
                                 <img src="/images/{{ $gallery->picture }}" class="object-cover w-full h-full max-w-md transition ease-out sm:h-56 hover:scale-105 hover:rounded-none" alt="">
@@ -39,8 +39,8 @@
                             <p class="font-semibold tracking-tight text-gray-900">Foto tidak ditemukan</p>
                         </div>
                     @endif
-                    
-                    
+
+
                 </div>
             </div>
             <div class="mt-12">
