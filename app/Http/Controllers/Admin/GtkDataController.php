@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Mapelajarguru;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class GtkDataController extends Controller
@@ -89,7 +90,11 @@ class GtkDataController extends Controller
     }
     private function _btn_detail($x)
     {
-        $btn_detail = '<a href="'.url('admin/gtk/detail/'.base64_encode($x->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+        if(Gate::allows('isSuperAdmin')){
+            $btn_detail = '<a href="'.url('admin/gtk/detail/'.base64_encode($x->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+        } else {
+            $btn_detail = '';
+        }
         return $btn_detail;
     }
     private function _toggle($x)

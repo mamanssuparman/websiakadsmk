@@ -52,8 +52,10 @@
         @csrf
         <div class="flex flex-row justify-between">
             <div></div>
-            <a href="{{ url('admin') }}/prodi/add" class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-lg"><i
-                    class="bi bi-plus"></i>Add Prodi</a>
+            @can('isSuperAdmin')
+                <a href="{{ url('admin') }}/prodi/add" class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-lg"><i
+                        class="bi bi-plus"></i>Add Prodi</a>
+            @endcan
         </div>
         <table id="example2" class="display" style="width:100%">
             <thead>

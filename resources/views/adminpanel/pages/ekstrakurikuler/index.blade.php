@@ -51,10 +51,11 @@
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
         <div class="flex flex-row justify-between">
             <div></div>
-            <div class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-lg">
-                <a href="{{ url('admin') }}/ekstrakurikuler/add"><i class="bi bi-plus"></i>Tambah Ekstrakurikuler</a>
-
-            </div>
+            @can('isSuperAdmin')
+                <div class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-lg">
+                    <a href="{{ url('admin') }}/ekstrakurikuler/add"><i class="bi bi-plus"></i>Tambah Ekstrakurikuler</a>
+                </div>
+            @endcan
         </div>
         <table id="example2" class="display" style="width:100%">
             <thead>

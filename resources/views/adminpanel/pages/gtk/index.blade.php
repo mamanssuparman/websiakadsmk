@@ -72,9 +72,11 @@
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
         <div class="flex flex-row justify-between">
             <div></div>
-            <a href="{{ url('admin') }}/gtk/add">
-                <div class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-md hover:bg-blue-800"><i class="bi bi-plus"></i>Tambah GTK</div>
-            </a>
+            @can('isSuperAdmin')
+                <a href="{{ url('admin') }}/gtk/add">
+                    <div class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-md hover:bg-blue-800"><i class="bi bi-plus"></i>Tambah GTK</div>
+                </a>
+            @endcan
           </div>
           <div class="overflow-y-auto">
             @csrf

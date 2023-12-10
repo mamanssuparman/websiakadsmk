@@ -51,7 +51,9 @@
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
         <div class="flex flex-row justify-between">
             <div></div>
-            <a href="{{ url('admin') }}/profile/add"> <div class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-lg"><i class="bi bi-plus"></i>Tambah Profile</div></a>
+            @can('isSuperAdmin')
+                <a href="{{ url('admin') }}/profile/add"> <div class="px-5 py-3 mb-4 font-semibold text-white bg-blue-700 rounded-lg"><i class="bi bi-plus"></i>Tambah Profile</div></a>
+            @endcan
         </div>
         <table id="example2" class="display" style="width:100%">
         @csrf

@@ -8,6 +8,7 @@ use App\Models\Categori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class EkstrakurikulersekolahController extends Controller
@@ -79,8 +80,10 @@ class EkstrakurikulersekolahController extends Controller
       // button detail
       private function _btn_detail($value)
       {
-        $btn_detail = '<a href="'.url('admin/ekstrakurikuler/edit/'.base64_encode($value->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
-          return $btn_detail;
+        if(Gate::allows('isSuperAdmin')){
+            $btn_detail = '<a href="'.url('admin/ekstrakurikuler/edit/'.base64_encode($value->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+              return $btn_detail;
+        }
       }
       // toggle active non active
       private function _toggle($value)
