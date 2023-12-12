@@ -54,11 +54,17 @@
 
             <li>
                 <a href="{{ url('admin') }}/mitra" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 {{ $head == 'Mitra' ? 'bg-gray-200' : '' }} ">
-                    <i class="text-slate-900 bi bi-aspect-ratio"></i>
+                    <i class="text-slate-900 bi bi-person-video2"></i>
                     <span class="flex-1 ml-3 whitespace-nowrap text-slate-900">Mitra</span>
                 </a>
             </li>
             @endcan
+            <li>
+                <a href="{{ url('admin') }}/sarana" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 {{ $head == 'Sarana' ? 'bg-gray-200' : '' }} ">
+                    <i class="text-slate-900 bi bi-ui-checks"></i>
+                    <span class="flex-1 ml-3 whitespace-nowrap text-slate-900">Sarana</span>
+                </a>
+            </li>
 
             <li class="w-full h-[1px] bg-slate-200"></li>
             <li class="ml-2 text-slate-300">

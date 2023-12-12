@@ -51,13 +51,20 @@
                             class="z-10 hidden w-56 font-normal bg-gray-100 border border-gray-200 divide-y divide-gray-200 rounded-lg">
                             <ul class="py-2 text-sm text-gray-700" >
                                 <div id="menu_profile">
-                                   
+
                                 </div>
-                               
+
                             </ul>
                         </div>
                         <div
                             class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-[20%] lg:bg-transparent lg:group-hover:bg-gray-400 transition ease-out">
+                        </div>
+                    </li>
+                    <li class="relative group">
+                        <a href="{{ url('') }}/saranaprasarana"
+                            class="block py-2 pl-3 pr-4 tracking-tight text-gray-800 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:p-0">Sarana</a>
+                        <div
+                            class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-1/2 -translate-x-1/2 lg:bg-transparent lg:group-hover:bg-gray-400 transition ease-out">
                         </div>
                     </li>
                     <li class="relative group">
@@ -73,7 +80,7 @@
                             class="z-10 hidden font-normal bg-gray-100 border border-gray-200 divide-y divide-gray-200 rounded-lg w-44">
                             <ul class="py-2 text-sm text-gray-700">
                                 <div id="menu_prodi">
-                                    
+
                                 </div>
 
                             </ul>

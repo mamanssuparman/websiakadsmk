@@ -11,6 +11,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Galleryvideo;
 use App\Models\Mapelajarguru;
+use App\Models\Saranaprasarana;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -99,5 +100,11 @@ class User extends Authenticatable
     // Relasi 1 : M to Mitras
     public function mitras(){
         return $this->hasMany(Mitra::class, 'usersid', 'id');
+    }
+
+    // Relation 1 : M to Sarana
+    public function saranas()
+    {
+        return $this->hasMany(Saranaprasarana::class, 'usersid', 'id');
     }
 }

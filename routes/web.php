@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Users\Sarana;
 use App\Http\Controllers\Users\GtkController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Users\HomeController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Admin\ProfileuserController;
 use App\Http\Controllers\Users\ProgramstudiController;
 use App\Http\Controllers\Admin\ProfileSekolahController;
 use App\Http\Controllers\Admin\CategoryarticleController;
+use App\Http\Controllers\Admin\SaranaprasaranaController;
 use App\Http\Controllers\Users\EkstrakurikulerController;
 use App\Http\Controllers\Admin\EkstrakurikulersekolahController;
 
@@ -55,6 +57,7 @@ Route::get('/gtk/getDataGtk', [GtkDataController::class, 'getDataGtk']);
 Route::get('/prodi/getDataProdi', [ProdiController::class, 'getDataProdi']);
 Route::get('/articledata/getDataArticle',[ArticledataController::class, 'getDataArticle']);
 Route::post('/sendComment/{id}', [ArticleController::class, 'storecomment']);
+Route::get('/saranaprasarana', [Sarana::class, 'index']);
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);
@@ -178,6 +181,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/mitra/stored', [MitraController::class, 'stored'])->middleware('can:isSuperAdmin');
     Route::get('/mitra/getDataMitra/{id}',[MitraController::class, 'getDataMitra'])->middleware('can:isSuperAdmin');
     Route::post('/mitra/Update/{id}', [MitraController::class, 'updateMitra'])->middleware('can:isSuperAdmin');
+
+    // Route Sarana
+    Route::get('/sarana', [SaranaprasaranaController::class, 'index']);
+    Route::get('/sarana/getSarana',[SaranaprasaranaController::class, 'getSarana']);
+    Route::post('/sarana/stored', [SaranaprasaranaController::class, 'stored']);
+    Route::get('/sarana/getSarana/{id}', [SaranaprasaranaController::class, 'getDataSarana']);
+    Route::post('/sarana/update/{id}', [SaranaprasaranaController::class, 'updated']);
+    Route::post('/sarana/activenon', [SaranaprasaranaController::class, 'activenon']);
 });
 // LFM
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {
