@@ -163,7 +163,7 @@ class MitraController extends Controller
                 $foto               = $nama_foto;
                 $dataUpdate['picture']  = $foto;
                 // Delete Picture Old
-                $foto_old = Mitra::where('id', $id)->firstOrFail();
+                $foto_old = Mitra::where('id', $id)->first();
                 File::delete(public_path('images'.'/'.$foto_old->picture ));
             }
 

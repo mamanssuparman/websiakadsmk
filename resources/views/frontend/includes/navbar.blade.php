@@ -144,13 +144,6 @@
                             class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-1/2 -translate-x-1/2 lg:bg-transparent lg:group-hover:bg-gray-400 transition ease-out">
                         </div>
                     </li>
-                    <li class="relative group">
-                        <a href="/pages/alumni.html"
-                            class="block py-2 pl-3 pr-4 tracking-tight text-gray-800 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:p-0">Alumni</a>
-                        <div
-                            class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-1/2 -translate-x-1/2 lg:bg-transparent lg:group-hover:bg-gray-400 transition ease-out">
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>

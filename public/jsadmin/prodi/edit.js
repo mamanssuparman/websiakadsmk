@@ -48,7 +48,7 @@ const eachMapelAjar = () =>{
                 <td>${nomapelajar++}<input type="hidden" name="idmapel${x.id}" value="${x.id}"></td>
                 <td>${x.deskripsi}</td>
                 <td>
-                    <button type="button" class="px-1 mt-2 mb-2 mr-2 text-sm font-medium text-white bg-red-700 rounded-md focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring red-300" onclick="hapusMapelAjar(this, ${x.id}, ${i})"><i class="bi bi-x"></i></button>
+                    <button type="button" class="px-2 mt-2 mb-2 mr-2 text-sm font-medium text-white bg-red-800 rounded-md focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring red-300" onclick="hapusMapelAjar(this, ${x.id}, ${i})"><i class="bi bi-x"></i></button>
                 </td>
             </tr>
         `)
@@ -111,7 +111,7 @@ const eachPrestasi = () =>{
                 <td>${noprestasi++}<input type="hidden" name="idmapel${x.id}" value="${x.id}"></td>
                 <td>${x.deskripsi}</td>
                 <td>
-                    <button type="button" class="px-1 mt-2 mb-2 mr-2 text-sm font-medium text-white bg-red-700 rounded-md focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring red-300" onclick="hapusPrestasi(this, ${x.id}, ${i})"><i class="bi bi-x"></i></button>
+                    <button type="button" class="px-2 mt-2 mb-2 mr-2 text-sm font-medium text-white bg-red-800 rounded-md focus:outline-none hover:bg-red-800 focus:ring-4 red-300" onclick="hapusPrestasi(this, ${x.id}, ${i})"><i class="bi bi-x"></i></button>
                 </td>
             </tr>
         `)
@@ -147,7 +147,7 @@ const eachPekerjaan = () =>{
                 <td>${nopekerjaan++}<input type="hidden" name="idmapel${x.id}" value="${x.id}"></td>
                 <td>${x.deskripsi}</td>
                 <td>
-                    <button type="button" class="px-1 mt-2 mb-2 mr-2 text-sm font-medium text-white bg-red-700 rounded-md focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring red-300" onclick="hapusPekerjaan(this, ${x.id}, ${i})"><i class="bi bi-x"></i></button>
+                    <button type="button" class="px-2 mt-2 mb-2 mr-2 text-sm font-medium text-white bg-red-800 rounded-md focus:outline-none hover:bg-red-800 focus:ring-4 red-300" onclick="hapusPekerjaan(this, ${x.id}, ${i})"><i class="bi bi-x"></i></button>
                 </td>
             </tr>
         `)

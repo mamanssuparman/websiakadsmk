@@ -39,6 +39,7 @@ $('#form-mitra').on('submit', function(e){
         contentType: false,
         processData: false,
         success: function(res){
+            console.log(res)
             table.ajax.reload(null, false)
             document.getElementById('form-mitra').reset();
             document.getElementById('preview').removeAttribute('src');

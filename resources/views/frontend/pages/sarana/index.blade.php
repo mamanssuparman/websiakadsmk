@@ -20,8 +20,8 @@
                     <h1 class="flex items-center pl-4 text-xl font-semibold border-gray-900 ">Sarana Prasarana</h1>
                 </div>
             </div>
+            @csrf
             <form action="" method="get" class="mt-8">
-                @csrf
                 <input type="search" class="w-1/2 rounded-lg text-slate-900" placeholder="Search..." name="search" value="{{ request('search') }}">
             </form>
             <div class="mt-5">
