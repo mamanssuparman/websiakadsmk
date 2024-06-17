@@ -44,7 +44,7 @@
                     <div class="pl-4 mt-8">
                         @foreach ($dataArticle as $article)
                         <div class="flex flex-col pb-4 sm:w-full md:w-96">
-                            <div class="flex flex-row lg:w-[700px]">
+                            <div class="flex flex-row lg:w-[600px]">
                                 <div class="w-full">
                                     <div class="flex flex-col">
                                         <div class="font-semibold">

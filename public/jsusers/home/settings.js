@@ -7,7 +7,7 @@ $.ajax({
     type: "GET",
     dataType: "JSON",
     success: function(res){
-        console.log(res)
+        // console.log(res)
         if(res.data.master.statuscode == 200){
             $('#foot_nomor_telepon').html(res.data.master.data.noteleponsekolah)
             $('#foot_email_sekolah').html(res.data.master.data.emailsekolah)

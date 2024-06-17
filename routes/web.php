@@ -38,9 +38,9 @@ use App\Http\Controllers\Admin\EkstrakurikulersekolahController;
 |
 */
 
-Route::get('/',[HomeController::class, 'index']);
+Route::get('/',[HomeController::class, 'index'])->name('homepage');
 Route::get('/users/getDataMain',[HomeController::class, 'getDataFooter']);
-Route::get('/profile/{slug}', [ProfileController::class, 'detail']);
+Route::get('/profile/{slug}', [ProfileController::class, 'detail'])->name('profile');
 Route::get('/programstudi/{slug}', [ProgramstudiController::class, 'detail']);
 Route::get('/ekstrakurikuler/{slug}', [EkstrakurikulerController::class, 'detail']);
 Route::get('/gtk',[GtkController::class,'index']);
@@ -57,7 +57,10 @@ Route::get('/gtk/getDataGtk', [GtkDataController::class, 'getDataGtk']);
 Route::get('/prodi/getDataProdi', [ProdiController::class, 'getDataProdi']);
 Route::get('/articledata/getDataArticle',[ArticledataController::class, 'getDataArticle']);
 Route::post('/sendComment/{id}', [ArticleController::class, 'storecomment']);
-Route::get('/saranaprasarana', [Sarana::class, 'index']);
+Route::get('/saranaprasarana', [Sarana::class, 'index'])->name('sarpras');
+Route::get('/home/getDataJsonGuru', [HomeController::class, 'getDataJsonGuru']);
+Route::get('/home/getDataKompetensi', [HomeController::class, 'getDataKompetensi']);
+Route::get('/home/getDataMitra', [HomeController::class, 'getDataMitra']);
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);

@@ -1,4 +1,7 @@
 @extends('frontend.layouts.layoutusers')
+@section('title')
+    {{ $dataEkstra->judul }}
+@endsection
 @section('content')
     <!-- Program Keahlian -->
     <section class="mt-24">
@@ -16,7 +19,7 @@
                         <hr class="my-5 border-gray-400">
                         <div class="flex flex-wrap gap-12 ">
                             <div class="w-32 overflow-hidden">
-                                <img src="/images/{{ $dataEkstra->pembina->photos }}" class="object-cover w-full h-auto min-h-32 rounded-md"
+                                <img src="/images/{{ $dataEkstra->pembina->photos }}" class="object-cover w-full h-auto rounded-md min-h-32"
                                     alt="">
                             </div>
                             <div>

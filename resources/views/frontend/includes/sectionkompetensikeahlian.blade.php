@@ -13,16 +13,12 @@
             </div>
         </div>
         <div class="flex justify-center">
-            <div class="flex gap-4 py-10 overflow-x-auto transition lg:flex-row md:flex-col sm:flex-col scroll-smooth">
-                <div class="flex justify-between gap-4 lg:flex-row md:flex-col">
-                    @foreach ($dataKompetensiKeahlian as $prodi)
-                    <div
-                        class="flex items-center w-48 h-full grid-cols-1 px-4 py-4 transition duration-500 bg-gray-200 rounded-lg shadow-lg hover:scale-105">
-                        <a href="{{ url('') }}/programstudi/{{ $prodi->slug }}"> <img src="/images/{{ $prodi->logoprodi }}" alt=""></a>
-                    </div>
-                    @endforeach
-                </div>
+            <div class="flex gap-4 py-10 overflow-x-auto transition lg:flex-row md:flex-col sm:flex-col scroll-smooth" id="card-kompetensi">
+
             </div>
         </div>
     </div>
 </section>
+@push('jsexternal')
+    <script src="/jsusers/home/kompetensiKeahlian.js"></script>
+@endpush

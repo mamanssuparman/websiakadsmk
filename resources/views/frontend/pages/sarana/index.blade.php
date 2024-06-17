@@ -1,4 +1,7 @@
 @extends('frontend.layouts.layoutusers')
+@section('title')
+    Sarana dan Prasarana
+@endsection
 @section('content')
 <!-- nav title -->
 <section class="mt-24">

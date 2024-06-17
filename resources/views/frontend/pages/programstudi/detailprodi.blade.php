@@ -1,4 +1,7 @@
 @extends('frontend.layouts.layoutusers')
+@section('title')
+    {{ $dataProdi->judul }}
+@endsection
 @section('content')
     <!-- Program Keahlian -->
     {{-- @dd($dataProdi) --}}

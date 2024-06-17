@@ -32,10 +32,10 @@
                     class="flex flex-col p-4 mt-4 border border-gray-200 rounded-lg lg:p-0 bg-gray-50 lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent font-inter">
                     <li class="relative group">
                         <a href="{{ url('') }}"
-                            class="block py-2 pl-3 pr-4 tracking-tight text-white bg-blue-600 rounded lg:bg-transparent lg:text-blue-700 lg:p-0"
+                            class="block py-2 pl-3 pr-4 tracking-tight  {{ Route::currentRouteName() == 'homepage' ? 'bg-blue-600 lg:text-blue-700 text-white' : 'text-gray-800' }}  rounded lg:bg-transparent  lg:p-0"
                             aria-current="page">Home</a>
                         <div
-                            class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-1/2 -translate-x-1/2 lg:bg-blue-600">
+                            class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-1/2 -translate-x-1/2 {{ Route::currentRouteName() == 'homepage' ? 'lg:bg-blue-600' : '' }} ">
                         </div>
                     </li>
                     <li class="relative group">

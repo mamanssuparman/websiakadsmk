@@ -1,4 +1,7 @@
 @extends('frontend.layouts.layoutusers')
+@section('title')
+    GTK
+@endsection
 @push('jscssexternal')
     <script src="/assetsusers/jquery-3.7.0.js"></script>
 @endpush

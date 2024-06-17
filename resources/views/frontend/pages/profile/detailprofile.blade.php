@@ -1,4 +1,7 @@
 @extends('frontend.layouts.layoutusers')
+@section('title')
+    {{ $dataProfile->judul }}
+@endsection
 @section('content')
 
 

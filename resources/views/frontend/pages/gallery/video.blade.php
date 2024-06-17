@@ -1,4 +1,7 @@
 @extends('frontend.layouts.layoutusers')
+@section('title')
+    Gallery Video
+@endsection
 @section('content')
     <!-- nav title -->
     <section class="mt-24">

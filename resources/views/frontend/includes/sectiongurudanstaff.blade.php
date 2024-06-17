@@ -16,24 +16,16 @@
                 </div>
             </div>
         </div>
-        <div>
-            <div class="flex gap-5 pt-10 overflow-x-auto snap-x scroll-smooth scrollbar-hidden">
-                @foreach ($dataGtk as $gtk)
-                <div class="block space-y-2 snap-start">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="/images/{{ $gtk->photos }}"
-                            class="object-cover max-w-md transition duration-500 ease-in-out rounded-lg h-44 sm:h-56 hover:scale-105"
-                            alt="gallery1">
-                    </div>
+        <div id="card-list-guru" class="flex gap-5 pt-10 overflow-x-auto snap-x scroll-smooth scrollbar-hidden">
 
-                    <div class="flex justify-center text-base font-semibold">
-                        <span class="text-base tracking-tight text-gray-900">{{ $gtk->nama }}</span>
-                    </div>
-                </div>
-                @endforeach
-            </div>
         </div>
 
     </div>
 
 </section>
+
+@push('jsexternal')
+    <script src="{{ url('') }}/jsusers/home/gurustaff.js">
+
+    </script>
+@endpush
