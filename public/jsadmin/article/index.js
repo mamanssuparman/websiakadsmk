@@ -7,7 +7,7 @@ $(() => {
         order: [],
         searching: true,
         ajax: {
-            url: baseurl + "/article/getDataArticle",
+            url: baseurl + "/articledata/getDataArticle",
             type: "GET",
             data: function (data) {},
         },
@@ -32,4 +32,9 @@ function activenon(txt,id){
         success: function(res){},
         error:function(jqXHR, textStatus, errorThrown){}
     });
+}
+
+function copyUrl(txt, x){
+    var copied= baseurl+'/article/'+x;
+    navigator.clipboard.writeText(copied)
 }

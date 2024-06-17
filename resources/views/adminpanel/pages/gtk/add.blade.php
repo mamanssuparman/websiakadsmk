@@ -1,5 +1,7 @@
 @extends('adminpanel.layouts.layoutadmin')
-
+@push('csjsexternal')
+<script src="/assetsadmin/js/jquery-3.7.0.js"></script>
+@endpush
 @section('content')
 {{-- start Toast or alert --}}
 <div id="alert-1" class="@if (session('success'))
@@ -33,7 +35,7 @@
         </div>
     </div>
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
-        <form action="{{ url('admin') }}/gtk/add" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data" id="form-add-gtk">
             @csrf
             <div class="flex flex-wrap gap-3">
                 <div class="w-full sm:w-1/2">
@@ -41,24 +43,18 @@
                         <label for="nuptk" class="block">NUPTK</label>
                         <input id="nuptk" name="nuptk" type="text"
                             class="w-full border rounded-md border-slate-300 " required value="{{ old('nuptk') }}">
-                            @error('nuptk')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errNuptk"></small>
                     </div>
                     <div class="mb-5">
                         <label for="nip" class="block">NIP</label>
                         <input id="nip" name="nip" type="text"
                             class="w-full border rounded-md border-slate-300 " required value="{{ old('nip') }}">
-                            @error('nip')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errNip"></small>
                     </div>
                     <div class="mb-5">
                         <label for="nama" class="block">Nama</label>
                         <input id="nama" name="textNama" type="text" class="w-full border rounded-md border-slate-300" required value="{{ old('textNama') }}">
-                            @error('textNama')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errTextNama"></small>
                     </div>
                     <div class="mb-5">
                         <label for="jenisKelamin" class="block ">Jenis Kelamin</label>
@@ -68,16 +64,12 @@
                             <option value="Laki-laki" {{ old('selectJenisKelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki Laki</option>
                             <option value="Perempuan" {{ old('selectJenisKelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                         </select>
-                            @error('selectJenisKelamin')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errSelectJenisKelamin"></small>
                     </div>
                     <div class="mb-5">
                         <label for="alamat" class="block ">Alamat</label>
                         <textarea id="alamat" name="textAlamat" class="w-full p-3 rounded-md border-slate-300" rows="6"></textarea>
-                            @error('textAlamat')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errTextAlamat"></small>
                     </div>
                 </div>
                 <div class="w-full sm:flex-1">
@@ -95,9 +87,7 @@
                             <option value="SMA" {{ old('selectPendidikanTerakhir') == 'SMA' ? 'selected' : '' }}>SMA</option>
                             <option value="SMP" {{ old('selectPendidikanTerakhir') == 'SMP' ? 'selected' : '' }}>SMP</option>
                         </select>
-                            @error('selectPendidikanTerakhir')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errSelectPendidikanTerakhir"></small>
                     </div>
                     <div class="mb-5">
                         <label for="jabatan" class="block ">Jabatan</label>
@@ -105,26 +95,21 @@
                             class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500" required>
                                 <option value="-">--Pilih Jabatan--</option>
                                 <option value="Tenaga Pendidik" {{ old('selectJabatan') == 'Tenaga Pendidik' ? 'selected' : '' }}>Tenaga Pendidik</option>
-                                <option value="Kepala Sekolah" {{ old('selectJabatan') == 'Kepala Sekolah' ? 'selected' : '' }}>Kepala Sekolah</option>
                                 <option value="Tenaga Kependidikan" {{ old('selectJabatan') == 'Tenaga Kependidikan' ? 'selected' : '' }}>Tenaga Kependidikan</option>
                         </select>
-                            @error('selectJabatan')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errSelectJabatan"></small>
                     </div>
                     <div class="mb-5">
                         <label for="tugasTambahan" class="block ">Tugas Tambahan</label>
                         <select id="tugasTambahan" name="selectTugasTambahan"
-                            class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500" required>
-                                <option value="-">--Pilih Tugas Tambahan--</option>
+                            class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500" >
+                                <option value="">--Pilih Tugas Tambahan--</option>
                                 <option value="Wakasek Kurikulum" {{ old('selectTugasTambahan') == 'Wakasek Kurikulum' ? 'selected' : '' }}>Wakasek Kurikulum</option>
                                 <option value="Wakasek Humas" {{ old('selectTugasTambahan') == 'Wakasek Humas' ? 'selected' : '' }}>Wakasek Humas</option>
                                 <option value="Wakasek Kesiswaan" {{ old('selectTugasTambahan') == 'Wakasek Kesiswaan' ? 'selected' : '' }}>Wakasek Kesiswaan</option>
                                 <option value="Wakasek Sarpras" {{ old('selectTugasTambahan') == 'Wakasek Sarpras' ? 'selected' : '' }}>Wakasek Sarpras</option>
                         </select>
-                            @error('selectTugasTambahan')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errSelectTugasTambahan"></small>
                     </div>
                     <div class="mb-5">
                         <label for="role" class="block ">Role</label>
@@ -135,31 +120,33 @@
                                 <option value="Admin" {{ old('selectRole') == 'Admin' ? 'selected' : '' }}>Admin</option>
                                 <option value="User" {{ old('selectRole') == 'User' ? 'selected' : '' }}>User</option>
                         </select>
-                            @error('selectRole')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errSelectRole"></small>
                     </div>
                     <div class="mb-5">
                         <label for="email" class="block">Email</label>
                         <input id="email" name="textemail" type="email" class="w-full border rounded-md border-slate-300 " required value="{{ old('textemail') }}">
-                            @error('textemail')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errTextEmail"></small>
                     </div>
                     <div class="mb-5">
                         <label for="fotoProfile" class="block ">Foto Profile</label>
                         <input id="fotoProfile" name="fotoProfile" type="file"
-                            class="w-full border rounded-md selec border-slate-300" accept="image/png,image/jpg">
-                        @error('fotoProfile')
-                            <small class="italic text-yellow-500">{{ $message }}</small>
-                        @enderror
+                            class="w-full border rounded-md selec border-slate-300" accept="image/png,image/jpg" onchange="previewImage(event)" id="fotoProfile">
+                            <small class="italic text-yellow-500" id="errFotoProfile"></small>
+                    </div>
+                    <div class="mb-5">
+                        <img src="" alt="" id="img-preview" width="200" class="rounded-md">
                     </div>
                 </div>
             </div>
             <div class="flex justify-end mt-2">
-                <button type="submit" class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800"><i class="bi bi-database-down"></i> Simpan</button>
+                <button class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800"><i class="bi bi-database-down"></i> Simpan</button>
             </div>
         </form>
 
     </div>
 @endsection
+@push('jsexternal')
+    <script src="/jsadmin/gtk/add.js">
+
+    </script>
+@endpush

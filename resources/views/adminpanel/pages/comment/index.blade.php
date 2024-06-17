@@ -55,8 +55,8 @@
                     <tr>
                         <th>#</th>
                         <th>Nama Pengirim</th>
+                        <th>Komentar</th>
                         <th>Article</th>
-                        <th>Status Comments</th>
                         <th>Status</th>
                         <th>Option</th>
                     </tr>

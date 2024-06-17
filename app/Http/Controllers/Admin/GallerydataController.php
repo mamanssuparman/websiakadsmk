@@ -131,7 +131,7 @@ class GallerydataController extends Controller
 
         $file_foto        = $request->file('foto');
         $ekstensi_foto    = $file_foto->extension();
-        $nama_foto        = date('dmyhis').'.'.$ekstensi_foto;
+        $nama_foto        = 'Gallery-'.date('dmyhis').'.'.$ekstensi_foto;
         $file_foto->move(public_path('/images'), $nama_foto);
         $foto = $nama_foto;
 
@@ -175,7 +175,7 @@ class GallerydataController extends Controller
             ]);
             $file_gambar        = $request->file('foto');
             $ekstensi_gambar    = $file_gambar->extension();
-            $nama_gambar        = date('dmyhis').'.'.$ekstensi_gambar;
+            $nama_gambar        = 'Gallery-'.date('dmyhis').'.'.$ekstensi_gambar;
             $file_gambar->move(public_path('/images'), $nama_gambar);
 
             $foto_old = Galleryvideo::firstWhere('id', $id);

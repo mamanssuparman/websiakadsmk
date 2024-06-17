@@ -218,7 +218,7 @@
                                         value="{{ Auth::user()->photos }}">
                                 </div>
                                 <div>
-                                    <img src="{{ asset('profile_photos/' . (Auth::user()->photos ? Auth::user()->photos : 'jk-placeholder-image.jpg')) }}"
+                                    <img src="{{ asset('/images/' . (Auth::user()->photos ? Auth::user()->photos : 'jk-placeholder-image.jpg')) }}"
                                         alt=""
                                         class="container items-center w-32 border-2 border-dashed rounded-md h-44"
                                         id="preview">

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Mapelajarguru;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class GtkDataController extends Controller
@@ -53,7 +54,7 @@ class GtkDataController extends Controller
         }
         $orderSort = $request->input('order.0.dir');
         // Get Data Nya
-        $data = User::where('role', '!=','User');
+        $data = User::where('jabatan','!=','Kepala Sekolah');
         // Function filter dari inputan search
         if($request->input('search.value')!= null){
             $data = $data->where(function($q)use($request){
@@ -89,7 +90,11 @@ class GtkDataController extends Controller
     }
     private function _btn_detail($x)
     {
-        $btn_detail = '<a href="'.url('admin/gtk/detail/'.base64_encode($x->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+        if(Gate::allows('isSuperAdmin')){
+            $btn_detail = '<a href="'.url('admin/gtk/detail/'.base64_encode($x->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+        } else {
+            $btn_detail = '';
+        }
         return $btn_detail;
     }
     private function _toggle($x)
@@ -223,18 +228,18 @@ class GtkDataController extends Controller
     }
     public function updateprofile(Request $request)
     {
-        $validation = $request->validate([
-            'textnama'                  => 'required',
-            'selectJenisKelamin'        => 'required',
-            'textalamat'                => 'required',
-            'selectpendidikanTerakhir'  => 'required',
-            'selectjabatan'             => 'required',
-            'selecttugasTambahan'       => 'required',
-            'selectrole'                => 'required',
-            // 'email'                     => 'required|unique:users,email,'.$request->email.',email',
-            'email'                     => 'required|unique:users,email,'.base64_decode($request->guruid).',id',
-        ]);
-        if($request->fotoProfile == ""){
+        try {
+            $validation = $request->validate([
+                'textnama'                  => 'required',
+                'selectJenisKelamin'        => 'required',
+                'textalamat'                => 'required',
+                'selectpendidikanTerakhir'  => 'required',
+                'selectjabatan'             => 'required',
+                // 'selecttugasTambahan'       => 'required',
+                'selectrole'                => 'required',
+                // 'email'                     => 'required|unique:users,email,'.$request->email.',email',
+                'email'                     => 'required|unique:users,email,'.base64_decode($request->guruid).',id',
+            ]);
             $dataStore = [
                 'nuptk'                 => $request->nuptk,
                 'nip'                   => $request->nip,
@@ -245,86 +250,87 @@ class GtkDataController extends Controller
                 'jabatan'               => $request->selectjabatan,
                 'tugastambahan'         => $request->selecttugasTambahan,
                 'role'                  => $request->selectrole,
+                // 'photos'                => $filenamesimpan,
                 'email'                 => $request->email
             ];
-            User::where('id', base64_decode($request->guruid))->update($dataStore);
-            return redirect()->back()->with('message','Profil berhasil di perbaharui');
-        } else {
-            $files = $request->file('fotoProfile');
-            $filenameWithExtension      = $request->file('fotoProfile')->getClientOriginalExtension();
-            $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
-            $extension                  = $files->getClientOriginalExtension();
-            $filenamesimpan             = 'gtk-' . time() . '.' . $extension;
-            $files->move('images', $filenamesimpan);
-            $dataStore = [
-                'nuptk'                 => $request->nuptk,
-                'nip'                   => $request->nip,
-                'nama'                  => $request->textnama,
-                'alamat'                => $request->textalamat,
-                'jeniskelamin'          => $request->selectJenisKelamin,
-                'pendidikanterakhir'    => $request->selectpendidikanTerakhir,
-                'jabatan'               => $request->selectjabatan,
-                'tugastambahan'         => $request->selecttugasTambahan,
-                'role'                  => $request->selectrole,
-                'photos'                => $filenamesimpan,
-                'email'                 => $request->email
-            ];
-            User::where('id', base64_decode($request->guruid))->update($dataStore);
-            return redirect()->back()->with('message','Profil berhasil di perbaharui');
+            if($request->hasFile('fotoProfile')){
+                $files = $request->file('fotoProfile');
+                $filenameWithExtension      = $request->file('fotoProfile')->getClientOriginalExtension();
+                $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+                $extension                  = $files->getClientOriginalExtension();
+                $filenamesimpan             = 'gtk-' . time() . '.' . $extension;
+                $files->move('images', $filenamesimpan);
+                $dataStore['photos']    = $filenamesimpan;
+                User::where('id', base64_decode($request->guruid))->update($dataStore);
+                return response()->json($request->session()->flash('message', 'Data berhasil di perbaharui.!'), 200);
+            } else {
+                User::where('id', base64_decode($request->guruid))->update($dataStore);
+                return response()->json($request->session()->flash('message', 'Data berhasil di perbahaui.'), 200);
+            }
+        } catch (Exception $error) {
+            return response()->json([
+                'message'   => 'something went wrong',
+                'data'      => $error
+            ], 500);
         }
     }
     public function stored(Request $request)
     {
-        $request->validate([
-            'textNama'              => 'required',
-            'selectJenisKelamin'    => 'required',
-            'textAlamat'            => 'required',
-            'selectPendidikanTerakhir'          => 'required',
-            'selectJabatan'                     => 'required',
-            'selectTugasTambahan'               => 'required',
-            'selectRole'                        => 'required',
-            'textemail'                         => 'unique:users,email'
-        ]);
-        if($request->fotoProfile == ""){
-            $dataStore = [
-                'nutpk'                 => $request->nuptk,
-                'nip'                   => $request->nip,
-                'nama'                  => $request->textNama,
-                'alamat'                => $request->textAlamat,
-                'jeniskelamin'          => $request->selectJenisKelamin,
-                'pendidikanterakhir'    => $request->selectPendidikanTerakhir,
-                'jabatan'               => $request->selectJabatan,
-                'tugastambahan'         => $request->selectTugasTambahan,
-                'role'                  => $request->selectRole,
-                'photos'                => 'default.jpg',
-                'email'                 => $request->textemail,
-                'password'              => Hash::make('1234567')
-            ];
-            User::create($dataStore);
-            return redirect()->back()->with('success', 'Data GTK berhasil di simpan');
-        } else {
-            $files = $request->file('fotoProfile');
-            $filenameWithExtension      = $request->file('fotoProfile')->getClientOriginalExtension();
-            $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
-            $extension                  = $files->getClientOriginalExtension();
-            $filenamesimpan             = 'gtk-' . time() . '.' . $extension;
-            $files->move('images', $filenamesimpan);
-            $dataStore = [
-                'nutpk'                 => $request->nuptk,
-                'nip'                   => $request->nip,
-                'nama'                  => $request->textNama,
-                'alamat'                => $request->textAlamat,
-                'jeniskelamin'          => $request->selectJenisKelamin,
-                'pendidikanterakhir'    => $request->selectPendidikanTerakhir,
-                'jabatan'               => $request->selectJabatan,
-                'tugastambahan'         => $request->selectTugasTambahan,
-                'role'                  => $request->selectRole,
-                'photos'                => $filenamesimpan,
-                'email'                 => $request->textemail,
-                'password'              => Hash::make('1234567')
-            ];
-            User::create($dataStore);
-            return redirect()->back()->with('success', 'Data GTK berhasil di simpan');
+        try {
+            $request->validate([
+                'textNama'                          => 'required',
+                'selectJenisKelamin'                => 'required',
+                'textAlamat'                        => 'required',
+                'selectPendidikanTerakhir'          => 'required',
+                'selectJabatan'                     => 'required',
+                // 'selectTugasTambahan'               => 'required',
+                'selectRole'                        => 'required',
+                'textemail'                         => 'unique:users,email'
+            ]);
+            if($request->hasFile('fotoProfile')){
+                $files = $request->file('fotoProfile');
+                $filenameWithExtension      = $request->file('fotoProfile')->getClientOriginalExtension();
+                $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+                $extension                  = $files->getClientOriginalExtension();
+                $filenamesimpan             = 'gtk-' . time() . '.' . $extension;
+                $files->move('images', $filenamesimpan);
+                $dataStore = [
+                    'nutpk'                 => $request->nuptk,
+                    'nip'                   => $request->nip,
+                    'nama'                  => $request->textNama,
+                    'alamat'                => $request->textAlamat,
+                    'jeniskelamin'          => $request->selectJenisKelamin,
+                    'pendidikanterakhir'    => $request->selectPendidikanTerakhir,
+                    'jabatan'               => $request->selectJabatan,
+                    'tugastambahan'         => $request->selectTugasTambahan,
+                    'role'                  => $request->selectRole,
+                    'photos'                => $filenamesimpan,
+                    'email'                 => $request->textemail,
+                    'password'              => Hash::make('1234567')
+                ];
+                User::create($dataStore);
+               return response()->json($request->session()->flash('success','Data GTK berhasil di simpan.'), 200);
+            } else {
+                $dataStore = [
+                    'nutpk'                 => $request->nuptk,
+                    'nip'                   => $request->nip,
+                    'nama'                  => $request->textNama,
+                    'alamat'                => $request->textAlamat,
+                    'jeniskelamin'          => $request->selectJenisKelamin,
+                    'pendidikanterakhir'    => $request->selectPendidikanTerakhir,
+                    'jabatan'               => $request->selectJabatan,
+                    'tugastambahan'         => $request->selectTugasTambahan,
+                    'role'                  => $request->selectRole,
+                    'photos'                => 'default.jpg',
+                    'email'                 => $request->textemail,
+                    'password'              => Hash::make('1234567')
+                ];
+                User::create($dataStore);
+                return response()->json($request->session()->flash('success', 'Data GTK berhasil di simpan'), 200);
+                // return redirect()->back()->with('success', 'Data GTK berhasil di simpan');
+            }
+        } catch (Exception $error) {
+            return response()->json($request->session()->flash('success', 'Data GTK Gagal di simpan'), 500);
         }
     }
     public function updatepassword(Request $request)

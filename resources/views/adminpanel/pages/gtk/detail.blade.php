@@ -48,7 +48,7 @@
         </div>
         <hr class="mb-4 border border-slate-300">
         <div id="profile" class="">
-            <form action="{{ url('admin') }}/gtk/updateprofile" method="post" id="form-profile" enctype="multipart/form-data">
+            <form action="" id="form-profile" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="guruid" id="guruid" value="">
                 <div class="flex flex-wrap gap-3 mb-4">
@@ -57,24 +57,18 @@
                             <label for="nuptk" class="block">NUPTK</label>
                             <input id="textnuptk" name="nuptk" type="text"
                                 class="w-full border rounded-md border-slate-300 " value="{{ old('nuptk') }}">
-                            @error('nuptk')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errNuptk"></small>
                         </div>
                         <div class="mb-4">
                             <label for="nip" class="block">NIP</label>
                             <input id="textnip" name="nip" type="text"
                                 class="w-full border rounded-md border-slate-300 " value="{{ old('nip') }}">
-                            @error('nip')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errTextNip"></small>
                         </div>
                         <div class="mb-4">
                             <label for="nama" class="block">Nama</label>
                             <input id="textnama" type="text" class="w-full border rounded-md border-slate-300" name="textnama" value="{{ old('textnama') }}">
-                            @error('textnama')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errTextNama"></small>
                         </div>
                         <div class="mb-4">
                             <label for="selectjenisKelamin" class="block ">Jenis Kelamin</label>
@@ -84,16 +78,12 @@
                                 <option value="Laki-laki" {{ old('selectJenisKelamin')=="Laki-laki" ? 'selected' : '' }}>Laki Laki</option>
                                 <option value="Perempuan" {{ old('selectJenisKelamin')=="Perempuan" ? 'selected' : '' }}>Perempuan</option>
                             </select>
-                            @error('selectJenisKelamin')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errSelectJenisKelamin"></small>
                         </div>
                         <div class="mb-4">
                             <label for="alamat" class="block ">Alamat</label>
                             <textarea id="textalamat" name="textalamat" class="w-full p-3 rounded-md border-slate-300" rows="8">{{ old('textalamat') }}</textarea>
-                            @error('textalamat')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errTextAlamat"></small>
                         </div>
                     </div>
                     <div class="w-full sm:flex-1">
@@ -111,9 +101,7 @@
                                 <option value="SMA" {{ old('selectpendidikanTerakhir') == "SMA" ? 'selected' : '' }}>SMA</option>
                                 <option value="SMP" {{ old('selectpendidikanTerakhir') == "SMP" ? 'selected' : '' }}>SMP</option>
                             </select>
-                            @error('selectpendidikanTerakhir')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errSelectPendidikanTerakhir"></small>
                         </div>
                         <div class="mb-4">
                             <label for="selectjabatan" class="block ">Jabatan</label>
@@ -124,9 +112,7 @@
                                 <option value="Kepala Sekolah" {{ old('selectjabatan') == "Kepala Sekolah" ? 'selected' : '' }}>Kepala Sekolah</option>
                                 <option value="Tenaga Kependidikan" {{ old('selectjabatan') == "Tenaga Kependidikan" ? 'selected' : '' }}>Tenaga Kependidikan</option>
                             </select>
-                            @error('selectjabatan')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errSelectJabatan"></small>
                         </div>
                         <div class="mb-4">
                             <label for="selecttugasTambahan" class="block ">Tugas Tambahan</label>
@@ -138,9 +124,7 @@
                                 <option value="Wakasek Kesiswaan" {{ old('selecttugasTambahan') == "Wakasek Kesiswaan" ? 'selected' : '' }}>Wakasek Kesiswaan</option>
                                 <option value="Wakasek Sarpras" {{ old('selecttugasTambahan') == "Wakasek Sarpras" ? 'selected' : '' }}>Wakasek Sarpras</option>
                             </select>
-                            @error('selecttugasTambahan')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errSelectTugasTambahan"></small>
                         </div>
                         <div class="mb-4">
                             <label for="selectrole" class="block ">Role</label>
@@ -151,16 +135,12 @@
                                 <option value="Admin" {{ old('selectrole') == "Admin" ? 'selected' : '' }}>Admin</option>
                                 <option value="User" {{ old('selectrole') == "User" ? 'selected' : '' }}>User</option>
                             </select>
-                            @error('selectrole')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errSelectRole"></small>
                         </div>
                         <div class="mb-4">
                             <label for="email">Email</label>
                             <input type="email" name="email" id="textEmail" class="w-full border rounded-md border-slate-300" required value="{{ old('email') }}">
-                            @error('email')
-                                <small class="italic text-yellow-500">{{ $message }}</small>
-                            @enderror
+                                <small class="italic text-yellow-500" id="errEmail"></small>
                         </div>
                         <div class="mb-4">
                             <label for="fotoProfile" class="block ">Foto Profile</label>
@@ -208,7 +188,6 @@
                         class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800"><i
                             class="bi bi-database-down"></i> Update</button>
                 </div>
-
             </form>
         </div>
         <div id="ubah_password" class="hidden">
@@ -221,7 +200,7 @@
                         <small class="hidden italic text-yellow-500" id="information-passwordbaru"></small>
                 </div>
                 <div class="mb-5">
-                    <label for="password" class="block">Cocokan Password</label>
+                    <label for="password" class="block">Konfirmasi Password</label>
                     <input id="cocokan_password" name="cocokan_password" type="password" class="w-full border rounded-md border-slate-300 ">
                     <small class="hidden italic text-yellow-500" id="information-confirmpassword"></small>
                 </div>

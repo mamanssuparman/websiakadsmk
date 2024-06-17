@@ -140,7 +140,7 @@ class ProdiController extends Controller
                 'deskripsi'             => 'required',
                 'logo'                  => ['required',File::image()->max('2mb')]
             ]);
-            $imagesName = time().'.'.$request->logo->extension();
+            $imagesName = 'prodi-'.time().'.'.$request->logo->extension();
             $request->logo->move(public_path('images'),$imagesName);
             $dataStoreProdis = [
                 'kajurid'       => $request->ketua_jurusan,
@@ -152,7 +152,7 @@ class ProdiController extends Controller
             ];
             $saveProdi = Prodi::create($dataStoreProdis);
             $p = $request->input();
-            if($p['prestasi_name']){
+            if(isset($p['prestasi_name'])){
                 foreach ($p['prestasi_name'] as $key => $x) {
                     Prestasiprodi::create([
                         'prodiid'       => $saveProdi->id,
@@ -160,7 +160,7 @@ class ProdiController extends Controller
                     ]);
                 }
             }
-            if($p['pekerjaan_name']){
+            if(isset($p['pekerjaan_name'])){
                 foreach ($p['pekerjaan_name'] as $key => $x) {
                     Pekerjaanproduktif::create([
                         'prodiid'       => $saveProdi->id,
@@ -168,7 +168,7 @@ class ProdiController extends Controller
                     ]);
                 }
             }
-            if($p['mapel_ajar']){
+            if(isset($p['mapel_ajar'])){
                 foreach ($p['mapel_ajar'] as $key => $x) {
                     Mapelproduktif::Create([
                         'prodiid'       => $saveProdi->id,
@@ -377,7 +377,7 @@ class ProdiController extends Controller
                 $request->validate([
                     'logo'      =>      'required|mimes:png,jpg|max:2048'
                 ]);
-                $imagesName = time().'.'.$request->logo->extension();
+                $imagesName = 'prodi-'.time().'.'.$request->logo->extension();
                 $request->logo->move(public_path('images'), $imagesName);
                 $dataUpdateProdi = [
                     'kajurid'       => $request->ketua_jurusan,

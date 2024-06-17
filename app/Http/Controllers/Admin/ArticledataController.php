@@ -77,7 +77,7 @@ class ArticledataController extends Controller
             $row[] = $x->categoryname;
             $row[] = '100 x views';
             $row[] = $this->_toggle($x);
-            $row[] = $this->_btn_detail($x).' '.$this->_views_detail($x);
+            $row[] = $this->_btn_detail($x).' '.$this->_views_detail($x).' '.$this->_copy_button($x);
             $data1 [] = $row;
         }
         return response()->json([
@@ -87,9 +87,15 @@ class ArticledataController extends Controller
             'data'  => $data1,
         ]);
     }
+    private function _copy_button($x)
+    {
+        $slug = $x->slug;
+        $copy_button = '<buton class="px-1 text-white bg-yellow-600 rounded-sm" onclick="copyUrl(this, '."'$x->slug'".')"><i class="bi bi-copy"></i></buton>';
+        return $copy_button;
+    }
     private function _views_detail($x)
     {
-        $views_detail = '<a class="px-1 text-white bg-green-500" href="'.url('admin').'/article/views/'.base64_encode($x->id).'"><i class="bi bi-eye-fill"></i></a>';
+        $views_detail = '<a class="px-1 text-white bg-green-500 rounded-sm" href="'.url('admin').'/article/views/'.base64_encode($x->id).'"><i class="bi bi-eye-fill"></i></a>';
         return $views_detail;
     }
     private function _toggle($x)
@@ -137,30 +143,41 @@ class ArticledataController extends Controller
     public function stored(Request $request)
     {
         try {
-            $request->validate([
+            $validasiData = $request->validate([
                 'judul'             => 'required',
                 'selectcategory'    => 'required',
-                'headerpicture'     => 'required',
-                'editor1'           => 'required'
+                // 'headerpicture'     => 'required',
+                // 'editor1'           => 'required'
             ]);
-            $files = $request->file('headerpicture');
-            $filenameWithExtension      = $request->file('headerpicture')->getClientOriginalExtension();
-            $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
-            $extension                  = $files->getClientOriginalExtension();
-            $filenamesimpan             = 'article-' . time() . '.' . $extension;
-            $files->move('images', $filenamesimpan);
             $dataStrore = [
                 'judul'             => $request->judul,
                 'slug'              => $request->slug,
-                'headerpicture'     => $filenamesimpan,
+                // 'headerpicture'     => $filenamesimpan,
                 'categoriesid'      => $request->selectcategory,
                 'article'           => $request->editor1,
                 'usersid'            => auth()->user()->id
             ];
+            if($request->hasFile('headerpicture')){
+                $validasiData['headerpicture']  = 'required';
+                $files = $request->file('headerpicture');
+                $filenameWithExtension      = $request->file('headerpicture')->getClientOriginalExtension();
+                $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
+                $extension                  = $files->getClientOriginalExtension();
+                $filenamesimpan             = 'article-' . time() . '.' . $extension;
+                $files->move('images', $filenamesimpan);
+                $dataStrore['headerpicture']    = $filenamesimpan;
+            } else {
+                $dataStrore['headerpicture']    = 'headerdefault.jpg';
+            }
+
             Article::create($dataStrore);
-            return redirect()->back()->with('message', 'Data Article berhasil di simpan.!');
+            return response()->json([
+                'message'       => $request->session()->flash('message', 'Data Article berhasil di simpan.!')
+            ], 200);
         } catch (Exception $error) {
-            return redirect()->back()->with('message', 'Data Article gagal di simpan.!');
+            return response()->json([
+                'message'       => $request->session()->flash('message', 'Something went wrong.!')
+            ], 200);
         }
     }
     public function update(Request $request, $id)

@@ -7,6 +7,8 @@ use App\Models\Ekstra;
 use App\Models\Categori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class EkstrakurikulersekolahController extends Controller
@@ -78,8 +80,10 @@ class EkstrakurikulersekolahController extends Controller
       // button detail
       private function _btn_detail($value)
       {
-        $btn_detail = '<a href="'.url('admin/ekstrakurikuler/edit/'.base64_encode($value->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
-          return $btn_detail;
+        if(Gate::allows('isSuperAdmin')){
+            $btn_detail = '<a href="'.url('admin/ekstrakurikuler/edit/'.base64_encode($value->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+              return $btn_detail;
+        }
       }
       // toggle active non active
       private function _toggle($value)
@@ -131,14 +135,15 @@ class EkstrakurikulersekolahController extends Controller
 
 
     // store process
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
+        try {
             $request->validate([
                 "namaEskul"         => ['required', 'unique:ekstras,judul'],
                 "deskripsi"         => ['required'],
                 "pembinaEkstra"     => ['required'],
+                "textSinonim"       => ['required']
             ]);
-
             $gambar = "default.jpg";
             if ($request->hasFile('logo')) {
                 $request->validate([
@@ -147,24 +152,23 @@ class EkstrakurikulersekolahController extends Controller
 
                 $file_gambar        = $request->file('logo');
                 $ekstensi_gambar    = $file_gambar->extension();
-                $nama_gambar        = date('dmyhis').'.'.$ekstensi_gambar;
+                $nama_gambar        = 'ekstra-'.date('dmyhis').'.'.$ekstensi_gambar;
                 $file_gambar->move(public_path('/images'), $nama_gambar);
                 $gambar = $nama_gambar;
             }
-
             $data_ekstra = [
                 "pembinaid"         =>  $request->pembinaEkstra,
-                "sinonim"           => $request->sinonim,
+                "sinonim"           => $request->textSinonim,
                 "judul"             =>  $request->namaEskul,
                 'slug'              => $request->slug,
                 "headerpicture"     =>  $gambar,
                 "description"       =>  $request->deskripsi,
             ];
-
-
             Ekstra::create($data_ekstra);
-
-            return back()->with('success', 'Add Ekstrakurikuler Successfully');
+            return response()->json($request->session()->flash('success','Data Ekstra berhasil di simpan.!'), 200);
+        } catch (Excetion $error) {
+            return response()->json($request->session()->flash('success', 'Gagal menyimpan data'), 500);
+        }
     }
 
     // slug
@@ -185,7 +189,7 @@ class EkstrakurikulersekolahController extends Controller
             'head'          => 'Ekstrakurikuler',
             'breadcumb1'    => 'Ekstrakurikuler',
             'breadcumb2'    => 'Edit',
-            'ekstradata'    => Ekstra::find($id),
+            'ekstradata'    => Ekstra::where('id', $id)->firstOrFail(),
             'datapembimbing'=> User::all(),
          ];
 
@@ -194,21 +198,20 @@ class EkstrakurikulersekolahController extends Controller
 
     // edit process
     public function update(Request $request, $id) {
-        $request->validate([
-            "namaEskul"         => ['required'],
-            "deskripsi"         => ['required'],
-            "pembinaEkstra"     => ['required'],
-        ]);
-
-        $data_ekstra = [
-            "pembinaid"         =>  $request->pembinaEkstra,
-            "judul"             =>  $request->namaEskul,
-            "sinonim"           =>  $request->sinonim,
-            "description"       =>  $request->deskripsi,
-        ];
-
-
-            $ekstra = Ekstra::find($id);
+        try {
+            $request->validate([
+                "namaEskul"         => ['required'],
+                "deskripsi"         => ['required'],
+                "pembinaEkstra"     => ['required'],
+                "textSinonim"       => ['required']
+            ]);
+            $data_ekstra = [
+                "pembinaid"         =>  $request->pembinaEkstra,
+                "judul"             =>  $request->namaEskul,
+                "sinonim"           =>  $request->textSinonim,
+                "description"       =>  $request->deskripsi,
+            ];
+            $ekstra = Ekstra::where('id', $id)->firstOrFail();
 
             if ($request->hasFile('logo')) {
                 $request->validate([
@@ -217,18 +220,24 @@ class EkstrakurikulersekolahController extends Controller
 
                 $file_gambar        = $request->file('logo');
                 $ekstensi_gambar    = $file_gambar->extension();
-                $nama_gambar        = date('dmyhis').'.'.$ekstensi_gambar;
+                $nama_gambar        = 'ekstra-'.date('dmyhis').'.'.$ekstensi_gambar;
                 $file_gambar->move(public_path('/images'), $nama_gambar);
 
                 $data_ekstra['headerpicture'] = $nama_gambar;
+                // Hapus foto lama
+                File::delete(public_path('images'.'/'.$ekstra->headerpicture));
             }
 
+            Ekstra::where('id', $id)->update($data_ekstra);
+            return response()->json([
+                'message'       => $request->session()->flash('success', 'Data berhasil di perbaharui.!')
+            ], 200);
 
-
-            $ekstra->update($data_ekstra);
-
-            return back()->with('success', 'Edit Ekstrakurikuler Successfully');
-
+        } catch (Exception $error) {
+            return response()->json([
+                'message'       => $request->session()->flash('success', 'Data gagal di perbaharui.!')
+            ], 500, $headers);
+        }
     }
 
     public function views(Request $request, $id)
@@ -241,5 +250,15 @@ class EkstrakurikulersekolahController extends Controller
             'dataEkstra'    => Ekstra::with(['pembina'])->where('id', base64_decode($id))->first()
         ];
         return view('adminpanel.pages.ekstrakurikuler.views', $data);
+    }
+    public function getData(Request $request, $id)
+    {
+        $dataJson = Ekstra::where('id', $id)->firstOrFail();
+        if($dataJson){
+            return response()->json([
+                'data'      => $dataJson,
+                'message'   => 'Berhasil mengambil data'
+            ], 200);
+        }
     }
 }

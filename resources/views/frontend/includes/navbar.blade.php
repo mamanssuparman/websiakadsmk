@@ -32,10 +32,10 @@
                     class="flex flex-col p-4 mt-4 border border-gray-200 rounded-lg lg:p-0 bg-gray-50 lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent font-inter">
                     <li class="relative group">
                         <a href="{{ url('') }}"
-                            class="block py-2 pl-3 pr-4 tracking-tight text-white bg-blue-600 rounded lg:bg-transparent lg:text-blue-700 lg:p-0"
+                            class="block py-2 pl-3 pr-4 tracking-tight  {{ Route::currentRouteName() == 'homepage' ? 'bg-blue-600 lg:text-blue-700 text-white' : 'text-gray-800' }}  rounded lg:bg-transparent  lg:p-0"
                             aria-current="page">Home</a>
                         <div
-                            class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-1/2 -translate-x-1/2 lg:bg-blue-600">
+                            class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-1/2 -translate-x-1/2 {{ Route::currentRouteName() == 'homepage' ? 'lg:bg-blue-600' : '' }} ">
                         </div>
                     </li>
                     <li class="relative group">
@@ -49,21 +49,22 @@
                         </button>
                         <div id="profileNavbar"
                             class="z-10 hidden w-56 font-normal bg-gray-100 border border-gray-200 divide-y divide-gray-200 rounded-lg">
-                            <ul class="py-2 text-sm text-gray-700">
-                                <li>
-                                    <a href="{{ url('') }}/profile"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">Visi
-                                        & Misi SMKN 3
-                                        Banjar</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/profile"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">Sejarah</a>
-                                </li>
+                            <ul class="py-2 text-sm text-gray-700" >
+                                <div id="menu_profile">
+
+                                </div>
+
                             </ul>
                         </div>
                         <div
                             class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-[20%] lg:bg-transparent lg:group-hover:bg-gray-400 transition ease-out">
+                        </div>
+                    </li>
+                    <li class="relative group">
+                        <a href="{{ url('') }}/saranaprasarana"
+                            class="block py-2 pl-3 pr-4 tracking-tight text-gray-800 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:p-0">Sarana</a>
+                        <div
+                            class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-1/2 -translate-x-1/2 lg:bg-transparent lg:group-hover:bg-gray-400 transition ease-out">
                         </div>
                     </li>
                     <li class="relative group">
@@ -78,30 +79,10 @@
                         <div id="programStudiNavbar"
                             class="z-10 hidden font-normal bg-gray-100 border border-gray-200 divide-y divide-gray-200 rounded-lg w-44">
                             <ul class="py-2 text-sm text-gray-700">
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">APHP</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">APAT</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">RPL</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">AKL</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">TBSM</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/programstudi"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">TKRO</a>
-                                </li>
+                                <div id="menu_prodi">
+
+                                </div>
+
                             </ul>
                         </div>
                         <div
@@ -120,26 +101,9 @@
                         <div id="ekstrakurikulerId"
                             class="z-10 hidden font-normal bg-gray-100 border border-gray-200 divide-y divide-gray-200 rounded-lg w-44">
                             <ul class="py-2 text-sm text-gray-700">
-                                <li>
-                                    <a href="{{ url('') }}/ekstrakurikuler"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">OSIS</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/ekstrakurikuler"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">Pramuka</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/ekstrakurikuler"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">Paskibra</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/ekstrakurikuler"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">PMR</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('') }}/ekstrakurikuler"
-                                        class="block px-4 py-2 mx-2 transition ease-out rounded-md hover:bg-blue-600 hover:text-gray-50 hover:scale-105">Rohis</a>
-                                </li>
+                                <div id="menu_ekstra">
+
+                                </div>
                             </ul>
                         </div>
                         <div
@@ -176,13 +140,6 @@
                     <li class="relative group">
                         <a href="{{ url('') }}/gtk"
                             class="block py-2 pl-3 pr-4 tracking-tight text-gray-800 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:p-0">GTK</a>
-                        <div
-                            class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-1/2 -translate-x-1/2 lg:bg-transparent lg:group-hover:bg-gray-400 transition ease-out">
-                        </div>
-                    </li>
-                    <li class="relative group">
-                        <a href="/pages/alumni.html"
-                            class="block py-2 pl-3 pr-4 tracking-tight text-gray-800 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:p-0">Alumni</a>
                         <div
                             class="max-lg:hidden absolute w-5 h-[3px] rounded-lg left-1/2 -translate-x-1/2 lg:bg-transparent lg:group-hover:bg-gray-400 transition ease-out">
                         </div>

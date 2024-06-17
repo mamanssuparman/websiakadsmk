@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Users\Sarana;
 use App\Http\Controllers\Users\GtkController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Users\HomeController;
 use App\Http\Controllers\Admin\MapelController;
+use App\Http\Controllers\Admin\MitraController;
 use App\Http\Controllers\Admin\ProdiController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\GtkDataController;
 use App\Http\Controllers\Admin\SettingController;
@@ -19,6 +23,7 @@ use App\Http\Controllers\Admin\ProfileuserController;
 use App\Http\Controllers\Users\ProgramstudiController;
 use App\Http\Controllers\Admin\ProfileSekolahController;
 use App\Http\Controllers\Admin\CategoryarticleController;
+use App\Http\Controllers\Admin\SaranaprasaranaController;
 use App\Http\Controllers\Users\EkstrakurikulerController;
 use App\Http\Controllers\Admin\EkstrakurikulersekolahController;
 
@@ -33,16 +38,14 @@ use App\Http\Controllers\Admin\EkstrakurikulersekolahController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
-
-Route::get('/profile', [ProfileController::class, 'detail']);
-Route::get('/programstudi', [ProgramstudiController::class, 'detail']);
-Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'detail']);
+Route::get('/',[HomeController::class, 'index'])->name('homepage');
+Route::get('/users/getDataMain',[HomeController::class, 'getDataFooter']);
+Route::get('/profile/{slug}', [ProfileController::class, 'detail'])->name('profile');
+Route::get('/programstudi/{slug}', [ProgramstudiController::class, 'detail']);
+Route::get('/ekstrakurikuler/{slug}', [EkstrakurikulerController::class, 'detail']);
 Route::get('/gtk',[GtkController::class,'index']);
 Route::get('/article', [ArticleController::class, 'index']);
-Route::get('/article/detail', [ArticleController::class, 'detail']);
+Route::get('/article/{id}', [ArticleController::class, 'detail']);
 Route::get('/gallery', [GalleryController::class, 'foto']);
 Route::get('/video', [GalleryController::class, 'video']);
 
@@ -52,29 +55,34 @@ Route::get('/signout',[AuthController::class, 'logout']);
 Route::post('/auth', [AuthController::class, 'check']);
 Route::get('/gtk/getDataGtk', [GtkDataController::class, 'getDataGtk']);
 Route::get('/prodi/getDataProdi', [ProdiController::class, 'getDataProdi']);
-Route::get('/article/getDataArticle',[ArticledataController::class, 'getDataArticle']);
+Route::get('/articledata/getDataArticle',[ArticledataController::class, 'getDataArticle']);
+Route::post('/sendComment/{id}', [ArticleController::class, 'storecomment']);
+Route::get('/saranaprasarana', [Sarana::class, 'index'])->name('sarpras');
+Route::get('/home/getDataJsonGuru', [HomeController::class, 'getDataJsonGuru']);
+Route::get('/home/getDataKompetensi', [HomeController::class, 'getDataKompetensi']);
+Route::get('/home/getDataMitra', [HomeController::class, 'getDataMitra']);
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[ProfileSekolahController::class,'index']);
-    Route::get('/profile/add', [ProfileSekolahController::class, 'add']);
-    Route::post('/profile/add', [ProfileSekolahController::class, 'stored']);
-    Route::get('/profile/edit/{id}', [ProfileSekolahController::class, 'edit']);
-    Route::post('/profile/edit/{id}', [ProfileSekolahController::class, 'updated']);
+    Route::get('/profile/add', [ProfileSekolahController::class, 'add'])->middleware('can:isSuperAdmin');
+    Route::post('/profile/add', [ProfileSekolahController::class, 'stored'])->middleware('can:isSuperAdmin');
+    Route::get('/profile/edit/{id}', [ProfileSekolahController::class, 'edit'])->middleware('can:isSuperAdmin');
+    Route::post('/profile/edit/{id}', [ProfileSekolahController::class, 'updated'])->middleware('can:isSuperAdmin');
     Route::get('/profile/getDataProfile', [ProfileSekolahController::class, 'getDataProfile']);
     Route::get('/profile/checkSlug',[ProfileSekolahController::class, 'checkslug']);
-    Route::post('/profile/activenon', [ProfileSekolahController::class, 'activenon']);
+    Route::post('/profile/activenon', [ProfileSekolahController::class, 'activenon'])->middleware('can:isSuperAdmin');
     Route::get('/profile/view/{id}', [ProfileSekolahController::class, 'views']);
     Route::get('/gtk', [GtkDataController::class, 'index']);
-    Route::get('/gtk/add', [GtkDataController::class, 'add']);
-    Route::post('/gtk/add',[GtkDataController::class, 'stored']);
-    Route::get('/gtk/detail/{id}', [GtkDataController::class, 'detail']);
+    Route::get('/gtk/add', [GtkDataController::class, 'add'])->middleware('can:isSuperAdmin');
+    Route::post('/gtk/add',[GtkDataController::class, 'stored'])->middleware('can:isSuperAdmin');
+    Route::get('/gtk/detail/{id}', [GtkDataController::class, 'detail'])->middleware('can:isSuperAdmin');
     Route::get('/gtk/getData/{id}', [GtkDataController::class, 'getData']);
     Route::get('/gtk/getDataMapel', [GtkDataController::class, 'getDataMapel']);
-    Route::post('/gtk/activenon',[GtkDataController::class, 'activenon']);
-    Route::post('/gtk/removemapelajar',[GtkDataController::class, 'removemapelajar']);
-    Route::post('/gtk/addmapelajar', [GtkDataController::class, 'addMapelAjar']);
-    Route::post('/gtk/updateprofile',[GtkDataController::class, 'updateprofile']);
-    Route::post('/gtk/updatepassword',[GtkDataController::class, 'updatepassword']);
+    Route::post('/gtk/activenon',[GtkDataController::class, 'activenon'])->middleware('can:isSuperAdmin');
+    Route::post('/gtk/removemapelajar',[GtkDataController::class, 'removemapelajar'])->middleware('can:isSuperAdmin');
+    Route::post('/gtk/addmapelajar', [GtkDataController::class, 'addMapelAjar'])->middleware('can:isSuperAdmin');
+    Route::post('/gtk/updateprofile',[GtkDataController::class, 'updateprofile'])->middleware('can:isSuperAdmin');
+    Route::post('/gtk/updatepassword',[GtkDataController::class, 'updatepassword'])->middleware('can:isSuperAdmin');
 
 
 
@@ -91,35 +99,36 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
 
     Route::get('/prodi', [ProdiController::class, 'index']);
-    Route::get('/prodi/add', [ProdiController::class, 'add']);
+    Route::get('/prodi/add', [ProdiController::class, 'add'])->middleware('can:isSuperAdmin');
     Route::get('/prodi/detail/{id}', [ProdiController::class, 'detail']);
-    Route::post('/prodi/detail/{id}', [ProdiController::class, 'updateProdi']);
-    Route::post('/prodi/saveProdi',[ProdiController::class, 'saveprodi']);
+    Route::post('/prodi/detail/{id}', [ProdiController::class, 'updateProdi'])->middleware('can:isSuperAdmin');
+    Route::post('/prodi/saveProdi',[ProdiController::class, 'saveprodi'])->middleware('can:isSuperAdmin');
     Route::get('/prodi/checkSlug', [ProdiController::class, 'checkslug']);
-    Route::post('/prodi/activenon', [ProdiController::class, 'activenon']);
+    Route::post('/prodi/activenon', [ProdiController::class, 'activenon'])->middleware('can:isSuperAdmin');
     Route::get('/prodi/getData/{id}', [ProdiController::class,'getData']);
-    Route::post('/prodi/addPrestasi',[ProdiController::class, 'addPrestasi']);
-    Route::post('/prodi/addPekerjaan',[ProdiController::class, 'addPekerjaan']);
-    Route::post('/prodi/removePekerjaan',[ProdiController::class, 'removePekerjaan']);
-    Route::post('/prodi/removePrestasi',[ProdiController::class, 'removePrestasi']);
-    Route::post('/prodi/addMapelAjar',[ProdiController::class, 'addMapelAjar']);
-    Route::post('/prodi/removeMapelAjar',[ProdiController::class, 'removeMapelAjar']);
+    Route::post('/prodi/addPrestasi',[ProdiController::class, 'addPrestasi'])->middleware('can:isSuperAdmin');
+    Route::post('/prodi/addPekerjaan',[ProdiController::class, 'addPekerjaan'])->middleware('can:isSuperAdmin');
+    Route::post('/prodi/removePekerjaan',[ProdiController::class, 'removePekerjaan'])->middleware('can:isSuperAdmin');
+    Route::post('/prodi/removePrestasi',[ProdiController::class, 'removePrestasi'])->middleware('can:isSuperAdmin');
+    Route::post('/prodi/addMapelAjar',[ProdiController::class, 'addMapelAjar'])->middleware('can:isSuperAdmin');
+    Route::post('/prodi/removeMapelAjar',[ProdiController::class, 'removeMapelAjar'])->middleware('can:isSuperAdmin');
     Route::get('/prodi/views/{id}', [ProdiController::class, 'views']);
 
     Route::get('/ekstrakurikuler', [EkstrakurikulersekolahController::class, 'index']);
     Route::get('/ekstrakurikuler/checkSlug', [EkstrakurikulersekolahController::class, 'checkslug']);
-    Route::get('/ekstrakurikuler/add', [EkstrakurikulersekolahController::class, 'add']);
-    Route::post('/ekstrakurikuler/store', [EkstrakurikulersekolahController::class, 'store']);
-    Route::post('/ekstrakurikuler/update/{ekstra}', [EkstrakurikulersekolahController::class, 'update']);
-    Route::get('/ekstrakurikuler/edit/{ekstra}', [EkstrakurikulersekolahController::class, 'edit']);
+    Route::get('/ekstrakurikuler/add', [EkstrakurikulersekolahController::class, 'add'])->middleware('can:isSuperAdmin');
+    Route::post('/ekstrakurikuler/stored', [EkstrakurikulersekolahController::class, 'store']);
+    Route::post('/ekstrakurikuler/update/{id}', [EkstrakurikulersekolahController::class, 'update'])->middleware('can:isSuperAdmin');
+    Route::get('/ekstrakurikuler/edit/{ekstra}', [EkstrakurikulersekolahController::class, 'edit'])->middleware('can:isSuperAdmin');
     Route::get('/getEkstrakulikuler', [EkstrakurikulersekolahController::class, 'getEkstrakulikuler']);
-    Route::post('/ekstrakurikuler/activenon', [EkstrakurikulersekolahController::class, 'activenon']);
+    Route::post('/ekstrakurikuler/activenon', [EkstrakurikulersekolahController::class, 'activenon'])->middleware('can:isSuperAdmin');
     Route::get('/ekstrakurikuler/views/{id}', [EkstrakurikulersekolahController::class, 'views']);
+    Route::get('/ekstrakurikuler/getData/{id}', [EkstrakurikulersekolahController::class, 'getData']);
 
     Route::get('/categoryarticle', [CategoryarticleController::class, 'index']);
     Route::get('/getCategoryarticle', [CategoryarticleController::class, 'getCategoryarticle']);
     Route::post('/categoryarticle/store', [CategoryarticleController::class, 'store']);
-    Route::post('/categoryarticle/activenon', [CategoryarticleController::class, 'activenon']);
+    Route::post('/categoryarticle/activenon', [CategoryarticleController::class, 'activenon'])->middleware('can:isSuperAdmin');
     Route::get('/categoryarticle/{category}/edit', [CategoryarticleController::class, 'edit']);
     Route::put('/categoryarticle/{category}/update', [CategoryarticleController::class, 'update']);
     Route::get('/category/checkSlug', [CategoryarticleController::class, 'checkSlug']);
@@ -129,7 +138,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/article/add', [ArticledataController::class, 'stored']);
     Route::get('/article/edit/{id}', [ArticledataController::class, 'edit']);
     Route::post('/article/edit/{id}', [ArticledataController::class, 'update']);
-    Route::post('/article/activenon', [ArticledataController::class, 'activenon']);
+    Route::post('/article/activenon', [ArticledataController::class, 'activenon'])->middleware('can:isSuperAdmin');
     Route::get('/article/checkSlug', [ArticledataController::class, 'checkslug']);
     Route::get('/article/views/{id}', [ArticledataController::class, 'views']);
     Route::get('/comment', [CommentController::class, 'index']);
@@ -160,6 +169,29 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/settings/getdatasettings', [SettingController::class, 'getdatasettings']);
     Route::post('/settings/stored', [SettingController::class, 'stored']);
     Route::post('/settings/update',[SettingController::class, 'updated']);
+
+    //Route Banners
+    Route::get('/banner', [BannerController::class, 'index']);
+    Route::get('/banner/getBanner', [BannerController::class, 'getBanner']);
+    Route::post('/banner/stored', [BannerController::class, 'store']);
+    Route::post('/banner/getDataBanner', [BannerController::class, 'getDataBanner']);
+    Route::post('/banner/{id}/update', [BannerController::class, 'update']);
+    Route::post('/banner/activenon', [BannerController::class, 'activenon']);
+
+    // Route Mitra
+    Route::get('/mitra', [MitraController::class, 'index'])->middleware('can:isSuperAdmin');
+    Route::post('/getListMitra', [MitraController::class, 'getListMitra'])->middleware('can:isSuperAdmin');
+    Route::post('/mitra/stored', [MitraController::class, 'stored'])->middleware('can:isSuperAdmin');
+    Route::get('/mitra/getDataMitra/{id}',[MitraController::class, 'getDataMitra'])->middleware('can:isSuperAdmin');
+    Route::post('/mitra/Update/{id}', [MitraController::class, 'updateMitra'])->middleware('can:isSuperAdmin');
+
+    // Route Sarana
+    Route::get('/sarana', [SaranaprasaranaController::class, 'index']);
+    Route::get('/sarana/getSarana',[SaranaprasaranaController::class, 'getSarana']);
+    Route::post('/sarana/stored', [SaranaprasaranaController::class, 'stored']);
+    Route::get('/sarana/getSarana/{id}', [SaranaprasaranaController::class, 'getDataSarana']);
+    Route::post('/sarana/update/{id}', [SaranaprasaranaController::class, 'updated']);
+    Route::post('/sarana/activenon', [SaranaprasaranaController::class, 'activenon']);
 });
 // LFM
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web','auth']], function () {

@@ -1,4 +1,7 @@
 @extends('frontend.layouts.layoutusers')
+@section('title')
+    Gallery Video
+@endsection
 @section('content')
     <!-- nav title -->
     <section class="mt-24">
@@ -20,122 +23,36 @@
                         <h1 class="flex items-center pl-4 text-xl font-semibold border-gray-900 ">Gallery Video</h1>
                     </div>
                 </div>
-                <form action="" method="" class="mt-8">
-                    <input type="search" class="w-1/2 rounded-lg text-slate-900" placeholder="Search...">
+                <form action="" method="get" class="mt-8">
+                    <input type="search" class="w-1/2 rounded-lg text-slate-900" placeholder="Search..." name="search" value="{{ request('search') }}">
                 </form>
                 <div class="mt-5">
                     <div class="flex flex-wrap items-start mt-12">
-                        <div class="w-full p-1 pt-8 md:w-1/3">
-                            <div class="overflow-hidden rounded-lg aspect-w-16">
-                                <iframe
-                                    class="object-cover w-full h-full max-w-md transition ease-out sm:h-56 hover:scale-105 hover:rounded-none"
-                                    width="560" height="315"
-                                    src="https://www.youtube.com/embed/FW1Ywl82DyM?si=tRtuNT9U7YqJGocY"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen></iframe>
+                        @if (count($dataVideo))
+                                @foreach ($dataVideo as $video)
+                                <div class="w-full p-1 pt-8 md:w-1/3">
+                                    <div class="overflow-hidden rounded-lg aspect-w-16">
+                                        <iframe
+                                            class="object-cover w-full h-full max-w-md transition ease-out sm:h-56 hover:scale-105 hover:rounded-none"
+                                            width="560" height="315"
+                                            src="https://www.youtube.com/embed/{{ $video->urlvideo }}"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                    </div>
+                                    <p class="font-semibold tracking-tight text-gray-900">{{ $video->judul }}</p>
+                                </div>
+                                @endforeach
+                        @else
+                            <div class="w-full p-1 pt-8 md:w-1/3">
+                                <p class="font-semibold tracking-tight text-gray-900">Video tidak ditemukan</p>
                             </div>
-                            <p class="font-semibold tracking-tight text-gray-900">Profile SMKN 3 BANJAR</p>
-                        </div>
-
-                        <div class="w-full p-1 pt-8 md:w-1/3">
-                            <div class="overflow-hidden rounded-lg aspect-w-16">
-                                <iframe
-                                    class="object-cover w-full h-full max-w-md transition ease-out sm:h-56 hover:scale-105 hover:rounded-none"
-                                    width="560" height="315"
-                                    src="https://www.youtube.com/embed/FW1Ywl82DyM?si=tRtuNT9U7YqJGocY"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen></iframe>
-                            </div>
-                            <p class="font-semibold tracking-tight text-gray-900">Profile SMKN 3 BANJAR</p>
-                        </div>
-
-                        <div class="w-full p-1 pt-8 md:w-1/3">
-                            <div class="overflow-hidden rounded-lg aspect-w-16">
-                                <iframe
-                                    class="object-cover w-full h-full max-w-md transition ease-out sm:h-56 hover:scale-105 hover:rounded-none"
-                                    width="560" height="315"
-                                    src="https://www.youtube.com/embed/FW1Ywl82DyM?si=tRtuNT9U7YqJGocY"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen></iframe>
-                            </div>
-                            <p class="font-semibold tracking-tight text-gray-900">Profile SMKN 3 BANJAR</p>
-                        </div>
-
-                        <div class="w-full p-1 pt-8 md:w-1/3">
-                            <div class="overflow-hidden rounded-lg aspect-w-16">
-                                <iframe
-                                    class="object-cover w-full h-full max-w-md transition ease-out sm:h-56 hover:scale-105 hover:rounded-none"
-                                    width="560" height="315"
-                                    src="https://www.youtube.com/embed/FW1Ywl82DyM?si=tRtuNT9U7YqJGocY"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen></iframe>
-                            </div>
-                            <p class="font-semibold tracking-tight text-gray-900">Profile SMKN 3 BANJAR</p>
-                        </div>
-
-                        <div class="w-full p-1 pt-8 md:w-1/3">
-                            <div class="overflow-hidden rounded-lg aspect-w-16">
-                                <iframe
-                                    class="object-cover w-full h-full max-w-md transition ease-out sm:h-56 hover:scale-105 hover:rounded-none"
-                                    width="560" height="315"
-                                    src="https://www.youtube.com/embed/FW1Ywl82DyM?si=tRtuNT9U7YqJGocY"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen></iframe>
-                            </div>
-                            <p class="font-semibold tracking-tight text-gray-900">Profile SMKN 3 BANJAR</p>
-                        </div>
-
-                        <div class="w-full p-1 pt-8 md:w-1/3">
-                            <div class="overflow-hidden rounded-lg aspect-w-16">
-                                <iframe
-                                    class="object-cover w-full h-full max-w-md transition ease-out sm:h-56 hover:scale-105 hover:rounded-none"
-                                    width="560" height="315"
-                                    src="https://www.youtube.com/embed/FW1Ywl82DyM?si=tRtuNT9U7YqJGocY"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen></iframe>
-                            </div>
-                            <p class="font-semibold tracking-tight text-gray-900">Profile SMKN 3 BANJAR</p>
-                        </div>
+                       @endif
 
                     </div>
                 </div>
                 <div class="mt-12">
-                    <ul class="inline-flex -space-x-px text-sm">
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center h-8 px-3 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-                        </li>
-                        <li>
-                            <a href="#" aria-current="page"
-                                class="flex items-center justify-center h-8 px-3 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">1</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">3</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-                        </li>
-                    </ul>
+                    {{ $dataVideo->links() }}
                 </div>
             </div>
         </div>

@@ -36,28 +36,42 @@ class CommentController extends Controller
 
     public function rejectComment($id)
     {
-        $comment = Comment::find($id);
-        $comment->update(['status' => 'Di Tolak']);
-
-        return response()->json(['message' => 'Comment rejected successfully']);
+        try {
+            $comment = Comment::where('id',$id);
+            $comment->update([
+                'statuscomment'     => 'Di Tolak'
+            ]);
+            return response()->json([
+                'message'       => 'Comment rejected successfully'
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'message'       => 'Something went wrong.!'
+            ], 500);
+        }
     }
 
     public function approveComment($id)
     {
-        $comment = Comment::find($id);
-        $comment->update(['status' => 'Approve']);
-
-        return response()->json(['message' => 'Comment approved successfully']);
+        try {
+            $comment = Comment::where('id', $id);
+            $comment->update([
+                'statuscomment'     => 'Approve'
+            ]);
+            return response()->json(['message'  => 'Comment Approved'], 200);
+        } catch (Exception $error) {
+            return response()->json(['message'  => 'Something went wrong'], 500);
+        }
     }
 
     public function getDataComments(Request $request)
     {
 
-        $orderBy = 'users.nama';
+        $orderBy = 'comments.namacomentar';
 
         switch ($request->input('order.3.column')) {
             case '1':
-                $orderBy = 'users.nama';
+                $orderBy = 'comments.namacomentar';
                 break;
                 // case '2':
                 //     $orderBy = 'articles.judul';
@@ -66,13 +80,14 @@ class CommentController extends Controller
 
         $orderSort = $request->input('order.0.dir');
 
-        $data = DB::table('comments')->leftJoin('users', 'comments.usersid', '=', 'users.id')->leftJoin('articles','comments.articleid','=','articles.id') ->select('comments.*', 'users.nama','articles.judul');
+        // $data = DB::table('comments')->leftJoin('users', 'comments.usersid', '=', 'users.id')->leftJoin('articles','comments.articleid','=','articles.id') ->select('comments.*', 'users.nama','articles.judul');
+        $data = DB::table('comments')->leftJoin('articles', 'comments.articleid', '=', 'articles.id')->select('comments.*', 'articles.judul');
         // $data->join('users', 'comments.usersid', '=', 'users.id');
         // $data->join('articles', 'comments.articleid', '=', 'articles.id');
 
         if ($request->input('search.value') != null) {
             $data = $data->where(function ($q) use ($request) {
-                $q->whereRaw('LOWER(users.nama) like ?', ['%' . $request->input('search.value') . '%']);
+                $q->whereRaw('LOWER(comments.namacomentar) like ?', ['%' . $request->input('search.value') . '%']);
                 // ->orWhereRaw('LOWER(articles.judul) like ?', ['%' . $request->input('search.value') . '%']);
             });
         }
@@ -89,10 +104,10 @@ class CommentController extends Controller
             $no++;
             $row = [];
             $row[] = $no;
-            $row[] = $x->nama;
-            $row[] = $x->judul;
+            $row[] = substr($x->namacomentar, 0, 80) ;
+            $row[] = substr($x->comment, 0, 80).'...' ;
+            $row[] = substr($x->judul, 0, 80).'...' ;
             $row[] = $this->_status($x);
-            $row[] = $this->_toggle($x);
             $row[] = $this->_btn_detail($x);
             $data1[] = $row;
         }
@@ -111,46 +126,16 @@ class CommentController extends Controller
         return $btn_detail;
     }
 
-    private function _toggle($x)
-    {
-        $statustoogle = $x->isactivecomments;
-        if ($statustoogle == 'Active') {
-            $togle = '<input type="checkbox" id="toggle" checked onclick="activenoncomments(this,' . $x->id . ')">';
-        } else {
-            $togle = '<input type="checkbox" id="toggle" onclick="activenoncomments(this,' . $x->id . ')">';
-        }
-        return $togle;
-    }
-
     private function _status($x)
     {
-        $status = $x->status;
+        $status = $x->statuscomment;
         if ($status == 'New') {
-            $span = '<span class="block h-6 text-center text-white bg-blue-800 rounded-full w-28">New</span>';
+            $span = '<span class="block h-6 text-center text-white bg-yellow-500 rounded-full w-28">New</span>';
         } elseif ($status == 'Approve') {
-            $span = '<span class="block h-6 text-center text-white bg-green-600 rounded-full w-28">Approve</span>';
+            $span = '<span class="block h-6 text-center text-white bg-green-500 rounded-full bg-blue-600-600 w-28">Approve</span>';
         } else {
             $span = '<span class="block h-6 text-center text-white bg-red-600 rounded-full w-28">Rejected</span>';
         }
         return $span;
-    }
-
-    public function activenon(Request $request)
-    {
-        $commentStatus = Comment::firstWhere('id', $request->idComment);
-        $status = $commentStatus->isactivecomments;
-        if ($status == "Active") {
-            $commentStatus->update(['isactivecomments' => 'Non Active']);
-            return response()->json([
-                'data' => "updated successfully",
-                'statuscode' => 200
-            ]);
-        } else {
-            $commentStatus->update(['isactivecomments' => 'Active']);
-            return response()->json([
-                'data' => "updated successfully",
-                'statuscode' => 200
-            ]);
-        }
     }
 }

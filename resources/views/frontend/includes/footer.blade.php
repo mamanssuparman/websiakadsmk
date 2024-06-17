@@ -22,16 +22,15 @@
                 <div class="flex flex-col justify-center px-4 py-4">
                     <div class="flex flex-row mb-4">
                         <div class="font-mono text-sm"><i class="mr-12 bi bi-telephone-fill"></i></div>
-                        <div class="font-mono text-sm">02652734141</div>
+                        <div class="font-mono text-sm" id="foot_nomor_telepon"></div>
                     </div>
                     <div class="flex flex-row mb-4">
                         <div class="font-mono text-sm"><i class="mr-12 bi bi-envelope-at-fill"></i></div>
-                        <div class="font-mono text-sm">smkn3banjar@gmail.com</div>
+                        <div class="font-mono text-sm" id="foot_email_sekolah"></div>
                     </div>
                     <div class="flex flex-row mb-4">
                         <div class="font-mono text-sm"><i class="mr-12 bi bi-pin-map-fill"></i></div>
-                        <div class="font-mono text-sm">Jl. Julaeni, RT/RW 5/2, Dsn. Langensari, Kel. Langensari, Kec.
-                            Langensari, Kota Banjar, Jawa Barat 46341
+                        <div class="font-mono text-sm" id="foot_alamat_sekolah">
                         </div>
                     </div>
                 </div>
@@ -55,3 +54,6 @@
         </div>
     </div>
 </footer>
+@push('jsexternal')
+<script src="{{ url('') }}/jsusers/home/settings.js"></script>
+@endpush

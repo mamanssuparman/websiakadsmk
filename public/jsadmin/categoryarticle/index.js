@@ -1,7 +1,7 @@
 let baseurl = window.location.origin;
 
 $(document).ready(function() {
-    
+
     // request read data
     table = $('#example2').DataTable({
         "processing": true,
@@ -50,7 +50,7 @@ $(document).ready(function() {
                 setTimeout(function() {
                     $(alert).addClass('hidden').removeClass('flex');
                 }, 3000);
-                
+
                 $('#btn-add-edit').replaceWith("<button id='btn-add-edit' class='px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800'><i class='bi bi-plus'></i>Add Category</button>")
                 $('#form-category')[0].reset();
             },
@@ -74,7 +74,7 @@ $(document).ready(function() {
             $('#idCategory').val(data.id);
             $('#btn-add-edit').replaceWith("<button id='btn-add-edit' class='px-5 py-3 font-semibold text-slate-500 bg-yellow-300 rounded-md mt-9 hover:bg-yellow-400'><i class='bi bi-pencil-fill'></i></i> Edit Category</button>")
         })
-    })    
+    })
 });
 
 
@@ -99,8 +99,7 @@ const slug = document.querySelector('#slug')
 title.addEventListener('change', function() {
     fetch('/admin/category/checkSlug?title=' + title.value)
         .then(response => response.json())
-        .then(data => slug.value = data.slug+'.html')
+        .then(data => slug.value = data.slug)
 })
 
 
-    

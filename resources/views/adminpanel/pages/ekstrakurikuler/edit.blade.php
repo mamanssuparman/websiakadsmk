@@ -36,46 +36,52 @@
         </div>
     </div>
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
-        <form action="{{ url('admin')}}/ekstrakurikuler/update/{{ $ekstradata->id }}" method="post" enctype="multipart/form-data">
+        <form action="" enctype="multipart/form-data" id="form-update-ekstrakurikuler">
             @csrf
             <div class="flex flex-wrap gap-3">
                 <div class="w-full sm:w-1/2">
                     <div class="mb-5">
                         <label for="namaEskul" class="block">Nama Ekstrakurikuler</label>
-                        <input id="namaEskul" name="namaEskul" type="text" class="w-full border rounded-md border-slate-300" value="{{ $ekstradata->judul }}">
+                        <input id="namaEskul" name="namaEskul" type="text" class="w-full border rounded-md border-slate-300" value="">
+                        <small class="italic text-yellow-500" id="errNamaEskul"></small>
                     </div>
                     <div class="mb-5">
                         <label for="sinonim" class="block ">Sinonim</label>
-                        <input id="sinonim" name="sinonim" type="text" class="w-full border rounded-md border-slate-300" value="{{ $ekstradata->sinonim }}">
-                        @error('sinonim')
-                            <small class="italic text-yellow-500">{{ $message }}</small>
-                        @enderror
+                        <input id="textSinonim" name="textSinonim" type="text" class="w-full border rounded-md border-slate-300" value="">
+
+                            <small class="italic text-yellow-500" id="errSinonim"></small>
+
                     </div>
                     <div class="mb-5">
                         <label  for="deskripsi" class="block ">Deskripsi</label>
-                        <textarea id="deskripsi" name="deskripsi" class="w-full p-3 rounded-md border-slate-300" rows="6">{{  $ekstradata->description }}</textarea>
+                        <textarea id="deskripsi" name="deskripsi" class="w-full p-3 rounded-md border-slate-300" rows="6"></textarea>
+                        <small class="italic text-yellow-500" id="errDeskripsi"></small>
                     </div>
                 </div>
                 <div class="w-full sm:flex-1">
                     <div class="mb-5">
                         <label for="logo" class="block ">Logo</label>
                         <input id="logo" name="logo" type="file" class="w-full border rounded-md selec border-slate-300">
+                        <small class="italic text-yellow-500" id="errLogo"></small>
                     </div>
                     <div class="mb-5">
                         <label for="pembinaEkstra"  class="block ">Pembina Ekstra</label>
                         <select id="pembinaEkstra" name="pembinaEkstra" class="block w-full p-2 bg-white border rounded-md border-slate-300 focus:ring-blue-500 focus:border-blue-500">
                             <option selected>--Pilih Pembina Ekstra--</option>
                             @foreach ($datapembimbing as $value)
-                                <option @if ($value->id == $ekstradata->pembinaid) selected
-                                @endif value="{{ $value->id }}">{{ $value->nama }} | {{ $value->jabatan }}</option>
+                                <option value="{{ $value->id }}">{{ $value->nama }} | {{ $value->jabatan }}</option>
                             @endforeach
                         </select>
+                        <small class="italic text-yellow-500" id="errPembinaEkstra"></small>
                     </div>
                 </div>
             </div>
             <div class="flex justify-end">
-                <button class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800"><i class="bi bi-database-down"></i> Simpan</button>
+                <button type="submit" class="px-5 py-3 font-semibold text-white bg-blue-700 rounded-md mt-9 hover:bg-blue-800"><i class="bi bi-database-down"></i> Update</button>
             </div>
         </form>
     </div>
 @endsection
+@push('jsexternal')
+    <script src="/jsadmin/ekstrakurikuler/edit.js"></script>
+@endpush

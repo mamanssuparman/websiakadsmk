@@ -6,6 +6,7 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ProfileSekolahController extends Controller
@@ -92,16 +93,24 @@ class ProfileSekolahController extends Controller
         // $active = 'Active';
         // $non    ="Non-Active";
         $statustoogle = $x->isactiveprofile;
-        if($statustoogle == 'Active'){
-            $togle= '<input type="checkbox" id="toggle" checked onclick="activenon(this,'.$x->id.')">';
+        if(Gate::allows('isSuperAdmin')){
+            if($statustoogle == 'Active'){
+                $togle= '<input type="checkbox" id="toggle" checked onclick="activenon(this,'.$x->id.')">';
+            } else {
+                $togle= '<input type="checkbox" id="toggle" onclick="activenon(this,'.$x->id.')">';
+            }
         } else {
-            $togle= '<input type="checkbox" id="toggle" onclick="activenon(this,'.$x->id.')">';
+            $togle= '';
         }
         return $togle;
     }
     private function _btn_detail($x)
     {
-        $btn_detail = '<a href="'.url('admin/profile/edit/'.base64_encode($x->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+        if(Gate::allows('isSuperAdmin')){
+            $btn_detail = '<a href="'.url('admin/profile/edit/'.base64_encode($x->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+        } else {
+            $btn_detail = '';
+        }
         return $btn_detail;
     }
     public function activenon(Request $request)
