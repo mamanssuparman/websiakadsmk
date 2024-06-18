@@ -30,7 +30,7 @@ class ArticleController extends Controller
     public function detail(Request $request, $id)
     {
         // GetIdArticle
-        $idArticle = Article::where('slug', $id)->firstOrFail();
+        $idArticle = Article::where('slug', $id)->where('isactivearticle', 'Active')->firstOrFail();
         $data = [
             'title'             => 'Home | SMK Negeri 3 Banjar',
             'navigation'        => "Home",

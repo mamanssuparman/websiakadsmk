@@ -1,7 +1,7 @@
 @extends('adminpanel.layouts.layoutadmin')
 @push('csjsexternal')
     <script src="/assetsadmin/js/jquery-3.7.0.js"></script>
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
 @endpush
 @section('content')
 {{-- start Toast or alert --}}
