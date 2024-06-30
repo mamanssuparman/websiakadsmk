@@ -13,7 +13,7 @@
           display: none;
         }
     </style>
-    <script src="/assetsadmin/js/jquery-3.7.0.js"></script>
+    <script src="{{ url('') }}/assetsadmin/js/jquery-3.7.0.js"></script>
     @stack('jscssexternal')
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
@@ -25,6 +25,9 @@
     @yield('content')
     <!-- Footer -->
     @include('frontend.includes.footer')
+    <script type="text/javascript">
+        // const storagePath = "{!! asset('storage/images') !!}";
+    </script>
     <!-- Akhir Footer -->
     @stack('jsexternal')
 </body>

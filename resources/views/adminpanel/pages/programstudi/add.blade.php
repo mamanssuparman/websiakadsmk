@@ -1,6 +1,6 @@
 @extends('adminpanel.layouts.layoutadmin')
 @push('csjsexternal')
-    <script src="/assetsadmin/js/jquery-3.7.0.js"></script>
+    <script src="{{ url('') }}/assetsadmin/js/jquery-3.7.0.js"></script>
 @endpush
 @section('content')
 {{-- start Toast or alert --}}
@@ -189,7 +189,7 @@
     </div>
 @endsection
 @push('jsexternal')
-    <script src="/jsadmin/prodi/add.js">
+    <script src="{{ url('') }}/jsadmin/prodi/add.js">
 
     </script>
 @endpush

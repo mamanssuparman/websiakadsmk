@@ -66,4 +66,10 @@ class ArticleController extends Controller
             ], 500);
         }
     }
+    function getDetailArticle($slug){
+        $detailArticle = Article::with(['user', 'categori'])->where('slug', $slug)->firstOrFail();
+        return response()->json([
+            'data'      => $detailArticle
+        ], 200);
+    }
 }

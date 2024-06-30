@@ -19,7 +19,7 @@ const getMitra = ()=>{
             `
             <div class="flex gap-4 lg:flex-row md:flex-col">
                 <div class="flex items-center w-48 h-full grid-cols-1 px-4 py-4 transition duration-500 bg-gray-200 rounded-lg shadow-lg hover:scale-105">
-                    <img src="${baseUrl}/images/${x.photos}" alt="" title="${x.nma}">
+                    <img src="${storagePath}/${x.photos}" alt="" title="${x.nama}">
                 </div>
             </div>
             `

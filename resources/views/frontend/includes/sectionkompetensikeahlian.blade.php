@@ -20,5 +20,5 @@
     </div>
 </section>
 @push('jsexternal')
-    <script src="/jsusers/home/kompetensiKeahlian.js"></script>
+    <script src="{{ url('') }}/jsusers/home/kompetensiKeahlian.js"></script>
 @endpush

@@ -138,10 +138,10 @@ class ProdiController extends Controller
                 'singkatan'             => 'required',
                 'ketua_jurusan'         => 'required',
                 'deskripsi'             => 'required',
-                'logo'                  => ['required',File::image()->max('2mb')]
+                'logo'                  => ['required',File::image()->max('1mb')]
             ]);
             $imagesName = 'prodi-'.time().'.'.$request->logo->extension();
-            $request->logo->move(public_path('images'),$imagesName);
+            $request->logo->storeAs('public/images',$imagesName);
             $dataStoreProdis = [
                 'kajurid'       => $request->ketua_jurusan,
                 'sinonim'       => $request->singkatan,
@@ -378,7 +378,7 @@ class ProdiController extends Controller
                     'logo'      =>      'required|mimes:png,jpg|max:2048'
                 ]);
                 $imagesName = 'prodi-'.time().'.'.$request->logo->extension();
-                $request->logo->move(public_path('images'), $imagesName);
+                $request->logo->storeAs('public/images', $imagesName);
                 $dataUpdateProdi = [
                     'kajurid'       => $request->ketua_jurusan,
                     'sinonim'       => $request->singkatan,

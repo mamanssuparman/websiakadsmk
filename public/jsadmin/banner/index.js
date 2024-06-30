@@ -2,7 +2,7 @@ let baseurl = window.location.origin;
 var iBanner
 let csrfHash = $('input[name="_token"]').val()
 $(document).ready(function(){
-    
+
     // show data banners
     table = $('#example2').DataTable({
         "processing": true,
@@ -20,8 +20,8 @@ $(document).ready(function(){
             "orderable": false,
         }]
     })
-    // process 
-   
+    // process
+
 })
 
 $('#form-banner').on('submit', function(e){
@@ -29,7 +29,7 @@ $('#form-banner').on('submit', function(e){
 
     $('.error-messages').val()
     let url = baseurl+'/admin/banner/stored';
-    
+
     if(iBanner != undefined){
         url = baseurl+'/admin/banner/'+iBanner+'/update';
     }
@@ -39,7 +39,7 @@ $('#form-banner').on('submit', function(e){
         type: "POST",
         dataType: "JSON",
         data: new FormData(this),
-        contentType: false, 
+        contentType: false,
         processData: false,
         success: function(res){
             table.ajax.reload(null, false);
@@ -57,7 +57,7 @@ $('#form-banner').on('submit', function(e){
                 $('#judulError').html(jqXHR.responseJSON.errors.judul)
                 $('#urlsError').html(jqXHR.responseJSON.errors.urls)
                 $('#fotoError').html(jqXHR.responseJSON.errors.foto)
-               
+
             }
         }
     })
@@ -76,7 +76,7 @@ function detail(txt, id){
         success: function(res){
             $('#judul').val(res.data.judul);
             $('#urls').val(res.data.urls);
-            $('#preview-edit').prop('src', '/images/'+res.data.pictures)
+            $('#preview-edit').prop('src', storagePath+ '/'+res.data.pictures)
             $('#btn-add-edit').replaceWith("<button id='btn-add-edit' type='submit' class='px-5 py-3 font-semibold text-white bg-yellow-500 rounded-md mt-9 hover:bg-yellow-800'><i class='bi bi-edit-fill'></i>Update Banner</button>")
             $('#preview-edit').show();
         },

@@ -1,10 +1,10 @@
 @extends('adminpanel.layouts.layoutadmin')
 @push('csjsexternal')
-    <script src="/assetsadmin/js/jquery-3.7.0.js"></script>
-    <script src="/assetsadmin/js/jquery.dataTables.min.js"></script>
-    <script src="/assetsadmin/js/dataTables.tailwindcss.min.js"></script>
+    <script src="{{ url('') }}/assetsadmin/js/jquery-3.7.0.js"></script>
+    <script src="{{ url('') }}/assetsadmin/js/jquery.dataTables.min.js"></script>
+    <script src="{{ url('') }}/assetsadmin/js/dataTables.tailwindcss.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/assetsadmin/css/dataTables.tailwindcss.min.css">
+    <link rel="stylesheet" href="{{ url('') }}/assetsadmin/css/dataTables.tailwindcss.min.css">
 
 
 @endpush
@@ -255,7 +255,10 @@
     {{-- End Modal Data Mata Pelajaran --}}
 @endsection
 @push('jsexternal')
-    <script src="/jsadmin/gtk/detail.js">
+<script type="text/javascript">
+    var storagePath = "{!! asset('storage/images/') !!}";
+</script>
+<script src="{{ url('') }}/jsadmin/gtk/detail.js">
 
 
     </script>

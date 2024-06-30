@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
-        <form action="{{ url('admin') }}/article/edit/{{ base64_encode($dataarticle->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="#" method="POST" enctype="multipart/form-data" id="form-update-article">
             @csrf
             <div class="px-4 overflow-y-auto">
                 <div class="flex flex-col">
@@ -45,7 +45,7 @@
                         Judul
                     </div>
                     <div>
-                        <input type="text" name="judul" id="judul" class="w-full h-8 rounded-md border-slate-300" value="{{ $dataarticle->judul }}">
+                        <input type="text" name="judul" id="judul" class="w-full h-8 rounded-md border-slate-300" value="">
                     </div>
                     <div class="mt-2">
                         <div class="text-slate-800">
@@ -55,14 +55,17 @@
                             <select name="selectcategory" id="selectCategory" class="w-full h-8 px-4 py-1 rounded-md border-slate-300 text-slate-800">
                                 <option value="-">-- Pilih Category --</option>
                                 @foreach ($datacategory as $category)
-                                    <option value="{{ $category->id }}" {{ $dataarticle->categoriesid == $category->id ? 'selected' : '' }}>{{ $category->categoryname }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->categoryname }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="mt-2">
                         <div class="text-slate-800">
-                            Header Picture
+                            <img src="" alt="" class="" id="thumbnailheader" style="max-width: 200px">
+                        </div>
+                        <div class="text-slate-800">
+                            Change Header Picture
                         </div>
                         <div>
                             <input type="file" name="headerpicture" id="" class="w-full h-8 rounded-md border-slate-300 bg-slate-200">
@@ -73,8 +76,8 @@
                             Isi Article
                         </div>
                         <div>
-                            <textarea name="editor1" id="" cols="20" class="w-full h-64 rounded-md border-slate-300">
-                                {{ $dataarticle->article }}
+                            <textarea name="editor1" id="editor1" cols="20" class="w-full h-64 rounded-md border-slate-300">
+
                             </textarea>
                         </div>
                     </div>
@@ -89,7 +92,10 @@
     </div>
 @endsection
 @push('jsexternal')
-    <script src="/jsadmin/article/edit.js">
+    <script>
+        var storagePath ="{!! asset('storage/images/') !!}";
+    </script>
+    <script src="{{ url('') }}/jsadmin/article/edit.js">
 
     </script>
 @endpush

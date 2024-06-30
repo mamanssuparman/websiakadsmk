@@ -91,7 +91,8 @@ class BannerController extends Controller
             $file_foto      = $request->file('foto');
             $ekstensi_foto  = $file_foto->extension();
             $nama_foto      = 'banners-'.date('dmyhis').'.'.$ekstensi_foto;
-            $file_foto->move(public_path('/images'),$nama_foto);
+            $file_foto->storeAs('public/images', $nama_foto);
+            // $file_foto->move(public_path('/images'),$nama_foto);
             $foto = $nama_foto;
             $data_banner = [
                 'judul'         => $request->judul,
@@ -152,7 +153,8 @@ class BannerController extends Controller
                 $file_foto          = $request->file('pictures');
                 $ekstensi_foto      = $file_foto->extension();
                 $nama_foto          = date('dmyhis').'.'.$ekstensi_foto;
-                $file_foto->move(public_path('/images'),$nama_foto);
+                $file_foto->storeAs('public/images', $nama_foto);
+                // $file_foto->move(public_path('/images'),$nama_foto);
                 $foto_old = Banner::firstWhere('id', $id);
                 File::delete(public_path('images'.'/'.$foto_old->pictures));
                 $data_update['pictures']    = $nama_foto;

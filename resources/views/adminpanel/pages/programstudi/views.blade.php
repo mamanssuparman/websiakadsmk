@@ -12,9 +12,9 @@
         </div>
     </div>
     <div class="p-4 mx-8 bg-white rounded-bl-lg rounded-br-lg">
-        <div class="flex flex-col lg:flex-row items-center">
+        <div class="flex flex-col items-center lg:flex-row">
             <div class="flex w-full p-2 bg-gray-100 rounded-md lg:w-1/3">
-                <img src="/images/{{ $dataprodi->logoprodi }}" alt="" class="" alt="Logo Jurusan">
+                <img src="{{ asset('storage/images').'/'.$dataprodi->logoprodi }}" alt="" class="" alt="Logo Jurusan">
             </div>
             <div class="mx-2 lg:w-2/3">
                 <h1 class="text-2xl font-semibold">{{ $dataprodi->judul }}</h1>
@@ -24,7 +24,7 @@
                 <hr class="my-5 border-gray-800">
                 <div class="flex flex-wrap gap-12">
                     <div class="w-32 overflow-hidden">
-                        <img src="/images/{{ $dataprodi->kajur->photos }}" alt="Photos Kajur" class="object-cover w-full h-auto rounded-md min-h-32">
+                        <img src="{{ asset('storage/images').'/'. $dataprodi->kajur->photos }}" alt="Photos Kajur" class="object-cover w-full h-auto rounded-md min-h-32">
                     </div>
                     <div>
                         <h1 class="text-xl font-thin">Ketua Jurusan</h1>

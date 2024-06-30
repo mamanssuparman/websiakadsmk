@@ -3,7 +3,7 @@
     GTK
 @endsection
 @push('jscssexternal')
-    <script src="/assetsusers/jquery-3.7.0.js"></script>
+    <script src="{{ url('') }}/assetsusers/jquery-3.7.0.js"></script>
 @endpush
 @section('content')
     <!-- nav title -->
@@ -35,7 +35,7 @@
                             @foreach ($dataGtk as $gtk)
                             <div class="w-full p-1 pt-8 md:w-1/6 lg:w-1/6">
                                 <div class="overflow-hidden rounded-lg aspect-w-16">
-                                    <img src="/images/{{ $gtk->photos }}" class="object-cover w-full h-full max-w-md transition ease-out sm:h-56 hover:scale-105 hover:rounded-none" alt="">
+                                    <img src="{{ asset('storage/images').'/'. $gtk->photos }}" class="object-cover w-full h-full max-w-md transition ease-out sm:h-56 hover:scale-105 hover:rounded-none" alt="">
                                 </div>
                                     <p class="font-semibold tracking-tight text-center text-gray-900">{{ $gtk->nama }}</p>
                             </div>

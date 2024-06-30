@@ -259,7 +259,7 @@ class GtkDataController extends Controller
                 $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
                 $extension                  = $files->getClientOriginalExtension();
                 $filenamesimpan             = 'gtk-' . time() . '.' . $extension;
-                $files->move('images', $filenamesimpan);
+                $files->storeAs('public/images', $filenamesimpan);
                 $dataStore['photos']    = $filenamesimpan;
                 User::where('id', base64_decode($request->guruid))->update($dataStore);
                 return response()->json($request->session()->flash('message', 'Data berhasil di perbaharui.!'), 200);
@@ -293,7 +293,7 @@ class GtkDataController extends Controller
                 $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
                 $extension                  = $files->getClientOriginalExtension();
                 $filenamesimpan             = 'gtk-' . time() . '.' . $extension;
-                $files->move('images', $filenamesimpan);
+                $files->storeAs('public/images', $filenamesimpan);
                 $dataStore = [
                     'nutpk'                 => $request->nuptk,
                     'nip'                   => $request->nip,
@@ -327,7 +327,6 @@ class GtkDataController extends Controller
                 ];
                 User::create($dataStore);
                 return response()->json($request->session()->flash('success', 'Data GTK berhasil di simpan'), 200);
-                // return redirect()->back()->with('success', 'Data GTK berhasil di simpan');
             }
         } catch (Exception $error) {
             return response()->json($request->session()->flash('success', 'Data GTK Gagal di simpan'), 500);

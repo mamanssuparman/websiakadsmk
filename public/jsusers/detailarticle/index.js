@@ -1,7 +1,23 @@
 var baseUrl = window.location.origin;
+var slug = window.location.href.split("/").pop()
 // var csrfHash = $('input[name="_token"]').val()
+// get data
+$.getJSON(baseUrl+'/getDetailArticle/'+slug, function(e){
+}).done(function(e){
+    console.log(e);
+    $('#judularticle').html(e.data.judul);
+    $('#users-post').html(e.data.user.nama);
+    $('#detail-article').html(e.data.article);
+    if(e.data.headerpicture == 'headerdefault.jpg'){
+        $('#header-picture').addClass('hidden');
+    } else {
+        $('#header-picture').prop('src', storagePath + '/'+e.data.headerpicture);
+    }
+}).fail(function(e){
+    console.log('gagal mengambil data');
+})
 function sendComment(){
-    var slug = window.location.href.split("/").pop()
+    // var slug = window.location.href.split("/").pop()
     $.ajax({
         url: baseUrl+'/sendComment/'+slug,
         type: "POST",

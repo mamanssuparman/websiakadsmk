@@ -14,7 +14,7 @@ $.ajax({
             $('#foot_alamat_sekolah').html(res.data.master.data.alamatsekolah)
             $('#body_judul_sambutan').html(res.data.master.data.judulsambutan)
             $('#body_isi_sambutan').html(res.data.master.data.isisambutan)
-            $('#body_foto_kepala').prop('src','/images/'+res.data.master.data.fotokepalasekolah)
+            $('#body_foto_kepala').prop('src',storagePath+'/'+res.data.master.data.fotokepalasekolah)
             $('#body_video_profile').prop('src','https://www.youtube.com/embed/'+res.data.master.data.urlvideo)
             $('#body_judul_video_sekolah').html(res.data.master.data.judulvideoprofile)
             $('#body_description_video').html(res.data.master.data.descriptionvideo)

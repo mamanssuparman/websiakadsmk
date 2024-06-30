@@ -8,6 +8,7 @@ use App\Models\Categori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ArticledataController extends Controller
@@ -40,7 +41,7 @@ class ArticledataController extends Controller
             'head'          => 'Article',
             'breadcumb1'    => 'Article',
             'breadcumb2'    => 'Edit',
-            'dataarticle'   => Article::where('id',base64_decode($id))->firstOrFail(),
+            'dataarticle'   => Article::where('id', Crypt::decrypt($id))->firstOrFail(),
             'datacategory'  => Categori::where('isactivecategories', 'Active')->get()
         ];
         return view('adminpanel.pages.article.edit', $data);
@@ -112,7 +113,8 @@ class ArticledataController extends Controller
     }
     private function _btn_detail($x)
     {
-        $btn_detail = '<a href="'.url('admin/article/edit/'.base64_encode($x->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+        // $btn_detail = '<a href="'.url('admin/article/edit/'.base64_encode($x->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
+        $btn_detail = '<a href="'.url('admin/article/edit/'.Crypt::encrypt($x->id)).'" class="px-1 text-white bg-blue-800 rounded-sm "><i class="bi bi-list"></i></a>';
         return $btn_detail;
     }
     public function activenon(Request $request)
@@ -164,7 +166,7 @@ class ArticledataController extends Controller
                 $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
                 $extension                  = $files->getClientOriginalExtension();
                 $filenamesimpan             = 'article-' . time() . '.' . $extension;
-                $files->move('images', $filenamesimpan);
+                $files->storeAs('public/images', $filenamesimpan);
                 $dataStrore['headerpicture']    = $filenamesimpan;
             } else {
                 $dataStrore['headerpicture']    = 'headerdefault.jpg';
@@ -195,7 +197,8 @@ class ArticledataController extends Controller
                 $filename                   = pathinfo($filenameWithExtension, PATHINFO_FILENAME);
                 $extension                  = $files->getClientOriginalExtension();
                 $filenamesimpan             = 'article-' . time() . '.' . $extension;
-                $files->move('images', $filenamesimpan);
+                $files->storeAs('public/images', $filenamesimpan);
+                // $files->move('images', $filenamesimpan);
                 $dataStrore = [
                     'judul'             => $request->judul,
                     'headerpicture'     => $filenamesimpan,
@@ -203,7 +206,7 @@ class ArticledataController extends Controller
                     'article'           => $request->editor1,
                     'usersid'           => auth()->user()->id
                 ];
-                Article::where('id', base64_decode($id))->update($dataStrore);
+                Article::where('id', Crypt::decrypt($id))->update($dataStrore);
                 return redirect()->back()->with('message', 'Data Article berhasil di simpan.!');
             } else {
                 $dataStrore = [
@@ -212,7 +215,7 @@ class ArticledataController extends Controller
                     'article'           => $request->editor1,
                     'usersid'           => auth()->user()->id
                 ];
-                Article::where('id', base64_decode($id))->update($dataStrore);
+                Article::where('id', Crypt::decrypt($id))->update($dataStrore);
                 return redirect()->back()->with('message', 'Data Article berhasil di simpan.!');
             }
         } catch (Exception $error) {
@@ -229,5 +232,11 @@ class ArticledataController extends Controller
             'dataArticle'   => Article::with(['user','categori'])->where('id', base64_decode($id))->firstOrFail()
         ];
         return view('adminpanel.pages.article.views', $data);
+    }
+
+    public function getdata($id)
+    {
+        $data = Article::where('id', Crypt::decrypt($id))->firstOrFail();
+        return response()->json($data, 200);
     }
 }

@@ -27,7 +27,7 @@
                     <div class="text-sm">
                         <div class="flex flex-col">
                             <div class="flex w-auto lg:w-96">
-                                <img src="/images/{{ $dataArticle->headerpicture }}" alt="Header Berita" class="{{ $dataArticle->headerpicture == "headerdefault.jpg" ? "hidden" : '' }}">
+                                <img src="{{ asset('storage/images').'/'.$dataArticle->headerpicture }}" alt="Header Berita" class="{{ $dataArticle->headerpicture == "headerdefault.jpg" ? "hidden" : '' }}">
                             </div>
                             <div class="text-justify text-slate-950">
                                 {!! $dataArticle->article !!}

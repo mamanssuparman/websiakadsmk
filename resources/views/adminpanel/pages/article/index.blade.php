@@ -74,6 +74,6 @@
     </div>
 @endsection
 @push('jsexternal')
-<script src="/jsadmin/article/index.js"></script>
+<script src="{{ url('') }}/jsadmin/article/index.js"></script>
 
 @endpush

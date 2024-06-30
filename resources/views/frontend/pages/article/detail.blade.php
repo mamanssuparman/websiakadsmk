@@ -20,11 +20,11 @@
                         <div class="flex flex-col w-full">
                             {{-- Start Article --}}
                             <div class="flex flex-col pb-4">
-                                <div class="text-xl font-semibold text-slate-900">
-                                    {{ $detailArticle->judul }}
+                                <div class="text-xl font-semibold text-slate-900" id="judularticle">
+                                    {{-- {{ $detailArticle->judul }} --}}
                                 </div>
                                 <div class="text-xs text-slate-900">
-                                    Posted By <i class="bi bi-person-fill"></i> {{ $detailArticle->user->role }}, <i
+                                    Posted By <i class="bi bi-person-fill"></i> <span id="users-post"></span>, <i
                                         class="bi bi-calendar-date"></i>
                                     {{ $detailArticle->created_at->diffForHumans() }}<i class="bi bi-bookmark-fill"></i><a
                                         href="{{ url('article') }}?category={{ $detailArticle->categori->slug }}">
@@ -35,10 +35,10 @@
                             <div class="pt-4 text-sm">
                                 <div class="flex flex-col">
                                     <div class="flex w-auto lg:w-96">
-                                        <img src="{{ url('') }}/images/{{ $detailArticle->headerpicture }}" alt="" class="{{ $detailArticle->headerpicture == 'headerdefault.jpg' ? 'hidden' : '' }} w-full h-full rounded-md shadow-md">
+                                        <img id="header-picture" src="" alt="" class="w-full h-full rounded-md shadow-md">
                                     </div>
-                                    <div class="text-justify text-slate-950">
-                                        {!! $detailArticle->article !!}
+                                    <div class="text-justify" id="detail-article">
+                                        {{-- {!! $detailArticle->article !!} --}}
 
                                     </div>
                                 </div>
@@ -87,5 +87,8 @@
     </section>
 @endsection
 @push('jsexternal')
-    <script src="/jsusers/detailarticle/index.js"></script>
+    <script type="text/javascript">
+    var storagePath = "{!! asset('storage/images/') !!}";
+    </script>
+    <script src="{{ url('') }}/jsusers/detailarticle/index.js"></script>
 @endpush

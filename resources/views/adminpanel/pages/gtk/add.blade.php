@@ -146,7 +146,7 @@
     </div>
 @endsection
 @push('jsexternal')
-    <script src="/jsadmin/gtk/add.js">
+    <script src="{{ url('') }}/jsadmin/gtk/add.js">
 
     </script>
 @endpush

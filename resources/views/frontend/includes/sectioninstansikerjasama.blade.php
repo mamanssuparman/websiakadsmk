@@ -6,6 +6,6 @@
     </div>
 </section>
 @push('jsexternal')
-<script src="/jsusers/home/mitraSekolah.js"></script>
+<script src="{{ url('') }}/jsusers/home/mitraSekolah.js"></script>
 
 @endpush

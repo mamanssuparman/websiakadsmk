@@ -9,7 +9,7 @@
             <div class="flex justify-center ">
                 <div class="flex flex-col w-3/4 gap-12 lg:flex-row ">
                     <div class="flex justify-center w-full p-2 bg-gray-100 rounded-lg lg:w-1/3 ">
-                        <img src="/images/{{ $dataEkstra->headerpicture }}" class="w-auto h-auto" alt="">
+                        <img src="{{ asset('storage/images').'/'. $dataEkstra->headerpicture }}" class="w-auto h-auto" alt="">
                     </div>
                     <div class="text-white lg:w-2/3">
                         <h1 class="text-xl font-semibold">{{ $dataEkstra->judul }}</h1>
@@ -19,7 +19,7 @@
                         <hr class="my-5 border-gray-400">
                         <div class="flex flex-wrap gap-12 ">
                             <div class="w-32 overflow-hidden">
-                                <img src="/images/{{ $dataEkstra->pembina->photos }}" class="object-cover w-full h-auto rounded-md min-h-32"
+                                <img src="{{ asset('storage/images').'/'. $dataEkstra->pembina->photos }}" class="object-cover w-full h-auto rounded-md min-h-32"
                                     alt="">
                             </div>
                             <div>

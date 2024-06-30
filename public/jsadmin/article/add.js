@@ -20,20 +20,24 @@ title.addEventListener("change", function () {
         .then((data) => (slug.value = data.slug));
 });
 
-$('#form-add-article').on('submit', function(e){
-    e.preventDefault()
+$("#form-add-article").on("submit", function (e) {
+    for (instance in CKEDITOR.instances)
+        CKEDITOR.instances[instance].updateElement();
+    data = new FormData($("#form-add-article")[0]);
+    data.append("article", $("#editor1").val());
+    e.preventDefault();
     $.ajax({
-        url: baseUrl+'/admin/article/add',
+        url: baseUrl + "/admin/article/add",
         type: "POST",
         dataType: "JSON",
-        data: new FormData(this),
+        data: data,
         contentType: false,
         processData: false,
-        success: function(res){
-            location.reload()
+        success: function (res) {
+            location.reload();
         },
-        error: function(res){
-            console.log(res)
-        }
-    })
-})
+        error: function (res) {
+            console.log(res);
+        },
+    });
+});

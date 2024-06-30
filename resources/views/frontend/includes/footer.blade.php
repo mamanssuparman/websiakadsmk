@@ -5,7 +5,7 @@
             <div class="flex justify-center px-4 lg:w-full md:w-full sm:w-full">
                 <div class="flex flex-col justify-center w-full">
                     <div class="flex justify-center pt-4">
-                        <img src="/images/logosmk.png" alt="">
+                        <img src="{{ url('') }}/images/logosmk.png" alt="">
                     </div>
                     <div class="flex justify-center gap-4 pt-4">
                         <div class="text-3xl"><i class="items-center bi bi-twitter-x"></i></div>
@@ -55,5 +55,8 @@
     </div>
 </footer>
 @push('jsexternal')
+<script type="text/javascript">
+    var storagePath = "{!! asset('storage/images') !!}";
+</script>
 <script src="{{ url('') }}/jsusers/home/settings.js"></script>
 @endpush

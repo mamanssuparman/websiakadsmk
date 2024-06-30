@@ -153,7 +153,8 @@ class EkstrakurikulersekolahController extends Controller
                 $file_gambar        = $request->file('logo');
                 $ekstensi_gambar    = $file_gambar->extension();
                 $nama_gambar        = 'ekstra-'.date('dmyhis').'.'.$ekstensi_gambar;
-                $file_gambar->move(public_path('/images'), $nama_gambar);
+                $file_gambar->storeAs('public/images', $nama_gambar);
+                // $file_gambar->move(public_path('/images'), $nama_gambar);
                 $gambar = $nama_gambar;
             }
             $data_ekstra = [
@@ -221,7 +222,8 @@ class EkstrakurikulersekolahController extends Controller
                 $file_gambar        = $request->file('logo');
                 $ekstensi_gambar    = $file_gambar->extension();
                 $nama_gambar        = 'ekstra-'.date('dmyhis').'.'.$ekstensi_gambar;
-                $file_gambar->move(public_path('/images'), $nama_gambar);
+                $file_gambar->storeAs('public/images', $nama_gambar);
+                // $file_gambar->move(public_path('/images'), $nama_gambar);
 
                 $data_ekstra['headerpicture'] = $nama_gambar;
                 // Hapus foto lama

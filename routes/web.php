@@ -46,6 +46,7 @@ Route::get('/ekstrakurikuler/{slug}', [EkstrakurikulerController::class, 'detail
 Route::get('/gtk',[GtkController::class,'index']);
 Route::get('/article', [ArticleController::class, 'index']);
 Route::get('/article/{id}', [ArticleController::class, 'detail']);
+Route::get('/getDetailArticle/{slug}', [ArticleController::class, 'getDetailArticle']);
 Route::get('/gallery', [GalleryController::class, 'foto']);
 Route::get('/video', [GalleryController::class, 'video']);
 
@@ -137,6 +138,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/article/add', [ArticledataController::class, 'add']);
     Route::post('/article/add', [ArticledataController::class, 'stored']);
     Route::get('/article/edit/{id}', [ArticledataController::class, 'edit']);
+    Route::get('/article/getdetail/{id}', [ArticledataController::class, 'getdata']);
     Route::post('/article/edit/{id}', [ArticledataController::class, 'update']);
     Route::post('/article/activenon', [ArticledataController::class, 'activenon'])->middleware('can:isSuperAdmin');
     Route::get('/article/checkSlug', [ArticledataController::class, 'checkslug']);

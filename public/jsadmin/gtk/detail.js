@@ -44,7 +44,7 @@ $.getJSON(baseurl + "/admin/gtk/getData/" + atob(id), function (res) {
         $("#selecttugasTambahan").val(res.datadetail.data.tugastambahan);
         $("#selectrole").val(res.datadetail.data.role);
         $("#textEmail").val(res.datadetail.data.email);
-        photo.src = baseurl + "/images/" + res.datadetail.data.photos;
+        photo.src = storagePath +'/'+ res.datadetail.data.photos;
     }
     console.log(res.datamapelajar.data);
     res.datamapelajar.data.map((x) => {
@@ -164,7 +164,7 @@ function updatePassword(){
     })
 }
 
-// Prosess Save atau Update Profile 
+// Prosess Save atau Update Profile
 $('#form-profile').on('submit', function(e){
     e.preventDefault()
     $.ajax({
@@ -172,8 +172,8 @@ $('#form-profile').on('submit', function(e){
         type: "POST",
         dataType: "JSON",
         data: new FormData(this),
-        contentType: false, 
-        processData: false, 
+        contentType: false,
+        processData: false,
         success: function(res){
             location.reload()
             console.log(res)
